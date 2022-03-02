@@ -3,10 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-충돌이 일어날꺼야
+혜지 충돌 
 
-
-이거 충돌이야
 <c:if test="${!empty loginUser }">
 	<script>
 		location.href="index.do";
