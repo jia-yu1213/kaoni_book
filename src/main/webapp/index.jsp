@@ -2,12 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+자 진짜 혜지꺼 해보자아
 
-<<<<<<< HEAD
-이번에는 될꺼야
-=======
-자 내가 해볼께
->>>>>>> master
 <c:if test="${!empty loginUser }">
 	<script>
 		location.href="index.do";
