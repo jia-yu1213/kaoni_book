@@ -5,6 +5,7 @@
 
 자 이제 진짜 내가 해볼게
 
+이거 충돌이야
 <c:if test="${!empty loginUser }">
 	<script>
 		location.href="index.do";
