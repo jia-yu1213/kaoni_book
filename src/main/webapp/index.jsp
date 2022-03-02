@@ -3,7 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-자 이제 진짜 내가 해볼게
+충돌이 일어날꺼야
+
 
 이거 충돌이야
 <c:if test="${!empty loginUser }">
