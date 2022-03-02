@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-그럼 이걸 지아가고쳐
+
+자 이제 진짜 내가 해볼게
 
 <c:if test="${!empty loginUser }">
 	<script>
