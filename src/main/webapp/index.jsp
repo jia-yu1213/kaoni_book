@@ -3,9 +3,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+혜지 충돌 
+
 
 지아지이장지ㅏㅇ지이자이자이자ㅏ
-
 
 <c:if test="${!empty loginUser }">
 	<script>
