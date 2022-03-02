@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-자 진짜 혜지꺼 해보자아
+그럼 이걸 지아가고쳐
 
 <c:if test="${!empty loginUser }">
 	<script>
