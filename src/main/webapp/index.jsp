@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-안녕
+내가 해볼게
 <c:if test="${!empty loginUser }">
 	<script>
 		location.href="index.do";
