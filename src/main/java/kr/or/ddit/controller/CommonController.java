@@ -115,26 +115,26 @@ public class CommonController {
 		
 	}
 	
-	@RequestMapping("/subMenu")
-	@ResponseBody
-	public ResponseEntity<List<MenuVO>> subMenuToJSON(String mCode) throws Exception {
-		ResponseEntity<List<MenuVO>> entity=null;
-
-	
-		List<MenuVO> subMenu = null;
-
-		try {
-			subMenu = menuService.getSubMenuList(mCode);			
-		
-			entity  = new ResponseEntity<List<MenuVO>>(subMenu,HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR);
-			e.printStackTrace();
-		}
-
-		return entity;
-	}
-	
+//	@RequestMapping("/subMenu")
+//	@ResponseBody
+//	public ResponseEntity<List<MenuVO>> subMenuToJSON(String mCode) throws Exception {
+//		ResponseEntity<List<MenuVO>> entity=null;
+//
+//	
+//		List<MenuVO> subMenu = null;
+//
+//		try {
+//			subMenu = menuService.getSubMenuList(mCode);			
+//		
+//			entity  = new ResponseEntity<List<MenuVO>>(subMenu,HttpStatus.OK);
+//		} catch (Exception e) {
+//			entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR);
+//			e.printStackTrace();
+//		}
+//
+//		return entity;
+//	}
+//	
 
 	@RequestMapping("/main")
 	public String main() {

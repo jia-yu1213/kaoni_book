@@ -24,18 +24,18 @@
 
 <!-- REQUIRED SCRIPTS -->
 <script>
-function subMenu(mCode){
-	//alert("function call sumMenu()"+mCode);	
-	if(mCode!="M000000"){
-		$.getJSON("subMenu.do?mCode="+mCode,function(data){
-			//console.log(data);
-			printData(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenu');
+// function subMenu(mCode){
+// 	//alert("function call sumMenu()"+mCode);	
+// 	if(mCode!="M000000"){
+// 		$.getJSON("subMenu.do?mCode="+mCode,function(data){
+// 			//console.log(data);
+// 			printData(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenu');
 			
-		});
-	}else{
-		$('.subMenuList').html("");		
-	}
-}
+// 		});
+// 	}else{
+// 		$('.subMenuList').html("");		
+// 	}
+// }
 
 function goPage(url,mCode){
 	  // HTML5 지원브라우저에서 사용 가능

@@ -11,11 +11,6 @@
 		order by mCode asc 
 	</select>
 	
-	<select id="selectSubMenu" resultType="menu">
-		select *
-		from menu
-		where upCode = #{mCode} and isNav=1
-	</select>
 	
 	<select id="selectMenuByMcode" resultType="menu">
 		select *

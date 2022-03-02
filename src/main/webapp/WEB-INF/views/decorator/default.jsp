@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <sitemesh:write property="head" />
   
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition ">
 <div class="wrapper">
 
   <!-- navigation -->
@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
+    Control sidebar content goes here
     <div class="p-3">
       <h5>Title</h5>
       <p>Sidebar content</p>
