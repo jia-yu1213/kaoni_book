@@ -3,13 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<<<<<<< HEAD
-
-내가 해볼게
->>>>>>> breadA
-=======
-왜 안되냥아아아
->>>>>>> breadA
+자 내가 해볼께
 <c:if test="${!empty loginUser }">
 	<script>
 		location.href="index.do";
