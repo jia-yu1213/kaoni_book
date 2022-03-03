@@ -7,7 +7,8 @@
 	<select id="selectMainMenu" resultType="menu">
 		select *
 		from menu
-		where mCode like '%'||'0000'||'%' 
+		where mCode like '%'||'0000'||'%'
+		and mCode != 'M000000' 
 		order by mCode asc 
 	</select>
 	

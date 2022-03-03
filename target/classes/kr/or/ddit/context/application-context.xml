@@ -37,10 +37,13 @@
 		  class="kr.or.ddit.dao.MemberDAOImpl"
 	      p:sqlSession-ref="sqlSession" />
 		
-
 	<bean id="loginUserLogDAO"
 	      class="kr.or.ddit.dao.LoginUserLogDAOImpl"
 	      p:sqlsession-ref="sqlSession" />
+	
+	<bean id="bookDAO" 
+		  class="kr.or.ddit.dao.BookDAOImpl"
+	      p:sqlSession-ref="sqlSession" />
 	
 	<!-- service  -->
 	<bean id="menuService"
@@ -55,7 +58,12 @@
 	<bean id="loginUserLogService"
 	      class="kr.or.ddit.service.LoginUserLogServiceImpl"
 	      p:loginUserLogDAO-ref="loginUserLogDAO"
-	      />         
+	      />
+	      
+	<bean id="bookService"
+		  class="kr.or.ddit.service.BookServiceImpl"
+		  p:bookDAO-ref="bookDAO"
+		  />         
 </beans>
 
 

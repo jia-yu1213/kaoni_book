@@ -12,6 +12,7 @@
 		<typeAlias type="kr.or.ddit.dto.MemberVO"  alias="member"/>	
 		<typeAlias type="kr.or.ddit.dto.MenuVO" alias="menu" />
 		<typeAlias type="kr.or.ddit.dto.LoginUserLogVO" alias="log" />
+		<typeAlias type="kr.or.ddit.dto.BookVO"  alias="book"/>	
 	</typeAliases>			
 	
 </configuration>

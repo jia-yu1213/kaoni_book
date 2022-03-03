@@ -6,19 +6,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<beans:bean id="loginUserLogTask"
-		  class="kr.or.ddit.scheduler.LoginUserLogTaskScheduler"
-		  p:loginUserLogService-ref="loginUserLogService"
-		  p:savePath-ref="loginUserLogSavePath"
-		  p:fileName-ref="loginUserLogSaveFileName"
-		  />
-	<scheduler id="LoginUserLogScheduler"/>
+<!-- 	<beans:bean id="loginUserLogTask" -->
+<!-- 		  class="kr.or.ddit.scheduler.LoginUserLogTaskScheduler" -->
+<!-- 		  p:loginUserLogService-ref="loginUserLogService" -->
+<!-- 		  p:savePath-ref="loginUserLogSavePath" -->
+<!-- 		  p:fileName-ref="loginUserLogSaveFileName" -->
+<!-- 		  /> -->
+<!-- 	<scheduler id="LoginUserLogScheduler"/> -->
 	
-	<scheduled-tasks scheduler="LoginUserLogScheduler">
-		<scheduled ref="loginUserLogTask" 
-				   method="logScheduler"
-				   cron="0 */2 * * * *"/>
-	</scheduled-tasks>	
+<!-- 	<scheduled-tasks scheduler="LoginUserLogScheduler"> -->
+<!-- 		<scheduled ref="loginUserLogTask"  -->
+<!-- 				   method="logScheduler" -->
+<!-- 				   cron="0 */2 * * * *"/> -->
+<!-- 	</scheduled-tasks>	 -->
 	
 	
 	<beans:bean id="memberPictureRemoveTask"
