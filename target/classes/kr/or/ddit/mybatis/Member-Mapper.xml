@@ -47,15 +47,15 @@
 	
 	<update id="insertMember" parameterType="member">
 		insert into 
-		member(id, pwd, email, phone,picture,name,authority)
-		values(#{id},#{pwd},#{email},#{phone},#{picture},#{name},#{authority})
+		member(name,id, pwd, gender, phone,address,email,picture,authority,detail_address)
+		values(#{name},#{id},#{pwd},#{gender},#{phone},#{address},#{email},#{picture},#{authority},#{detail_address})
 	</update>	
 	
 	<update id="updateMember" parameterType="member">
 		update member 
 		set 
 		pwd=#{pwd},email=#{email},phone=#{phone},name=#{name},
-		picture=#{picture}
+		picture=#{picture},address=#{address},detail_address=#{detail_address}
 		
 		<if test="authority != null">
 			,authority=#{authority}

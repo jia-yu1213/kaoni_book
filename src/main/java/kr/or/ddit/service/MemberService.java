@@ -13,8 +13,8 @@ import kr.or.ddit.exception.NotFoundIDException;
 public interface MemberService {
 	
 	// 로그인 
-	/* void login(String id, String pwd) throws SQLException, NotFoundIDException, 
-															InvalidPasswordException;*/
+	void login(String id, String pwd) throws SQLException, NotFoundIDException, 
+															InvalidPasswordException;
 	
 	// 회원정보조회
 	MemberVO getMember(String id) throws SQLException;

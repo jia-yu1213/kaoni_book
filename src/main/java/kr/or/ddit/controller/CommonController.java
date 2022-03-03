@@ -1,11 +1,11 @@
 package kr.or.ddit.controller;
 
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.dto.MenuVO;
+import kr.or.ddit.exception.InvalidPasswordException;
+import kr.or.ddit.exception.NotFoundIDException;
 import kr.or.ddit.service.MemberService;
 import kr.or.ddit.service.MenuService;
+import kr.or.ddit.util.ExceptionLoggerHelper;
 
 @Controller
 public class CommonController {
@@ -61,9 +65,7 @@ public class CommonController {
 	}
 	
 
-/* logined process by spring-security 
- * 	
- * @RequestMapping(value="/common/login",method=RequestMethod.POST)
+  @RequestMapping(value="/common/login",method=RequestMethod.POST)
 	public String login(String id, String pwd,HttpServletRequest request,
 											  HttpSession session,
 											  RedirectAttributes rttr) throws Exception{
@@ -94,7 +96,7 @@ public class CommonController {
 		return url;
 	}
 	
-	*/
+
 	
 	@RequestMapping("/common/loginTimeOut")
 	public String loginTimeOut(Model model)throws Exception {
@@ -115,26 +117,7 @@ public class CommonController {
 		
 	}
 	
-//	@RequestMapping("/subMenu")
-//	@ResponseBody
-//	public ResponseEntity<List<MenuVO>> subMenuToJSON(String mCode) throws Exception {
-//		ResponseEntity<List<MenuVO>> entity=null;
-//
-//	
-//		List<MenuVO> subMenu = null;
-//
-//		try {
-//			subMenu = menuService.getSubMenuList(mCode);			
-//		
-//			entity  = new ResponseEntity<List<MenuVO>>(subMenu,HttpStatus.OK);
-//		} catch (Exception e) {
-//			entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR);
-//			e.printStackTrace();
-//		}
-//
-//		return entity;
-//	}
-//	
+
 
 	@RequestMapping("/main")
 	public String main() {
