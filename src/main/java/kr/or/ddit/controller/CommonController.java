@@ -36,7 +36,7 @@ public class CommonController {
 	
 	
 	@RequestMapping("/index")
-	public String index(@RequestParam(defaultValue="M000000")String mCode,Model model)
+	public String index(@RequestParam(defaultValue="M010000")String mCode,Model model)
 																throws SQLException{
 		String url="common/indexPage";
 	
@@ -96,7 +96,6 @@ public class CommonController {
 		return url;
 	}
 	
-
 	
 	@RequestMapping("/common/loginTimeOut")
 	public String loginTimeOut(Model model)throws Exception {
@@ -117,14 +116,6 @@ public class CommonController {
 		
 	}
 	
-
-
-	@RequestMapping("/main")
-	public String main() {
-		String url="common/main";
-		return url;
-	}
-	
 	@RequestMapping("/getMcode")
 	@ResponseBody
 	public ResponseEntity<MenuVO> getMcode(String mName)throws Exception{
@@ -141,6 +132,12 @@ public class CommonController {
 	
 		
 		return entity;
+	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		String url="common/main";
+		return url;
 	}
 }
 
