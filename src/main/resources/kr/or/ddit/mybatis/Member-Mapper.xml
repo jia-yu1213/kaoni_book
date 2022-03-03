@@ -4,6 +4,9 @@
 <mapper namespace="Member-Mapper">
 	
 	<sql id="search">	
+		<if test="searchType == 'n'.toString()">
+			and name like '%'||#{keyword}||'%'			
+		</if>	
 		<if test="searchType == 'i'.toString()">
 			and id like '%'||#{keyword}||'%'			
 		</if>
@@ -12,7 +15,7 @@
 		</if>
 		<if test="searchType == 'e'.toString()">
 			and email like '%'||#{keyword}||'%'			
-		</if>		
+		</if>	
 	</sql>	
 	
 	<select id="selectMemberList" resultType="member">
@@ -47,15 +50,15 @@
 	
 	<update id="insertMember" parameterType="member">
 		insert into 
-		member(name,id, pwd, gender, phone,address,email,picture,authority,detail_address)
-		values(#{name},#{id},#{pwd},#{gender},#{phone},#{address},#{email},#{picture},#{authority},#{detail_address})
+		member(name,id, pwd, gender, phone, address, email, last_login, picture, regdate, authority, detail_address, birth_date)
+		values(#{name},#{id},#{pwd},#{gender},#{phone},#{address},#{email},sysdate,#{picture},sysdate,'1',#{detail_address}, #{birth_date})
 	</update>	
 	
 	<update id="updateMember" parameterType="member">
 		update member 
 		set 
-		pwd=#{pwd},email=#{email},phone=#{phone},name=#{name},
-		picture=#{picture},address=#{address},detail_address=#{detail_address}
+		name=#{name}, pwd=#{pwd}, phone=#{phone}, address=#{address}, email=#{email},
+		picture=#{picture}, detail_address=#{detail_address}, birth_date=#{birth_date}
 		
 		<if test="authority != null">
 			,authority=#{authority}
@@ -70,16 +73,17 @@
 		from member 
 		where id=#{id}		
 	</update>
-	
-	<update id="disabledMember" >
-		update member 
+
+	<update id="enabledMember">
+		update member
 		set enabled=0
 		where id=#{id}
 	</update>
 	
-	<update id="enabledMember">
-		update member
+	<update id="disabledMember" >
+		update member 
 		set enabled=1
 		where id=#{id}
 	</update>
+	
 </mapper>

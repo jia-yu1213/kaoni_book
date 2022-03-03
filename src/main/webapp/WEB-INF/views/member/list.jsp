@@ -56,6 +56,7 @@
 					  	  <!-- search bar -->
 					 	<select class="form-control col-md-3" name="searchType" id="searchType">
 							<option value=""  ${cri.searchType eq '' ? 'selected':''}>검색구분</option>
+							<option value="n"  ${cri.searchType eq 'n' ? 'selected':''}>이름</option>
 							<option value="i"  ${cri.searchType eq 'i' ? 'selected':''}>아이디</option>
 							<option value="p"  ${cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
 							<option value="e"  ${cri.searchType eq 'e' ? 'selected':''}>이메일</option>
