@@ -86,6 +86,7 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update("Member-Mapper.enabledMember",id);
 
 	}
+
 }
 
 

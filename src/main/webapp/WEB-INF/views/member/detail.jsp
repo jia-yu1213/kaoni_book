@@ -12,11 +12,21 @@
 
 .picdiv{
 
-    background-color: lightgray;
+    background-color: #E9ECEF;
     height: 200px;
     width: 160px;
     float: left;
 }
+
+.register-card {
+  background-color: ghostwhite;
+  border-top: 0;
+  color: #666;
+  padding: 20px;
+  text-align :center
+  
+}
+
 </style>
 
 </head>
@@ -46,83 +56,64 @@
 	  	</div>
   	</section> -->
     <!-- Main content -->
-    <section class="content register-page">       
-		<div class="register-box">         
+    <section class="content register-page" style="background-color: ghostwhite;">       
+		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal"  method="post">
 	    		<div class="register-card-header" >
 	    			<h1 class="text-center">회원정보 상세보기</h1>
 	    		</div>
+	    		
 	        	<div class="register-card-body" style="width:500px; height: 350px;">
-	            	
-						<div class = "picdiv" data-id="${member.id }"></div>
 						
+						<div class = "picdiv" data-id="${member.id }"></div>
            	  			<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
 								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
-	                   			<input name="id" type="text" class="form-control col-sm-8" style="width: 100px;" value="${member.id }" readonly>
+	                   			<input name="id" type="text" class="form-control col-sm-8" style="width: 80px;" value="${member.id }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="name" class="col-sm-4">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</label>
-	                   			<input name="name" type="text" class="form-control col-sm-8" style="width: 100px;" value="${member.name }" readonly>
+	                   			<input name="name" type="text" class="form-control col-sm-8" style="width: 80px;" value="${member.name }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="birth" class="col-sm-4">생년월일</label>
-	                   			<input name="birth" type="text" class="form-control col-sm-8" style="width: 100px;" value="${member.birth_date }" pattern="yyyy-MM-dd" readonly>
+								<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd" var="birth_date"/>
+	                   			<input name="birth" type="text" class="form-control col-sm-8" style="width: 80px;" value="${birth_date }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="phone" class="col-sm-4">전화번호</label>
-	                   			<input name="phone" type="text" class="form-control col-sm-8" style="width: 100px;" value="${member.phone }" readonly>
+	                   			<input name="phone" type="text" class="form-control col-sm-8" style="width: 80px;" value="${member.phone }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="email" class="col-sm-4">이&nbsp;&nbsp;메&nbsp;&nbsp;일</label>
-	                   			<input name="email" type="text" class="form-control col-sm-8" style="width: 60px;" value="${member.email }" readonly>
+	                   			<input name="email" type="text" class="form-control col-sm-8" style="width: 80px;" value="${member.email }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
-								<label for="address" class="col-sm-3" style="padding: 0;">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
-	                   			<input name="address" type="text" class="form-control col-sm-9" style="width: 98px;" value="${member.address }" readonly>
+								<label for="address"  style="padding: 0; width:80px;" >주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
+	                   			<input name="address" type="text" class="form-control " style="width: 375px;" value="${member.address }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
-								<label for="detailAddress" class="col-sm-3" style="padding: 0;">상세주소</label>
-	                   			<input name="detailAddress" type="text" class="form-control col-sm-9" style="width: 98px;" value="${member.detail_address }" readonly>
+								<label for="detailAddress"  style="padding: 0; width:80px;">상세주소</label>
+	                   			<input name="detailAddress" type="text" class="form-control " style="width: 375px;" value="${member.detail_address }" readonly>
                  			</div>
                  		</div>
                  		
-<%-- 	                <div class="form-group row">
-	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이  름</label>
-	
-	                  <div class="col-sm-9">
-	                    <input name="pwd" type="text" class="form-control" id="inputPassword3" value="${member.name }" readonly>
-	                  </div>
-	                </div>
-	                 <div class="form-group row">
-	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이메일</label>
-	
-	                  <div class="col-sm-9">
-	                    <input name="email" type="email" class="form-control" id="inputPassword3" value="${member.email }" readonly>
-	                  </div>
-	                </div>
-	                 <div class="form-group row">
-	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">전화번호</label>
-	                  <div class="col-sm-9">   
-	                  	<input name="phone" type="text" class="form-control" id="inputPassword3" value="${member.phone }" readonly>	                
-	                  </div>                  
-	                </div>               
-	              </div>  
+                 	</div>	
+ 	                
 		          <div class="card-footer" style="padding:5px 0;" >
 		          		<div class="row">
-		          		<c:if test="${loginUser.id eq member.id }">
 			          		<div class="col-sm-3 text-center">
 			          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-warning ">수 정</button>
 			          		</div>
@@ -133,22 +124,22 @@
 			          		</div>
 		          			
 			          		<div class="col-sm-3 text-center">
-			          			<c:if test="${member.enabled ne 0 }">
+			          			<c:if test="${member.enabled eq 0 }">
 			          			<button type="button" onclick="location.href='stop.do?id=${member.id}';" 
 			          			id="stopBtn" class="btn btn-info" >비활성</button>
 			          			</c:if>
-			          			<c:if test="${member.enabled eq 0 }">
+			          			<c:if test="${member.enabled eq 1 }">
 			          			<button type="button" onclick="location.href='active.do?id=${member.id}';" 
 			          			id="activeBtn" class="btn btn-info" >활&nbsp;&nbsp;성</button>
 			          			</c:if>
 			          		</div>
-		          		</c:if>
 		          	
 			          		<div class="col-sm-3 text-center">
 			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
 			            	</div>
-		          	    </div>   --%>	
-		          </div>
+		          	    </div> 
+		          	</div>
+		          	   
 	      	  </form>
       	  </div>
     </section>
@@ -158,6 +149,16 @@
 
 <script>
 
+/* function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
+	winleft = (screen.width - WinWidth) / 2;
+	wintop = (screen.height - WinHeight) / 2;
+	var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth +", " 
+							+"height="+ WinHeight +", top="+ wintop +", left=" 
+							+ winleft +", resizable=yes, status=yes"  );
+	win.focus() ; 
+}
+ */
+ 
 window.onload=function(){
 	MemberPictureThumb(document.querySelector('[data-id="${member.id}"]'),'${member.picture}','<%=request.getContextPath()%>');
 	

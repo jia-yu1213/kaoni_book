@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO member = memberDAO.selectMemberById(id);
 		return member;
 	}
-
+	
 	@Override
 	public List<MemberVO> getMemberList() throws SQLException {
 		List<MemberVO> memberList = memberDAO.selectMemberList();
@@ -98,5 +98,6 @@ public class MemberServiceImpl implements MemberService {
 
 		memberDAO.enabledMember(id);
 	}
+
 
 }
