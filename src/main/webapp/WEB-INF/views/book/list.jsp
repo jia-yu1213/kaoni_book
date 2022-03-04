@@ -45,7 +45,17 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">공지등록</button>				
+				<c:choose>
+	      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
+	      			</c:when>
+	      			<c:when test="${loginUser.authority eq 0}">
+	      				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',800,700);">도서등록</button>
+	      			</c:when>
+	      		</c:choose>
+			
+			
+			
+								
 				<div id="keyword" class="card-tools" style="width:540px;">
 					<div class="input-group row">
 						<select style="display:none"class="form-control col-md-3" name="perPageNum" id="perPageNum"
@@ -76,7 +86,8 @@
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
 						<th style="width:8%;">번 호</th>
-						<th style="width:48%;">제 목</th>
+						<th style="width:8%;">분 류</th>
+						<th style="width:45%;">제 목</th>
 						<th style="width:15%;">저 자</th>
 						<th>대여종료일</th>
 						<th style="width:15%;">대여하기</th>
@@ -91,6 +102,7 @@
 					<c:forEach items="${bookList }" var="book">
 						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }&from=list','상세보기',800,700);">
 							<td style='vertical-align:middle'>${book.rownum }</td>
+							<td style='vertical-align:middle'>${book.cate_name }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 												white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">
 							${book.title }
@@ -98,7 +110,28 @@
 							<td style='vertical-align:middle'>
 							${book.writer }
 							</td>
-							<td style='vertical-align:middle'></td>
+							<td style='vertical-align:middle'>
+							<jsp:useBean id="now" class="java.util.Date" />
+							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+							<fmt:formatDate value="${book.rent_end }" pattern="yyyy-MM-dd" var="rent_end" />
+							
+								<c:choose>
+									<c:when test="${rent_end eq null}">
+									
+									</c:when>
+									<c:when test="${rent_end eq today}">
+										반납예정일
+									</c:when>
+									<c:when test="${rent_end < today}">
+										연체중
+									</c:when>
+									<c:when test="${rent_end > today}">
+										${rent_end }
+									</c:when>
+									
+								</c:choose>
+							
+							</td>
 							<td style='vertical-align:middle' onclick="event.stopPropagation()">
 							<c:choose>
 								<c:when test="${book.book_status eq 0}">
@@ -128,7 +161,7 @@
 		var login = $('#loginUser').val();
 		//로그인체크
 		if (!login) {
-			alert("로그인해")
+			alert("로그인이 필요한 서비스입니다. \n로그인 후 이용해주시기 바랍니다.")
 		}else{
 			//비동기 책 대여 중인지, 연체중인지 확인 
 			//맵으로 상태를 보내서 대여 없는거, 대여중인거, 연체중인거, 연제기간인거
@@ -136,23 +169,30 @@
 				url:"<%=request.getContextPath()%>/rent/checkRent",
 				type:"post",
 				success : function(dataMap){
+					
 					var status = dataMap.status;
 					var data = dataMap.data;
+				
+					var answer;
 					if (status=="overdueRent") {
-						alert("연체가 되었습니다."+data);
+						answer = confirm(data+"권이 연체중입니다. \n연체중에는 이용이 불가합니다. \n반납하시겠습니까?");
+						if(answer){
+							location = "<%=request.getContextPath()%>/mylist/list.do";
+						}
 					}else if (status=="overdueDate") {
-						
-						 alert("overdueDate"+data.split(" ")[0]);
+						 alert("연체 기간입니다. \n"+data.split(" ")[0]+"까지 이용이 불가합니다.");
 					}else if (status=="nowRent") {
-						alert("nowRent"+data);
 						//대여가능
-					}
+						answer = confirm(data+"권이 대여중입니다. \n대여하시겠습니까?");
+						if(answer){
 						
-					
+							location = "<%=request.getContextPath()%>/rent/registRent.do?book_no="+book_no;
+						}
+					}
 						
 				},
 				error : function(){
-						
+					alert("대여ajax 에러");		
 				}
 			});		
 		}

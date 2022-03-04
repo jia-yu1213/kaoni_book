@@ -41,36 +41,10 @@ public class BookServiceImpl implements BookService {
 	}
 
 //	@Override
-//	public NoticeVO getNotice(int nno) throws SQLException {
-//		NoticeVO board = noticeDAO.selectNoticeByNno(nno);
-//		noticeDAO.increaseViewCount(nno);
-//		return board;
+//	public void modifyStatus(BookVO book) throws SQLException {
+//		bookDAO.updateBookStatus(book);
+//		
 //	}
-//
-//	@Override
-//	public NoticeVO getNoticeForModify(int nno) throws SQLException {
-//		NoticeVO board = noticeDAO.selectNoticeByNno(nno);
-//		return board;
-//	}
-//
-//	@Override
-//	public void regist(NoticeVO notice) throws SQLException {
-//
-//		int nno = noticeDAO.selectNoticeSequenceNextValue();
-//		notice.setNno(nno);
-//		noticeDAO.insertNotice(notice);
-//	}
-//
-//	@Override
-//	public void modify(NoticeVO notice) throws SQLException {
-//
-//		noticeDAO.updateNotice(notice);
-//	}
-//
-//	@Override
-//	public void remove(int nno) throws SQLException {
-//
-//		noticeDAO.deleteNotice(nno);
-//	}
+
 
 }

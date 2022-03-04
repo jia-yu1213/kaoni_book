@@ -5,6 +5,7 @@ import java.util.Date;
 public class BookVO {
 	
 	private int rownum;
+	
 	private String book_no;
 	private String title;
 	private String writer;
@@ -15,7 +16,27 @@ public class BookVO {
 	private String book_intro;
 	private String book_index;
 	private String writer_intro;
-	private String book_status;
+	private int book_status;
+	private Date rent_end;
+	private String cate_name;
+	private String cate_no;
+	
+	public String getCate_name() {
+		return cate_name;
+	}
+
+	public void setCate_name(String cate_name) {
+		this.cate_name = cate_name;
+	}
+
+	public String getCate_no() {
+		return cate_no;
+	}
+
+	public void setCate_no(String cate_no) {
+		this.cate_no = cate_no;
+	}
+
 	public String getBook_no() {
 		return book_no;
 	}
@@ -86,12 +107,22 @@ public class BookVO {
 	public void setWriter_intro(String writer_intro) {
 		this.writer_intro = writer_intro;
 	}
-	public String getBook_status() {
+
+	public int getBook_status() {
 		return book_status;
 	}
-	public void setBook_status(String book_status) {
+
+	public void setBook_status(int book_status) {
 		this.book_status = book_status;
 	}
-	
+
+	public Date getRent_end() {
+		return rent_end;
+	}
+
+	public void setRent_end(Date rent_end) {
+		this.rent_end = rent_end;
+	}
+
 
 }

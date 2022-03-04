@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.or.ddit.dao.BookDAO;
 import kr.or.ddit.dao.RentDAO;
+import kr.or.ddit.dto.BookVO;
+import kr.or.ddit.dto.RentVO;
 
 public class RentServiceImpl implements RentService {
 
@@ -15,7 +18,13 @@ public class RentServiceImpl implements RentService {
 	public void setRentDAO(RentDAO rentDAO) {
 		this.rentDAO = rentDAO;
 	}
+	
+	private BookDAO bookDAO;
 
+	public void setBookDAO(BookDAO bookDAO) {
+		this.bookDAO = bookDAO;
+	}
+	
 	@Override
 	public Map<String, Object> checkRent(String mem_id) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -32,12 +41,24 @@ public class RentServiceImpl implements RentService {
 			
 			dataMap.put("status", "overdueDate");
 			dataMap.put("data", overdueDate);
-		}else if(nowRent!=0) {
+		}else {
 			//현재 대여중인 책이 있는 경우
 			dataMap.put("status", "nowRent");
 			dataMap.put("data", nowRent);
 		}
 		return dataMap;
+	}
+
+	@Override
+	public void registRent(RentVO rent) throws SQLException {
+		//대여이력 업데이트
+		rentDAO.insertRent(rent);
+		
+		//책상태 업데이트
+		BookVO book = new BookVO();
+		book.setBook_no(rent.getBook_no());
+		book.setBook_status(1);
+		bookDAO.updateBookStatus(book);
 	}
  
 }

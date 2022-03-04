@@ -8,22 +8,15 @@ import kr.or.ddit.dto.BookVO;
 
 public interface BookDAO {
 
+	//책 목록 조회
 	List<BookVO> selectSearchBookList(SearchCriteria cri) throws SQLException;
 
+	//책 목록 갯수
 	int selectSearchBookListCount(SearchCriteria cri) throws SQLException;
+	
+	//책 대여상태 변경
+	void updateBookStatus(BookVO book) throws SQLException;
 
-//	NoticeVO selectNoticeByNno(int nno) throws SQLException;
-//
-//	// viewcnt 증가
-//	void increaseViewCount(int nno) throws SQLException;
-//
-//	// Notice_seq.nextval 가져오기
-//	int selectNoticeSequenceNextValue() throws SQLException;
-//
-//	void insertNotice(NoticeVO Notice) throws SQLException;
-//
-//	void updateNotice(NoticeVO Notice) throws SQLException;
-//
-//	void deleteNotice(int nno) throws SQLException;
-
+	//책 추가
+	void insertBook(BookVO book) throws SQLException;
 }

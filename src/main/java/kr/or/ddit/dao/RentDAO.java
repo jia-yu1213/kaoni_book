@@ -1,7 +1,8 @@
 package kr.or.ddit.dao;
 
 import java.sql.SQLException;
-import java.util.Date;
+
+import kr.or.ddit.dto.RentVO;
 
 public interface RentDAO {
 
@@ -10,4 +11,6 @@ public interface RentDAO {
 	int selectOverdueRentCount(String mem_id) throws SQLException;
 
 	String selectOverdueDate(String mem_id) throws SQLException;
+	
+	void insertRent(RentVO rent) throws SQLException;
 }

@@ -35,39 +35,13 @@ public class BookDAOImpl implements BookDAO {
 		return count;
 	}
 
-//	@Override
-//	public NoticeVO selectNoticeByNno( int nno) throws SQLException {
-//		NoticeVO notice=session.selectOne("Notice-Mapper.selectNoticeByNno",nno);
-//		return notice;
-//	}
-//
-//	@Override
-//	public void increaseViewCount( int nno) throws SQLException {
-//		session.update("Notice-Mapper.increaseViewCount",nno);
-//		
-//	}
-//
-//	@Override
-//	public int selectNoticeSequenceNextValue() throws SQLException {
-//		int seq_num=session.selectOne("Notice-Mapper.selectNoticeSequenceNextValue");
-//		return seq_num;
-//	}
-//
-//	@Override
-//	public void insertNotice( NoticeVO notice) throws SQLException {
-//		session.update("Notice-Mapper.insertNotice",notice);
-//		
-//	}
-//	
-//	@Override
-//	public void updateNotice(NoticeVO notice) throws SQLException {
-//		session.update("Notice-Mapper.updateNotice",notice);
-//	}
-//
-//	@Override
-//	public void deleteNotice(int nno) throws SQLException {
-//		session.update("Notice-Mapper.deleteNotice",nno);
-//	}
+	@Override
+	public void updateBookStatus(BookVO book) throws SQLException {
+		session.update("Book-Mapper.updateBookStatus",book);
+		
+	}
+
+
 }
 
 

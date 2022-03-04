@@ -15,16 +15,21 @@
 
 	</sql>
 	<select id="selectSearchBookList" resultType="book">
-	    select rownum, a.* 
+	    select 
+	    	rownum, a.* 
         from(
-        select
-		* 
-		from book
-		where book_no is not null
-		<include refid="search" />
-		order by book_no desc
-        )A
+    	    select
+				b.* ,(select cate_name from category where cate_no=b.cate_no) cate_name,
+        		case when b.book_status=0 then null
+             		 when b.book_status=1 then (select max(rent_end) from book_rent where book_no=b.book_no)
+        		end rent_end
+			from book b
+			where b.book_no is not null
+			<include refid="search" />
+			order by b.book_no desc
+        ) A
 	</select>
+	
 	<select id="selectSearchBookListCount" resultType="int">
 		select
 		count(*) 
@@ -33,7 +38,30 @@
 		<include refid="search" />
 		order by book_no desc
 	</select>
-
+	
+	<update id="updateBookStatus" parameterType="book">
+		update book 
+		set 
+		book_status=#{book_status}		
+		where book_no=#{book_no}
+	</update>
+	
+	<update id="insertBook" parameterType="book">
+		insert into book(book_no,title, writer,ori_title,translator,publisher,publishing_date,book_intro,cate_no,book_index,writer_intro)
+        values(
+	       	(select nvl(max(rent_no),0)+1 from book_rent), 
+	       	title, 
+	       	writer, 
+	       	ori_title, 
+	       	translator, 
+	       	publisher, 
+	       	publishing_date, 
+	       	book_intro, 
+	       	cate_no, 
+	       	book_index, 
+	       	writer_intro
+        )
+	</update>	
 </mapper>
 
 

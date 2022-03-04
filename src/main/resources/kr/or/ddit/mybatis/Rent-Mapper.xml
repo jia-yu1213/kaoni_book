@@ -31,10 +31,18 @@
         where mem_id='1'
         and real_end is not null
         and rent_end<real_end) a
-        where overdue>sysdate
+        where overdue>=sysdate
 		]]>
 	</select>
 	
+	
+	<update id="insertRent" parameterType="rent">
+	/* insertRent 대여이력 업데이트*/
+		insert into 
+		book_rent(rent_no,book_no,mem_id)
+		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{mem_id}) 
+	</update>	
+
 </mapper>
 
 
