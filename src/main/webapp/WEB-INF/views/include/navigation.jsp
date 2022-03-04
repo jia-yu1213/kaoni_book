@@ -19,6 +19,11 @@
       
       
     </ul>
+    <ul class="navbar-nav ml-auto">
+    	<li class="nav-item">
+    	<a href="common/loginForm"> 로그인</a>
+    	</li>
+    </ul>
 
 <!--     Right navbar links -->
 <!--     <ul class="navbar-nav ml-auto"> -->

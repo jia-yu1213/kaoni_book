@@ -18,14 +18,7 @@
 	<bean id="fileUploadPath" class="java.lang.String">
 		<constructor-arg value="${pds.upload}"/>
 	</bean>
-	<!-- login user log path -->
-	<bean id="loginUserLogSavePath" class="java.lang.String">
-		<constructor-arg value="${login.user.log}" />
-	</bean>
-	
-	<bean id="loginUserLogSaveFileName" class="java.lang.String">
-		<constructor-arg value="login_user_log.csv" />
-	</bean>
+
 	
 	<!-- DAO	 -->
 	<bean id="menuDAO"
@@ -36,13 +29,13 @@
 	<bean id="memberDAO" 
 		  class="kr.or.ddit.dao.MemberDAOImpl"
 	      p:sqlSession-ref="sqlSession" />
-		
-	<bean id="loginUserLogDAO"
-	      class="kr.or.ddit.dao.LoginUserLogDAOImpl"
-	      p:sqlsession-ref="sqlSession" />
-	
+
 	<bean id="bookDAO" 
 		  class="kr.or.ddit.dao.BookDAOImpl"
+	      p:sqlSession-ref="sqlSession" />
+
+	<bean id="rentDAO" 
+		  class="kr.or.ddit.dao.RentDAOImpl"
 	      p:sqlSession-ref="sqlSession" />
 	
 	<!-- service  -->
@@ -55,15 +48,15 @@
 		  p:memberDAO-ref="memberDAO"
 		  />
 
-	<bean id="loginUserLogService"
-	      class="kr.or.ddit.service.LoginUserLogServiceImpl"
-	      p:loginUserLogDAO-ref="loginUserLogDAO"
-	      />
-	      
 	<bean id="bookService"
 		  class="kr.or.ddit.service.BookServiceImpl"
 		  p:bookDAO-ref="bookDAO"
-		  />         
+		  />
+		  
+	<bean id="rentService"
+		  class="kr.or.ddit.service.RentServiceImpl"
+		  p:rentDAO-ref="rentDAO"
+		  />               
 </beans>
 
 

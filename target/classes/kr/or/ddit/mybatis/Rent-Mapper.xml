@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Rent-Mapper">
+
+	<select id="selectNowRentCount" resultType="int">
+		/* selectNowRentCount 현재 연체가 아니면서 대여중인 책의 갯수*/
+		select count(rent_no) 
+		from book_rent 
+		where mem_id = #{mem_id} 
+	     <![CDATA[
+		and rent_end>sysdate 
+		and real_end is null
+		]]>
+	</select>
+	
+	<select id="selectOverdueRentCount" resultType="int">
+		/* selectOverdueRentCount 현재 연체중인 책의 갯수*/
+		select count(rent_no) from book_rent
+        where mem_id=#{mem_id}
+        <![CDATA[
+        and rent_end<sysdate 
+        and real_end is null
+		]]>
+	</select>
+	
+	<select id="selectOverdueDate" resultType="String">
+		/* selectOverdueDate 연체 기간*/
+        <![CDATA[
+        select a.overdue from (
+        select max(real_end+((real_end)-(rent_end))) overdue from book_rent
+        where mem_id='1'
+        and real_end is not null
+        and rent_end<real_end) a
+        where overdue>sysdate
+		]]>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
