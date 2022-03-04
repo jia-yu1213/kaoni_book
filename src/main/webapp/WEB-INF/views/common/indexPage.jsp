@@ -90,7 +90,7 @@ function printData(dataArr,target,templateObject,removeClass){
 <script>
 window.onload=function(){
 	goPage('${menu.murl}','${menu.mcode}');
-	subMenu('${menu.mcode}'.substring(0,3)+"0000");
+// 	subMenu('${menu.mcode}'.substring(0,3)+"0000");
 }
 </script>
 

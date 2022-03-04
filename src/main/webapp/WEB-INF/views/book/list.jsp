@@ -7,12 +7,13 @@
 
 <head></head>
 
-<title>공지목록</title>
+<title>도서목록</title>
 
 <body>	
+<input type="hidden" id="loginUser" value="${loginUser}" >
 	<c:if test="${from eq 'regist'}" >
 		<script>
-    	alert("공지사항 등록이 성공했습니다.");
+    	alert("도서 등록이 성공했습니다.");
     	window.opener.location.reload();	
     	window.close();
     	</script>
@@ -22,13 +23,13 @@
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>공지목록</h1>  				
+	  				<h1>도서 목록</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
+				        	<i class="fa fa-dashboard"></i>도서
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">
@@ -47,7 +48,7 @@
 				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">공지등록</button>				
 				<div id="keyword" class="card-tools" style="width:540px;">
 					<div class="input-group row">
-						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
+						<select style="display:none"class="form-control col-md-3" name="perPageNum" id="perPageNum"
 					  		onchange="list_go();">
 					  		<option value="10" >정렬개수</option>
 					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
@@ -58,7 +59,7 @@
 						<select class="form-control col-md-4" name="searchType" id="searchType">
 							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
 							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
+							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>저 자</option>
 							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>출판사</option>
 						</select>					
 						<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${param.keyword }"/>
@@ -74,11 +75,11 @@
 			<div class="card-body">
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
-						<th style="width:10%;">번 호</th>
-						<th style="width:50%;">제 목</th>
-						<th style="width:15%;">작성자</th>
-						<th>등록일</th>
-						<th style="width:10%;">조회수</th>
+						<th style="width:8%;">번 호</th>
+						<th style="width:48%;">제 목</th>
+						<th style="width:15%;">저 자</th>
+						<th>대여종료일</th>
+						<th style="width:15%;">대여하기</th>
 					</tr>				
 					<c:if test="${empty bookList }" >
 						<tr>
@@ -88,16 +89,28 @@
 						</tr>
 					</c:if>				
 					<c:forEach items="${bookList }" var="book">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?nno=${book.book_no }&from=list','상세보기',800,700);">
-							<td></td>
+						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }&from=list','상세보기',800,700);">
+							<td style='vertical-align:middle'>${book.rownum }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
-												white-space: nowrap; text-overflow: ellipsis;">
+												white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">
 							${book.title }
 							</td>			
-							<td data-target="notice-writer">${book.writer}<td>							
-								<fmt:formatDate value="${book.publishing_date }" pattern="yyyy-MM-dd"/>
+							<td style='vertical-align:middle'>
+							${book.writer }
 							</td>
-							<td><span class="badge bg-red">${book.publisher }</span></td>		
+							<td style='vertical-align:middle'></td>
+							<td style='vertical-align:middle' onclick="event.stopPropagation()">
+							<c:choose>
+								<c:when test="${book.book_status eq 0}">
+									<button type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
+								</c:when>
+								<c:when test="${book.book_status eq 1}">
+									<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
+								</c:when>
+								
+							</c:choose>
+							
+							</td>		
 						</tr>
 					</c:forEach>
 				</table>				
@@ -110,17 +123,47 @@
 		
     </section>
     <!-- /.content -->
-<%--     <script>
-    window.onload=function(){
-    	$("[data-target='notice-writer']").click(function(event){    		
-    		OpenWindow('<%=request.getContextPath()%>/member/detail.do?id='
-    				+$(this).text(),'상세보기',800,700);
-    		return false;    		
-    	});
-    }
+<script>
+	function rentBook(book_no){
+		var login = $('#loginUser').val();
+		//로그인체크
+		if (!login) {
+			alert("로그인해")
+		}else{
+			//비동기 책 대여 중인지, 연체중인지 확인 
+			//맵으로 상태를 보내서 대여 없는거, 대여중인거, 연체중인거, 연제기간인거
+			$.ajax({
+				url:"<%=request.getContextPath()%>/rent/checkRent",
+				type:"post",
+				success : function(dataMap){
+					var status = dataMap.status;
+					var data = dataMap.data;
+					if (status=="overdueRent") {
+						alert("연체가 되었습니다."+data);
+					}else if (status=="overdueDate") {
+						
+						 alert("overdueDate"+data.split(" ")[0]);
+					}else if (status=="nowRent") {
+						alert("nowRent"+data);
+						//대여가능
+					}
+						
+					
+						
+				},
+				error : function(){
+						
+				}
+			});		
+		}
+	
+
+	
+	
+		
+	}
     
-    
-    </script> --%>
+   </script> 
     
 </body>
 

@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class BookVO {
 	
+	private int rownum;
 	private String book_no;
 	private String title;
 	private String writer;
 	private String ori_title;
 	private String translator;
 	private String publisher;
-	private String publishing_date;
+	private Date publishing_date;
 	private String book_intro;
 	private String book_index;
 	private String writer_intro;
@@ -18,6 +19,15 @@ public class BookVO {
 	public String getBook_no() {
 		return book_no;
 	}
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
 	public void setBook_no(String book_no) {
 		this.book_no = book_no;
 	}
@@ -51,10 +61,11 @@ public class BookVO {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public String getPublishing_date() {
+
+	public Date getPublishing_date() {
 		return publishing_date;
 	}
-	public void setPublishing_date(String publishing_date) {
+	public void setPublishing_date(Date publishing_date) {
 		this.publishing_date = publishing_date;
 	}
 	public String getBook_intro() {

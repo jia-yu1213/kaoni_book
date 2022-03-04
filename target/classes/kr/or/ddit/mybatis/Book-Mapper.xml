@@ -15,12 +15,15 @@
 
 	</sql>
 	<select id="selectSearchBookList" resultType="book">
-		select
+	    select rownum, a.* 
+        from(
+        select
 		* 
 		from book
 		where book_no is not null
 		<include refid="search" />
 		order by book_no desc
+        )A
 	</select>
 	<select id="selectSearchBookListCount" resultType="int">
 		select
