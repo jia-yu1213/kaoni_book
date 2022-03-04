@@ -13,8 +13,8 @@
 		<if test="searchType == 'p'.toString()">
 			and phone like '%'||#{keyword}||'%'			
 		</if>
-		<if test="searchType == 'e'.toString()">
-			and email like '%'||#{keyword}||'%'			
+		<if test="searchType == 's'.toString()">
+			and enabled like '%'||#{keyword}||'%'			
 		</if>	
 	</sql>	
 	

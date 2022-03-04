@@ -47,9 +47,9 @@
 					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
 					  		onchange="list_go(1);">
 					  		<option value="10" >정렬개수</option>
-					  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option>
-					  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>3개씩</option>
-					  		<option value="5" ${cri.perPageNum == 5 ? 'selected':''}>5개씩</option>
+					  		<option value="2" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
+					  		<option value="3" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
+					  		<option value="5" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
 					  		
 					  	</select>
 					  	
@@ -59,7 +59,7 @@
 							<option value="n"  ${cri.searchType eq 'n' ? 'selected':''}>이름</option>
 							<option value="i"  ${cri.searchType eq 'i' ? 'selected':''}>아이디</option>
 							<option value="p"  ${cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
-							<option value="e"  ${cri.searchType eq 'e' ? 'selected':''}>이메일</option>
+							<option value="p"  ${cri.searchType eq 's' ? 'selected':''}>상태</option>
 						</select>
 						<!-- keyword -->
    					 	<input  class="form-control" type="text" name="keyword" 
@@ -80,24 +80,30 @@
 		    		<table class="table table-bordered">
 		    			<tr>
 		                	<th>아이디</th>
-		                	<th>패스워드</th>
-		                	<th>이메일</th>
+		                	<th>이름</th>
+		                	<th>생년월일</th>
 		                	<th>전화번호</th>
-		                	<th>등록날짜</th> <!-- yyyy-MM-dd  -->
+		                	<th>상태</th>
 		               	</tr>
 		            
 		               	<c:forEach items="${memberList }" var="member" >
 		               	  <tr  onclick="OpenWindow('detail.do?id=${member.id}','','800','900');" style="cursor:pointer;">
 		               		<td>${member.id }</td>
-		              		<td>${member.pwd }</td>
-		              		<td>${member.email }</td>
-		              		
-		              		<c:set var="phone" value="${member.phone.replace('-','') }" />
-		              		
-		              		<td>${phone.substring(0,3) }-${phone.substring(3,7) }-${phone.substring(7) }</td>
+		               		<td>${member.name }</td>
 		              		<td>
-		              			<fmt:formatDate value="${member.regDate }" pattern="yyyy-MM-dd"/>
+		              			<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd"/>
 		              		</td>
+		              		<c:set var="phone" value="${member.phone.replace('-','') }" />
+		              		<td>
+		              			${phone.substring(0,3) }-${phone.substring(3,7) }-${phone.substring(7)}
+		              		</td>
+          				     <td>
+          				     	<c:choose>
+          				     		<c:when test="${member.enabled eq '0'}">활성</c:when>
+          				     		<c:when test="${member.enabled eq '1'}">휴면</c:when>
+          				     		<c:when test="${member.enabled eq '2'}">탈퇴</c:when>
+          				     	</c:choose>
+       				     	</td>
 		              	  </tr>
 		               	</c:forEach>   	
 		              
