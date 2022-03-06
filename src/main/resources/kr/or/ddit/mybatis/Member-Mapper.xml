@@ -21,6 +21,7 @@
 	<select id="selectMemberList" resultType="member">
 		select * 
 		from member
+		where not enabled in('2')
 	</select>
 	
 	
@@ -28,7 +29,7 @@
 		select
 		* 
 		from member
-		where id is not null
+		where id is not null and not enabled in('2')
 		<include refid="search" />
 		order by regDate desc
 	</select>
@@ -36,7 +37,7 @@
 		select
 		count(*) 
 		from member
-		where id is not null
+		where id is not null and not enabled in('2')
 		<include refid="search" />
 	</select>
 	
@@ -67,23 +68,22 @@
 		where id=#{id}
 	</update>
 	
-		
-	<update id="deleteMember" parameterType="str" >
-		delete 
-		from member 
-		where id=#{id}		
-	</update>
-
 	<update id="enabledMember">
 		update member
 		set enabled=0
 		where id=#{id}
 	</update>
-	
+
 	<update id="disabledMember" >
 		update member 
 		set enabled=1
 		where id=#{id}
+	</update>
+	
+	<update id="deleteMember" parameterType="str" >
+		update member
+		set enabled=2
+		where id=#{id}		
 	</update>
 	
 </mapper>
