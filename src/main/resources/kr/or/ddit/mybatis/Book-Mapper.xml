@@ -47,21 +47,26 @@
 	</update>
 	
 	<update id="insertBook" parameterType="book">
+		/* insertBook 책 목록 추가*/
 		insert into book(book_no,title, writer,ori_title,translator,publisher,publishing_date,book_intro,cate_no,book_index,writer_intro)
         values(
-	       	(select nvl(max(rent_no),0)+1 from book_rent), 
-	       	title, 
-	       	writer, 
-	       	ori_title, 
-	       	translator, 
-	       	publisher, 
-	       	publishing_date, 
-	       	book_intro, 
-	       	cate_no, 
-	       	book_index, 
-	       	writer_intro
+	       	concat('EM',LPAD(seq_book.nextval,6,0)), 
+	       	#{title}, 
+	       	#{writer}, 
+	       	#{ori_title}, 
+	       	#{translator}, 
+	       	#{publisher}, 
+	       	#{publishing_date}, 
+	       	#{book_intro}, 
+	       	#{cate_no}, 
+	       	#{book_index}, 
+	       	#{writer_intro}
         )
 	</update>	
+	
+	<select id="selectCateList" resultType="book">
+	 	select * from category order by cate_no
+	</select>
 </mapper>
 
 

@@ -13,6 +13,10 @@
 	<bean id="picturePath" class="java.lang.String">
 		<constructor-arg value="${member.picture.upload}" />      
 	</bean>
+	<!-- book.picture -->
+	<bean id="bookPicturePath" class="java.lang.String">
+		<constructor-arg value="${book.picture.upload}" />      
+	</bean>
 	
 	<!-- file upload -->
 	<bean id="fileUploadPath" class="java.lang.String">

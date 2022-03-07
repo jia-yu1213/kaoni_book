@@ -41,6 +41,18 @@ public class BookDAOImpl implements BookDAO {
 		
 	}
 
+	@Override
+	public void insertBook(BookVO book) throws SQLException {
+		session.update("Book-Mapper.insertBook",book);
+		
+	}
+
+	@Override
+	public List<BookVO> selectCateList() throws SQLException {
+		List<BookVO> cateList =  session.selectList("Book-Mapper.selectCateList");
+		return cateList;
+	}
+
 
 }
 

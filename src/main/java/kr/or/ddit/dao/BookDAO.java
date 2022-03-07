@@ -19,4 +19,7 @@ public interface BookDAO {
 
 	//책 추가
 	void insertBook(BookVO book) throws SQLException;
+	
+	//카테고리 목록 가져오기
+	List<BookVO> selectCateList() throws SQLException;
 }

@@ -40,11 +40,24 @@ public class BookServiceImpl implements BookService {
 		return dataMap;
 	}
 
+	@Override
+	public void regist(BookVO book) throws SQLException {
+		bookDAO.insertBook(book);
+	}
+
 //	@Override
 //	public void modifyStatus(BookVO book) throws SQLException {
 //		bookDAO.updateBookStatus(book);
 //		
 //	}
+	
 
+	@Override
+	public List<BookVO> selectCateList() throws SQLException {
+		List<BookVO> cateList = bookDAO.selectCateList();
+		return cateList;
+	}
+
+	
 
 }
