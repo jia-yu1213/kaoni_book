@@ -235,28 +235,65 @@ public class MemberController {
 		return url;
 	}
 	
+	@RequestMapping(value = "/active", method = RequestMethod.GET)
+	public String enabled(String id, HttpSession session, RedirectAttributes rttr) throws SQLException {
+		String url = "redirect:/member/detail";
+		
+		MemberVO member;
+		
+		member = memberService.getMember(id); 
+		//DB에서 enabled가 활성(0)으로 상태 변경
+		
+		memberService.enabled(id);
+		
+		rttr.addFlashAttribute("activeMember",member);
+		rttr.addAttribute("from","active");		
+		rttr.addAttribute("id",id);
+		
+		return url;
+	}
+	
+	@RequestMapping(value = "/stop", method = RequestMethod.GET)
+	public String disabled(String id, HttpSession session, RedirectAttributes rttr) throws SQLException {
+		String url = "redirect:/member/detail";
+		
+		MemberVO member;
+		
+		member = memberService.getMember(id); 
+
+		//DB에서 enabled가 비활성(1)으로 상태 변경
+		memberService.disabled(id);
+		
+		rttr.addFlashAttribute("stopMember",member);
+		rttr.addAttribute("from","stop");		
+		rttr.addAttribute("id",id);
+		
+		return url;
+	}
+	
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
 	public String remove(String id, HttpSession session, RedirectAttributes rttr) throws SQLException {
-		String url = "redirect:/member/detail.do";
+		String url = "redirect:/member/detail";
 		
 		MemberVO member;
 
 		// 이미지 파일을 삭제
-		member = memberService.getMember(id);
+		member = memberService.getMember(id); 
+		
 		String savePath = this.picturePath;
 		File imageFile = new File(savePath, member.getPicture());
 		if (imageFile.exists()) {
 			imageFile.delete();
 		}
-		//DB삭제
+		//DB에서 탈퇴로 상태 변경
 		memberService.remove(id);
 		
 		// 삭제되는 회원이 로그인 회원인경우 로그아웃 해야함.
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+/*		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser.getId().equals(member.getId())) {
 			session.invalidate();
 		}
-		
+*/
 		rttr.addFlashAttribute("removeMember",member);
 		
 		rttr.addAttribute("from","remove");		
@@ -264,6 +301,8 @@ public class MemberController {
 		
 		return url;
 	}
+	
+
 }
 
 

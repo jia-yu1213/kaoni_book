@@ -1,124 +1,195 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<title>회원수정</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<title>회원상세보기</title>
 
+<head>
+	<%-- <%@include file="./detailStyle.jsp" %>
+ --%>
+<style>
+
+.picdiv{
+
+    border: 1px solid green;;
+    height: 200px;
+    width: 160px;
+    float: left;
+}
+
+.register-card {
+  background-color: #E9ECEF;
+  border-top: 0;
+  color: #666;
+  padding: 20px;
+  text-align :center
+  
+}
+
+[class*='pull-right']{
+	width: 75px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.md-2, .card-footer {
+	background-color: ghostwhite;
+}
+
+</style>
+
+</head>
 <body>
 
   <!-- Content Wrapper. Contains page content -->
-  <div>
-   <section class="content-header">
-	  	<div class="container-fluid">
+  <div >
+  	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
-	  			<div class="col-sm-6">
-	  				<h1>수정페이지</h1>  				
-	  			</div>
-	  			<div class="col-sm-6">
-	  				<ol class="breadcrumb float-sm-right">
-			        <li class="breadcrumb-item">
-			        	<a href="#">
-				        	<i class="fa fa-dashboard">회원관리</i>
-				        </a>
-			        </li>
-			        <li class="breadcrumb-item active">
-			        	수정
-			        </li>		        
-	    	  </ol>
-	  			</div>
-	  		</div>
+          		<div>
+          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-primary pull-right" onclick="modify_go();" style="margin-left: 20px;">수정</button>
+          		</div>
+         		
+          		</div>
 	  	</div>
-  	</section> 
-  <!-- Main content -->
-  <section class="content register-page" >
-	<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">	
-		<div class="register-box" style="min-width:450px;">	
-			<div class="register-card-body">	
-				<div class="row">					
-					<input type="hidden" name="oldPicture"  value="${member.picture }"/>
-					<input type="file" id="inputFile" onchange="changePicture_go();" name="picture" style="display:none" />
-					<div class="input-group col-md-12">
-						<div class="col-md-12" style="text-align: center;">
-							<div class="" id="pictureView" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto; margin-bottom:5px;"></div>														
-							<div class="input-group input-group-sm">
-								<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon">사진변경</label>
-								<input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled
-									value="${member.picture.split('\\$\\$')[1] }"/>
-								<input id="picture" class="form-control" type="hidden" name="uploadPicture" />
-							</div>						
-						</div>												
-					</div>
-				</div>	
-				<div class="form-group row">
-					<label for="id" class="col-sm-3 control-label text-center">아이디</label>	
-					<div class="col-sm-9">
-						<input readonly name="id" type="text" class="form-control" id="id"
-							placeholder="13글자 영문자,숫자 조합" value="${member.id }">
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label for="pwd" class="col-sm-3 control-label text-center" >패스워드</label>
-
-					<div class="col-sm-9">
-						<input name="pwd" type="password" class="form-control" id="pwd"
-							placeholder="20글자 영문자,숫자,특수문자 조합" value="${member.pwd }">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="pwd" class="col-sm-3 control-label text-center" >이 름</label>
-
-					<div class="col-sm-9">
-						<input name="name" type="text" class="form-control" id="name"
-							placeholder="20글자 영문자,숫자,특수문자 조합" value="${member.name }">
-					</div>
-				</div>
+  <!-- 	</section> -->
+    <!-- Main content -->
+    <section class="content register-page" style="background-color: ghostwhite;">       
+		<div class="register-box" style="width:500px;">         
+	    	<form role="form" class="form-horizontal"  method="post">
+	    		<div class="register-card-header" >
+	    			<h1 class="text-center" style="font-size: 35px;">회원정보 수정</h1>
+	    		</div>
+	    		
+	        	<div class="register-card-body" style="width:500px; height: 350px;">
 						
-									
-				<div class="form-group row">
-					<label for="authority" class="col-sm-3 control-label text-center" >권 한</label>
-					<div class="col-sm-9">
-						<select name="authority" class="form-control">
-							<option ${member.authority eq 'ROLE_USER' ? 'selected' : '' } value="ROLE_USER">사용자</option>
-							<option ${member.authority eq 'ROLE_MANAGER' ? 'selected' : '' } value="ROLE_MANAGER">운영자</option>
-							<option ${member.authority eq 'ROLE_ADMIN' ? 'selected' : '' } value="ROLE_ADMIN">관리자</option>
-						</select>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label for="email" class="col-sm-3 control-label text-center">이메일</label>
-
-					<div class="col-sm-9">
-						<input name="email" type="email" class="form-control" id="email"
-							placeholder="example@naver.com" value="${member.email }">
-					</div>
-				</div>
-				<div class="form-group row">
-                  <label for="phone" class="col-sm-3 control-label text-center">전화번호</label>
-                  <div class="col-sm-9">   
-                  	<input name="phone" type="text" class="form-control" id="inputPassword3" value="${member.phone }">	                
-                  </div>                  
-                </div>  
-				
-				<div class="card-footer row" style="margin-top: 0; border-top: none;">						
-					<button type="button" id="modifyBtn"  onclick="modify_go();"
-						class="btn btn-warning col-sm-4 text-center" >수정하기</button>
-					<div class="col-sm-4"></div>
-					<button type="button" id="cancelBtn" onclick="history.go(-1);"
-						class="btn btn-default pull-right col-sm-4 text-center">취 소</button>
-				</div>	
-			</div>
-		</div>
-	</form>
-  </section>
+						<div class = "picdiv" style="border: 1px solid green;" data-id="${member.id }"></div>
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
+								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
+	                   			<input name="id" type="text" class="form-control col-sm-8 id" style="width: 80px; text-align:center;" value="${member.id }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="name" class="col-sm-4">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</label>
+	                   			<input name="name" type="text" class="form-control col-sm-8 name" style="width: 80px; text-align:center;" value="${member.name }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="birth" class="col-sm-4">생년월일</label>
+								<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd" var="birth_date"/>
+	                   			<input name="" type="text" class="form-control col-sm-8 birth" style="width: 80px; text-align:center;" value="${birth_date }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="phone" class="col-sm-4">전화번호</label>
+	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" style="width: 80px; text-align:center;" value="${member.phone }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="email" class="col-sm-4">이&nbsp;&nbsp;메&nbsp;&nbsp;일</label>
+	                   			<input name="email" type="text" class="form-control col-sm-8 email" style="width: 80px; text-align:center;" value="${member.email }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px 0;">
+								<label for="address"  style="padding: 0; width:80px;" >주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
+	                   			<input name="address" type="text" class="form-control address" style="width: 375px; text-align:center;" value="${member.address }" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px 0;">
+								<label for="detailAddress"  style="padding: 0; width:80px;">상세주소</label>
+	                   			<input name="detailAddress" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }" >
+                 			</div>
+                 		</div>
+                 		
+                 	</div>	
+ 	                
+		          <div class="card-footer" style="padding:10px 0;" >
+		          		<div class="row">
+			          		<div class="col-sm-12 text-center">
+<!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
+			            		<button type="button" id="listBtn" onclick="history.go(-1);" class="btn btn-sm btn-secondary float-center" style="width:60px;">취소 </button>
+			            		
+			            	</div>
+		          	    </div> 
+		          	</div>
+		          	   
+	      	  </form>
+      	  </div>
+    </section>
     <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
+<form id="modifyData">
+	<input type="hidden" name="id">
+	<input type="hidden" name="name">
+	<input type="hidden" name="birth">
+	<input type="hidden" name="phone">
+	<input type="hidden" name="email">
+	<input type="hidden" name="address">
+	<input type="hidden" name="detail_address">
+</form>
+<script>
+
+/* function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
+	winleft = (screen.width - WinWidth) / 2;
+	wintop = (screen.height - WinHeight) / 2;
+	var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth +", " 
+							+"height="+ WinHeight +", top="+ wintop +", left=" 
+							+ winleft +", resizable=yes, status=yes"  );
+	win.focus() ; 
+}
+ */
  
-  <%@ include file="./js/modify_js.jsp" %>
+window.onload=function(){
+	MemberPictureThumb(document.querySelector('[data-id="${member.id}"]'),'${member.picture}','<%=request.getContextPath()%>');
+	
+	<c:if test="${param.from eq 'modify'}" >
+		alert("${member.name}님의 정보가 수정되었습니다.");	
+		location.href='detail.do?id=${member.id}';
+		
+		if(${parentReload}){			
+			if(confirm('로그인 사용자의 정보가 수정되었습니다.\n현재 화면을 닫고 새로고침 하시겠습니까?')){
+				window.opener.parent.location.reload(true);
+				window.close();
+			}	
+		}
+	</c:if>
+	
+	<c:if test="${param.from eq 'active'}" >
+		alert("${activeMember.name}님의 계정이 활성상태가되었습니다.");
+		<c:if test="${empty loginUser}">
+			window.opener.parent.location.href="<%=request.getContextPath()%>";
+		</c:if>
+		window.close();
+		opener.parent.location.reload();
+	</c:if>
+	<c:if test="${param.from eq 'stop'}" >
+		alert("${stopMember.name}님의 계정이 휴면상태가되었습니다.");
+		<c:if test="${empty loginUser}">
+			window.opener.parent.location.href="<%=request.getContextPath()%>";
+		</c:if>
+		window.close();
+		opener.parent.location.reload();
+	</c:if>
+	
+	<c:if test="${param.from eq 'remove'}" >
+		alert("${removeMember.name}님의 정보가 삭제되었습니다.");
+		<c:if test="${empty loginUser}">
+			window.opener.parent.location.href="<%=request.getContextPath()%>";
+		</c:if>
+		window.close();
+		opener.parent.location.reload();
+	</c:if>
+
+	
+}
+</script>    
+  
 </body>
-
-
-
-
-
-
