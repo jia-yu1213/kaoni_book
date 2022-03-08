@@ -98,7 +98,7 @@
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="phone" class="col-sm-4">전화번호</label>
-	                   			<input name="phone" type="text" class="form-control col-sm-8" style="width: 80px; text-align:center;" value="${member.phone }" readonly>
+	                   			<input name="phone" type="text" class="form-control col-sm-8" style="width: 80px; text-align:center;"  value="${member.phone.substring(0,3) }-${member.phone.substring(3,7) }-${member.phone.substring(7)}" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
@@ -125,7 +125,6 @@
 		          <div class="card-footer" style="padding:10px 0;" >
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
-<!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
 			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-sm btn-secondary float-center" style="width:60px;">닫 기</button>
 			            		
 			            	</div>
@@ -141,16 +140,6 @@
 
 <script>
 
-/* function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
-	winleft = (screen.width - WinWidth) / 2;
-	wintop = (screen.height - WinHeight) / 2;
-	var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth +", " 
-							+"height="+ WinHeight +", top="+ wintop +", left=" 
-							+ winleft +", resizable=yes, status=yes"  );
-	win.focus() ; 
-}
- */
- 
 window.onload=function(){
 	MemberPictureThumb(document.querySelector('[data-id="${member.id}"]'),'${member.picture}','<%=request.getContextPath()%>');
 	

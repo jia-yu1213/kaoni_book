@@ -73,10 +73,6 @@
 		name=#{name},phone=#{phone}, address=#{address}, email=#{email}, picture =#{picture},
 		 detail_address=#{detail_address}, birth_date=#{birth_date}
 		
-		<if test="authority != null">
-			,authority=#{authority}
-		</if>
-		
 		where id=#{id}
 	</update>
 	

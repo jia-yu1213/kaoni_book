@@ -25,19 +25,19 @@ public class MemberModifyCommand {
 	
 	public MemberVO toParseMember() throws ParseException {
 		MemberVO member = new MemberVO();
-		member.setId(id);
-		member.setName(name);
+		member.setId(this.id);
+		member.setName(this.name);
 		member.setPhone(this.phone);
 		member.setAddress(this.address);
 		member.setEmail(this.email);
 		member.setDetail_address(this.detail_address);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = format.parse(birth_date);
+		Date date = format.parse(this.birth_date);
 		member.setBirth_date(date);
 		
 		return member;
 	}
-
+	
 
 	public String getId() {
 		return id;
@@ -47,6 +47,7 @@ public class MemberModifyCommand {
 	public void setId(String id) {
 		this.id = id;
 	}
+
 
 
 	public String getName() {

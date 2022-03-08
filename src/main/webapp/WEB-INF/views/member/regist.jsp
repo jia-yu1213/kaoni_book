@@ -67,7 +67,7 @@
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal" action="regist.do" method="post">
 	    		<div class="register-card-header" >
-	    			<h1 class="text-center" style="font-size: 35px;">회원등록 </h1>
+					<h1 class="text-center" style="font-size: 35px;">회원등록 </h1>
 	    		</div>
 	    		
 	        	<div class="register-card-body" style="width:500px; height: 440px;">
@@ -124,17 +124,17 @@
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
 								<label for="address"  style="padding: 0; width:80px;" >주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
-	                   			<input name="address" type="text" class="form-control address" style="width: 375px; text-align:center;" >
+	                   			<input name="address" type="text" class="form-control address" style="width: 375px; text-align:center;" value="${member.address }" >
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
 								<label for="detail_address"  style="padding: 0; width:80px;">상세주소</label>
-	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;">
+	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }" >
                  			</div>
                  		</div>
                  		
-                 	</div>	
+                 	</div>		
  	                
 		          <div class="card-footer" style="padding:10px 0;" >
 		          		<div class="row">
