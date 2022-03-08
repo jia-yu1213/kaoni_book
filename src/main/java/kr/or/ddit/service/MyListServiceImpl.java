@@ -17,7 +17,7 @@ public class MyListServiceImpl implements MyListService {
 
 	private MyListDAO mylistDAO;
 
-	public void setMyListDAO(MyListDAO mylistDAO) {
+	public void setMylistDAO(MyListDAO mylistDAO) {
 		this.mylistDAO = mylistDAO;
 	}
 

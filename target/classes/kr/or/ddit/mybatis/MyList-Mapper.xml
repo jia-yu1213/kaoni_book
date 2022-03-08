@@ -4,10 +4,10 @@
 	
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
-			and title like '%'||#{keyword}||'%'			
+			and c.title like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and writer like '%'||#{keyword}||'%'			
+			and c.writer like '%'||#{keyword}||'%'			
 		</if>
 
 	</sql>
@@ -16,19 +16,18 @@
 	    select 
 	    	rownum, a.* 
         from(
-    	    select a.*(select book_title, writer from book where book_no =  a.book_no) 
-        	from book_rent a where id = #{id}
+        	select b.*, c.title, c.writer
+        	from book_rent b, book c where b.book_no=c.book_no and b.id = #{id}
 			<include refid="search" />
-			order by a.rent_no desc
+			order by b.rent_no desc
         ) A
 	</select>
 	
 	<select id="selectRentListByIDCount" resultType="int" parameterType="str">
 	/* selectRentListByMemIDCount 아이디로 대여이력 갯수 가져오기*/
-		select a.*(select book_title, writer from book where book_no =  a.book_no) 
-      	from book_rent a where mem_id = #{mem_id}
+		select count(b.rent_no)
+        from book_rent b, book c where b.book_no=c.book_no and b.id = #{id}
 		<include refid="search" />
-		order by a.rent_no desc
 	</select>
 	
 	
