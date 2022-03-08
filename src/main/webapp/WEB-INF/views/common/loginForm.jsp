@@ -29,7 +29,10 @@
 <body class="hold-transition login-page" style="background-color : white">
 <div class="login-box" style="width : 450px">
 		<div class="login-logo">
-			<img src="<%=request.getContextPath() %>/resources/images/booklogo.png" alt="AdminLTE Logo" style="height : 150px">
+			<a href="<%=request.getContextPath() %>/index.do" class="brand-link">
+				<img src="<%=request.getContextPath() %>/resources/images/booklogo.png" alt="AdminLTE Logo" style="height : 150px">
+			
+			</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">

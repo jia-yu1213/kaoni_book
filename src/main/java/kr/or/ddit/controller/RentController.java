@@ -44,7 +44,7 @@ public class RentController {
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		
 		RentVO rent = new RentVO();
-		rent.setMem_id(member.getId());
+		rent.setId(member.getId());
 		rent.setBook_no(book_no);
 		rentService.registRent(rent);
 		

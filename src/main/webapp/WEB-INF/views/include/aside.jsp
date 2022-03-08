@@ -19,7 +19,7 @@
 			<c:when test="${loginUser eq null }">
        			<div class="info">
           			<div class="row">
-						<button onclick="location.href='<%=request.getContextPath() %>/common/loginForm.do';" class="btn btn-xs btn-primary col-xs-3 " type="button" >LOGIN</button>
+						<button onclick="location.href='<%=request.getContextPath() %>/common/loginForm.do';" class="btn btn-primary col-xs-3 " type="button" >LOGIN</button>
 				    </div>
 		       	</div>
 			</c:when>

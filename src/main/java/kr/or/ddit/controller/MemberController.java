@@ -196,7 +196,6 @@ public class MemberController {
 
 		MemberVO member = memberService.getMember(id);
 		model.addAttribute("member", member);
-		
 
 		return url;
 	}
@@ -225,6 +224,7 @@ public class MemberController {
 		// 로그인한 사용자의 경우 수정된 정보로 session 업로드
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser != null && member.getId().equals(loginUser.getId())) {
+			member.setAuthority(loginUser.getAuthority());
 			session.setAttribute("loginUser", member);
 			rttr.addFlashAttribute("parentReload",true);
 		}
