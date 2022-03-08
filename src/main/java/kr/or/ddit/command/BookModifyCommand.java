@@ -4,11 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.or.ddit.dto.BookVO;
 
-public class BookRegistCommand {
+public class BookModifyCommand {
 	
-
+	private String book_no;
 	private String title;
 	private String writer;
 	private String ori_title;
@@ -19,8 +21,9 @@ public class BookRegistCommand {
 	private String book_index;
 	private String writer_intro;
 	private String cate_no;
-	private String picture;
-
+	private MultipartFile picture;
+	private String oldPicture; // 이전 사진파일명
+	private String uploadPicture; // 변경된 사진 파일명.
 
 	public String getTitle() {
 		return title;
@@ -105,12 +108,37 @@ public class BookRegistCommand {
 	}
 	
 	
-	public String getPicture() {
+
+	public String getBook_no() {
+		return book_no;
+	}
+
+	public void setBook_no(String book_no) {
+		this.book_no = book_no;
+	}
+
+	public MultipartFile getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(MultipartFile picture) {
 		this.picture = picture;
+	}
+
+	public String getOldPicture() {
+		return oldPicture;
+	}
+
+	public void setOldPicture(String oldPicture) {
+		this.oldPicture = oldPicture;
+	}
+
+	public String getUploadPicture() {
+		return uploadPicture;
+	}
+
+	public void setUploadPicture(String uploadPicture) {
+		this.uploadPicture = uploadPicture;
 	}
 
 	public BookVO toBookVO() throws ParseException {
@@ -132,7 +160,7 @@ public class BookRegistCommand {
 		book.setCate_no(cate_no);
 		book.setBook_index(book_index);
 		book.setWriter_intro(writer_intro);
-		book.setPhoto(picture);
+		
 		return book;
 	}
 	

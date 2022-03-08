@@ -20,7 +20,16 @@ public class BookVO {
 	private Date rent_end;
 	private String cate_name;
 	private String cate_no;
+	private String photo;
 	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	public String getCate_name() {
 		return cate_name;
 	}

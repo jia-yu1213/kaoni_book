@@ -22,4 +22,10 @@ public interface BookDAO {
 	
 	//카테고리 목록 가져오기
 	List<BookVO> selectCateList() throws SQLException;
+	
+	//책번호로 책 상세보기
+	BookVO selectBookByBookNo(String book_no) throws SQLException;
+	
+	//책 수정하기
+	void updateBook(BookVO book) throws SQLException;
 }

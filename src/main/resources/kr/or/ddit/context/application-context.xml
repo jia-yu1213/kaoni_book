@@ -17,11 +17,6 @@
 	<bean id="bookPicturePath" class="java.lang.String">
 		<constructor-arg value="${book.picture.upload}" />      
 	</bean>
-	
-	<!-- file upload -->
-	<bean id="fileUploadPath" class="java.lang.String">
-		<constructor-arg value="${pds.upload}"/>
-	</bean>
 
 	
 	<!-- DAO	 -->

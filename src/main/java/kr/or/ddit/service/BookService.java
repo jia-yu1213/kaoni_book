@@ -13,11 +13,18 @@ public interface BookService {
 	Map<String, Object> getBookList(SearchCriteria cri) throws SQLException;
 	
 //	// 대여 상태 수정
-//	void modifyStatus(BookVO book) throws SQLException;
+	void modifyStatus(BookVO book) throws SQLException;
 	
 	// 도서 추가
 	void regist(BookVO book)throws SQLException;
 	
 	//카테고리 목록 가져오기
 	List<BookVO> selectCateList() throws SQLException;
+	
+	//상세보기
+	BookVO getBook(String book_no) throws SQLException;
+	
+	//수정하기
+	void modify(BookVO book) throws SQLException;
+	
 }
