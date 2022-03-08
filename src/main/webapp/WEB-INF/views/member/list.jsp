@@ -87,7 +87,7 @@
 		               	</tr>
 		            
 		               	<c:forEach items="${memberList }" var="member" >
-		               	  <tr  onclick="OpenWindow('detail.do?id='+${member.id},'','700','600');" style="cursor:pointer;">
+		               	  <tr  onclick="OpenWindow('detail.do?id=${member.id}','','700','600');" style="cursor:pointer;">
 		               		<td>${member.id }</td>
 		               		<td>${member.name }</td>
 		              		<td>
