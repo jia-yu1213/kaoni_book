@@ -6,8 +6,7 @@
 <title>회원상세보기</title>
 
 <head>
-	<%-- <%@include file="./detailStyle.jsp" %>
- --%>
+
 <style>
 
 .picdiv{
@@ -43,20 +42,18 @@
 <body>
 
   <!-- Content Wrapper. Contains page content -->
-  <div >
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
           		<div>
-          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-primary pull-right" onclick="modify_go();" style="margin-left: 20px;">수정</button>
+          			<button type="button" onclick="modify_go();" id="modifyBtn" class="btn btn-primary pull-right" style="margin-left: 20px;">수정</button>
           		</div>
          		
           		</div>
-	  	</div>
   <!-- 	</section> -->
     <!-- Main content -->
     <section class="content register-page" style="background-color: ghostwhite;">       
 		<div class="register-box" style="width:500px;">         
-	    	<form role="form" class="form-horizontal"  method="post">
+	    	<form role="form" class="form-horizontal"  action="modify.do" method="post">
 	    		<div class="register-card-header" >
 	    			<h1 class="text-center" style="font-size: 35px;">회원정보 수정</h1>
 	    		</div>
@@ -78,9 +75,9 @@
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
-								<label for="birth" class="col-sm-4">생년월일</label>
+								<label for="birth_date" class="col-sm-4">생년월일</label>
 								<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd" var="birth_date"/>
-	                   			<input name="" type="text" class="form-control col-sm-8 birth" style="width: 80px; text-align:center;" value="${birth_date }" >
+	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" style="width: 80px; text-align:center;" value="${birth_date }" >
                  			</div>
                  		</div>
        		          	<div class="top3">
@@ -103,8 +100,8 @@
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
-								<label for="detailAddress"  style="padding: 0; width:80px;">상세주소</label>
-	                   			<input name="detailAddress" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }" >
+								<label for="detail_address"  style="padding: 0; width:80px;">상세주소</label>
+	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }" >
                  			</div>
                  		</div>
                  		
@@ -126,26 +123,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<form id="modifyData">
-	<input type="hidden" name="id">
-	<input type="hidden" name="name">
-	<input type="hidden" name="birth">
-	<input type="hidden" name="phone">
-	<input type="hidden" name="email">
-	<input type="hidden" name="address">
-	<input type="hidden" name="detail_address">
-</form>
 <script>
-
-/* function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
-	winleft = (screen.width - WinWidth) / 2;
-	wintop = (screen.height - WinHeight) / 2;
-	var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth +", " 
-							+"height="+ WinHeight +", top="+ wintop +", left=" 
-							+ winleft +", resizable=yes, status=yes"  );
-	win.focus() ; 
-}
- */
  
 window.onload=function(){
 	MemberPictureThumb(document.querySelector('[data-id="${member.id}"]'),'${member.picture}','<%=request.getContextPath()%>');
@@ -191,5 +169,7 @@ window.onload=function(){
 	
 }
 </script>    
+  
+    <%@ include file="./js/modify_js.jsp" %>
   
 </body>

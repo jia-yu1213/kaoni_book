@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -72,7 +73,8 @@ public class MemberController {
 
 		String result = "";
 		HttpStatus status = null;
-
+		System.out.println("사진 : " + oldPicture);
+		
 		/* 파일저장확인 */
 		if ((result = savePicture(oldPicture, multi)) == null) {
 			result = "업로드 실패했습니다.!";
@@ -165,7 +167,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(MemberRegistCommand memberReq) throws SQLException, IOException {
+	public String regist(MemberRegistCommand memberReq) throws Exception {
 		String url = "member/regist_success";
 
 		MemberVO member = memberReq.toMemberVO();
@@ -187,7 +189,7 @@ public class MemberController {
 		return url;
 	}
 	
-	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/modifyForm")
 	public String modifyForm(String id, Model model)throws SQLException {
 
 		String url = "member/modify";
@@ -200,7 +202,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/modify")
 	public String modify(MemberModifyCommand modifyReq,HttpSession session,
 						 RedirectAttributes rttr)throws Exception {
 		String url="redirect:/member/detail.do";
@@ -212,9 +214,14 @@ public class MemberController {
 		member.setPicture(fileName);
 		
 		//파일변경 없을시 기존 파일명 유지
-		if (modifyReq.getPicture().isEmpty()) {
-			member.setPicture(modifyReq.getOldPicture());
+		if (modifyReq.getPicture()==null) {
+			member.setPicture("");
+		}else {
+			if (modifyReq.getPicture().isEmpty()) {
+				member.setPicture(modifyReq.getOldPicture());
+			}
 		}
+		
 		//DB 내용 수정
 		memberService.modify(member);
 		
@@ -234,6 +241,7 @@ public class MemberController {
 		
 		return url;
 	}
+	
 	
 	@RequestMapping(value = "/active", method = RequestMethod.GET)
 	public String enabled(String id, HttpSession session, RedirectAttributes rttr) throws SQLException {

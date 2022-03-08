@@ -1,147 +1,157 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <title>회원등록</title>
 
+<head>
+
+<style>
+
+.picdiv{
+
+    border: 1px solid green;;
+    height: 200px;
+    width: 160px;
+    float: left;
+    object-fit: cover;
+    background-size: contain;
+}
+
+#inputFile, #oldFile{
+	
+	height: 200px;
+    width: 160px;
+    object-fit: cover;
+}
+
+.register-card {
+  background-color: #E9ECEF;
+  border-top: 0;
+  color: #666;
+  padding: 20px;
+  text-align :center
+  
+}
+
+[class*='pull-right']{
+	width: 75px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.md-2, .card-footer {
+	background-color: ghostwhite;
+}
+
+</style>
+
+</head>
+
 <body>
 
+<div>
 	<!-- Content Wrapper. Contains page content -->
-<div >
-  	 <section class="content-header">
-	  	<div class="container-fluid">
+  	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
-	  			<div class="col-sm-6">
-	  				<h1>회원등록</h1>  				
-	  			</div>
-	  			<div class="col-sm-6">
-	  				<ol class="breadcrumb float-sm-right">
-			        <li class="breadcrumb-item">
-			        	<a href="#">
-				        	<i class="fa fa-dashboard">회원관리</i>
-				        </a>
-			        </li>
-			        <li class="breadcrumb-item active">
-			        	등록
-			        </li>		        
-	    	  </ol>
-	  			</div>
-	  		</div>
-	  	</div>
-  	</section>
-	<!-- Main content -->
-	<section class="content register-page">
-		<div class="register-box">
-			<div class="login-logo">
-    			<a href="<%=request.getContextPath()%>/member/registForm.do"><b>회원 등록</b></a>
-  			</div>
-			<!-- form start -->
-			<div class="card">				
-				<div class="register-card-body">
-					<form role="form" class="form-horizontal" action="regist.do" method="post">						
-						<input type="hidden" name="picture" />
-						<div class="input-group mb-3">
-							<div class="mailbox-attachments clearfix" style="text-align: center;">
-								<div class="mailbox-attachment-icon has-img" id="pictureView" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto;"></div>
-								<div class="mailbox-attachment-info">
-									<div class="input-group input-group-sm">
-										<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon">파일선택</label>
-										<input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled/>
-										<span class="input-group-append-sm">											
-											<button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();">업로드</button>											
-										</span>
-									</div>
-								</div>
-							</div>
-							<br />
-						  </div>	
-						  <div class="form-group row">
-							 <label for="id" class="col-sm-3" style="font-size:0.9em;" >
-							 	<span style="color:red;font-weight:bold;">*</span>아이디</label>	
-							<div class="col-sm-9 input-group input-group-sm">
-								<input name="id" 
-									onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
-								type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
-								<span class="input-group-append-sm">	
-									<button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append">중복확인</button>
-								</span>								
-							</div>								
-						</div>
-						<div class="form-group row">
-							<label for="pwd" class="col-sm-3" style="font-size:0.9em;">
-								<span style="color:red;font-weight:bold;">*</span>패스워드</label>
-							<div class="col-sm-9 input-group-sm">								
-								<input class="form-control" name="pwd" type="password" class="form-control" id="pwd"
-										placeholder="20글자 영문자,숫자,특수문자 조합" />
-							</div>
-							
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-3" style="font-size:0.9em;">
-								<span style="color:red;font-weight:bold;">*</span>이 름</label>
-							<div class="col-sm-9 input-group-sm">								
-								<input class="form-control" name="name" type="text" class="form-control" id="name"
-										placeholder="이름을 입력하세요"
-										onkeyup="this.value=this.value.trim();" />
-							</div>
-							
-						</div>		
-						<div class="form-group row">
-							<label for="authority" class="col-sm-3" style="font-size:0.9em;" >권 한</label>
-							<div class="col-sm-9">
-								<select name="authority" class="form-control" style="font-size:0.9em;">
-									<option value="ROLE_USER">사용자</option>
-									<option value="ROLE_MANAGER">운영자</option>
-									<option value="ROLE_ADMIN">관리자</option>
-								</select>
-							</div>
-						</div>					
-						<div class="form-group row">
-							<label for="email" class="col-sm-3" style="font-size:0.9em;">이메일</label>
-							<div class="col-sm-9 input-group-sm">
-								<input name="email" type="email" class="form-control" id="email"
-										placeholder="example@naver.com">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="phone" class="col-sm-3 control-label">전화번호</label>
-							<div class="col-sm-9">	
-								<div class="input-group-sm">
-									<select style="width:75px;" name="phone" id="phone" class="form-control float-left">
-										<option value="">-선택-</option>
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="017">017</option>
-										<option value="018">018</option>
-									</select>							
-									<label class="float-left" style="padding: 0; text-align: center;">&nbsp;-&nbsp;</label>										
-									<input style="width:68px;" name="phone" type="text" class="form-control float-left" />
-									<label class="float-left" style="padding: 0; text-align: center;">&nbsp;-</label>
-									<input style="width:68px;" name="phone" type="text" class="form-control float-right" />						
-								</div>
-							</div>
-						</div>
+          		<div>
+          			<button type="button" onclick="regist_go();return false;" id="registBtn" class="btn btn-primary pull-right" style="margin-left: 20px;">등록</button>
+          		</div>
+         		
+          	</div>
+  <!-- 	</section> -->
+    <!-- Main content -->
+    <section class="content register-page" style="background-color: ghostwhite;">       
+		<div class="register-box" style="width:500px;">         
+	    	<form role="form" class="form-horizontal" action="regist.do" method="post">
+	    		<div class="register-card-header" >
+	    			<h1 class="text-center" style="font-size: 35px;">회원등록 </h1>
+	    		</div>
+	    		
+	        	<div class="register-card-body" style="width:500px; height: 440px;">
 						
-						<div class="card-footer">
-							<div class="row">								
-								<div class="col-sm-6">
-									<button type="button" id="registBtn" onclick="regist_go();return false;" class="btn btn-info">등&nbsp;&nbsp;록</button>
-							 	</div>
-							 	
-							 	<div class="col-sm-6">
-									<button type="button" id="cancelBtn" onclick="CloseWindow();"
-										class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취 &nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
-								</div>
-							
-							</div>
-						</div>
-					</form>					
-				</div><!-- register-card-body -->
-			</div>
-		</div>
-	</section>		<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group">
+           	  				<input type="hidden" name="picture" />
+           	  					<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon" style="border-radius: 3px; height:38px;">파일선택</label>
+								<input id="inputFileName" class="form-control" type="text" name="tempPicture" style="width: 310px;" disabled/>
+								<span class="input-group-append-sm">											
+									<button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();" style="width: 70px; height:38px; ">업로드</button>											
+								</span>
+                 			</div>
+                 		</div>
+                 		
+						<div class = "picdiv" id="pictureView" style="margin-top: 20px; border: 1px solid green;"></div>
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
+								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
+	                   			<input name="id" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control col-sm-5 id" id="id" placeholder="영문자,숫자" style="width: 50px; text-align:center;">
+									<button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append col-sm-3" style="width: 30px; height:38px; font-size:0.87rem;">중복확인</button>
+                 			</div>
+                 		</div>
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
+								<label for="id" class="col-sm-4">패스워드</label>
+								<input class="form-control" name="pwd" type="password" class="form-control col-sm-8 pwd" id="pwd" placeholder="20글자 영문자,숫자 조합" style="width: 196px; text-align:center;" />
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="name" class="col-sm-4">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</label>
+	                   			<input name="name" type="text" class="form-control col-sm-8 name" style="width: 80px; text-align:center;">
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="birth_date" class="col-sm-4">생년월일</label>
+	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" placeholder="0000-00-00" style="width: 80px; text-align:center;">
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="phone" class="col-sm-4">전화번호</label>
+	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" placeholder="010-1234-1234" style="width: 80px; text-align:center;">
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px;">
+								<label for="email" class="col-sm-4">이&nbsp;&nbsp;메&nbsp;&nbsp;일</label>
+	                   			<input name="email" type="text" class="form-control col-sm-8 email" placeholder="example@naver.com" style="width: 80px; text-align:center;" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px 0;">
+								<label for="address"  style="padding: 0; width:80px;" >주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
+	                   			<input name="address" type="text" class="form-control address" style="width: 375px; text-align:center;" >
+                 			</div>
+                 		</div>
+       		          	<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 5px 0;">
+								<label for="detail_address"  style="padding: 0; width:80px;">상세주소</label>
+	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;">
+                 			</div>
+                 		</div>
+                 		
+                 	</div>	
+ 	                
+		          <div class="card-footer" style="padding:10px 0;" >
+		          		<div class="row">
+			          		<div class="col-sm-12 text-center">
+<!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
+			            		<button type="button" id="listBtn" onclick="CloseWindow()" class="btn btn-sm btn-secondary float-center" style="width:60px;">닫기 </button>
+			            		
+			            	</div>
+		          	    </div> 
+		          	</div>
+		          	   
+	      	  </form>
+      	  </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 
 <form role="imageForm" action="upload/picture.do" method="post" enctype="multipart/form-data">
@@ -154,15 +164,3 @@
 
 <jsp:include page="./js/regist_js.jsp" />
 </body>
-
-
-
-
-
-
-
-
-
-
-
-

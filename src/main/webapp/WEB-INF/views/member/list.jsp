@@ -38,7 +38,7 @@
    	<section class="content">
    		<div class="card">
    			<div class="card-header with-border">
-   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do','회원등록',700,600);" >회원등록</button>
+   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do','회원등록',700,670);" >회원등록</button>
    				<div id="keyword" class="card-tools" style="width:550px;">
    					 <div class="input-group row">
    					 	<!-- search bar -->
@@ -47,9 +47,9 @@
 					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
 					  		onchange="list_go(1);">
 					  		<option value="10" >정렬개수</option>
-					  		<option value="2" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
-					  		<option value="3" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
-					  		<option value="5" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
+					  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>20개씩</option>
+					  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>50개씩</option>
+					  		<option value="5" ${cri.perPageNum == 5 ? 'selected':''}>100개씩</option>
 					  		
 					  	</select>
 					  	
@@ -59,7 +59,7 @@
 							<option value="n"  ${cri.searchType eq 'n' ? 'selected':''}>이름</option>
 							<option value="i"  ${cri.searchType eq 'i' ? 'selected':''}>아이디</option>
 							<option value="p"  ${cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
-							<option value="p"  ${cri.searchType eq 's' ? 'selected':''}>상태</option>
+							<option value="s"  ${cri.searchType eq 's' ? 'selected':''}>상태</option>
 						</select>
 						<!-- keyword -->
    					 	<input  class="form-control" type="text" name="keyword" 

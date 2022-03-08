@@ -41,6 +41,7 @@
 
 </head>
 <body>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
   <!-- Content Wrapper. Contains page content -->
   <div >
@@ -74,7 +75,7 @@
 	    		
 	        	<div class="register-card-body" style="width:500px; height: 350px;">
 						
-						<div class = "picdiv" style="border: 1px solid green;" data-id="${member.id }"></div>
+						<div class = "picdiv"  id="pictureView" data-id="${member.id }" style="border: 1px solid green;"></div>
            	  			<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
 								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>

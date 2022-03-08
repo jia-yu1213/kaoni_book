@@ -156,6 +156,18 @@ function regist_go(){
       alert("이름은 필수입니다.");
       return;
    }
+
+   /* if($('input[name="phone"]').val()==""){
+      alert("전화번호는 필수입니다.");
+      return;
+   } */
+   
+   /* if($('input[name="phone"]').length!=11){
+      alert("전화번호 형식에 맞게 입력해주세요.");
+      return;
+   } */
+   
+   console.log($('input[name="phone"]').length);
    
    var form = $('form[role="form"]');
    form.submit();

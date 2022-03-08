@@ -21,17 +21,17 @@
 <!-- 	</scheduled-tasks>	 -->
 	
 	
-	<beans:bean id="memberPictureRemoveTask"
-	            class="kr.or.ddit.scheduler.RemoveMemberPictureScheduler"
-	            p:memberService-ref="memberService"
-	            p:picturePath-ref="picturePath"
-	            />
-	<scheduler id="memberPictureRemoveScheduler"/>
-	<scheduled-tasks scheduler="memberPictureRemoveScheduler">
-	<scheduled ref="memberPictureRemoveTask" 
-				   method="removePicture"
-				   cron="*/10 * * * * *"/>
-	</scheduled-tasks>
+<!-- 	<beans:bean id="memberPictureRemoveTask" -->
+<!-- 	            class="kr.or.ddit.scheduler.RemoveMemberPictureScheduler" -->
+<!-- 	            p:memberService-ref="memberService" -->
+<!-- 	            p:picturePath-ref="picturePath" -->
+<!-- 	            /> -->
+<!-- 	<scheduler id="memberPictureRemoveScheduler"/> -->
+<!-- 	<scheduled-tasks scheduler="memberPictureRemoveScheduler"> -->
+<!-- 	<scheduled ref="memberPictureRemoveTask"  -->
+<!-- 				   method="removePicture" -->
+<!-- 				   cron="*/10 * * * * *"/> -->
+<!-- 	</scheduled-tasks> -->
 	
 	
 <!-- 	<beans:bean id="summernoteImageRemoveTask" -->

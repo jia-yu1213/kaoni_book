@@ -50,16 +50,28 @@
 	</select>
 	
 	<update id="insertMember" parameterType="member">
-		insert into 
-		member(name,id, pwd, gender, phone, address, email, last_login, picture, regdate, authority, detail_address, birth_date)
-		values(#{name},#{id},#{pwd},#{gender},#{phone},#{address},#{email},sysdate,#{picture},sysdate,'1',#{detail_address}, #{birth_date})
+		insert into member
+					values(#{name},
+						   #{id},
+						   #{pwd},
+						   '1',
+						   #{phone},
+						   #{address},
+						   #{email},
+						   sysdate,
+						   #{picture},
+						   sysdate,
+						   '1',
+						   '0',
+						   #{detail_address}, 
+						   #{birth_date})
 	</update>	
 	
 	<update id="updateMember" parameterType="member">
 		update member 
 		set 
-		name=#{name}, pwd=#{pwd}, phone=#{phone}, address=#{address}, email=#{email},
-		picture=#{picture}, detail_address=#{detail_address}, birth_date=#{birth_date}
+		name=#{name},phone=#{phone}, address=#{address}, email=#{email}, picture =#{picture},
+		 detail_address=#{detail_address}, birth_date=#{birth_date}
 		
 		<if test="authority != null">
 			,authority=#{authority}
