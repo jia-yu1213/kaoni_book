@@ -45,17 +45,27 @@ public class BookServiceImpl implements BookService {
 		bookDAO.insertBook(book);
 	}
 
-//	@Override
-//	public void modifyStatus(BookVO book) throws SQLException {
-//		bookDAO.updateBookStatus(book);
-//		
-//	}
+	@Override
+	public void modifyStatus(BookVO book) throws SQLException {
+		bookDAO.updateBookStatus(book);
+	}
 	
 
 	@Override
 	public List<BookVO> selectCateList() throws SQLException {
 		List<BookVO> cateList = bookDAO.selectCateList();
 		return cateList;
+	}
+
+	@Override
+	public BookVO getBook(String book_no) throws SQLException {
+		BookVO book = bookDAO.selectBookByBookNo(book_no);
+		return book;
+	}
+
+	@Override
+	public void modify(BookVO book) throws SQLException {
+		bookDAO.updateBook(book);
 	}
 
 	

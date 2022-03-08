@@ -3,10 +3,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-window.onload=function(){
-  	MemberPictureThumb($('#pictureView')[0],'${member.picture}',
-  			'<%=request.getContextPath()%>');
-}  
 
 function  changePicture_go(){
 	//alert("click picture btn");

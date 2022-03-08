@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.ddit.command.BookModifyCommand;
 import kr.or.ddit.command.BookRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
+import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.service.BookService;
 import kr.or.ddit.util.MakeFileName;
 
@@ -144,15 +147,73 @@ public class BookController {
 		
 		BookVO book = regReq.toBookVO();
 		
-	
-		//board.setTitle((String)request.getAttribute("XSStitle"));
-		
 		bookService.regist(book);
 		
 		rttr.addFlashAttribute("from","regist");
 		
 		return url;
 	}
+	
+	@RequestMapping("/detail")
+	public ModelAndView detail(String book_no, ModelAndView mnv) throws SQLException{
+			String url = "book/detail";
+			BookVO book = bookService.getBook(book_no);
+			mnv.addObject("book",book);
+			mnv.setViewName(url);
+			return mnv;
+	}
+	
+	@RequestMapping(value="/remove",method=RequestMethod.POST)
+	public String remove(String book_no,RedirectAttributes rttr) throws Exception{
+		String url = "redirect:/book/detail.do";
+
+		BookVO book = new BookVO();
+		book.setBook_no(book_no);
+		book.setBook_status(2);
+		bookService.modifyStatus(book);
+		
+		rttr.addAttribute("book_no",book_no);
+		rttr.addFlashAttribute("from","remove");
+		return url;		
+	}
+	
+	@RequestMapping(value = "/modifyForm")
+	public ModelAndView modifyForm(String book_no, ModelAndView mnv)throws SQLException {
+
+		String url = "book/modify";
+		List<BookVO> cateList =  bookService.selectCateList();
+		mnv.addObject("cateList",cateList);
+		BookVO book = bookService.getBook(book_no);
+		mnv.addObject("book", book);
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@RequestMapping(value="/modify")
+	public String modify(BookModifyCommand modifyReq, RedirectAttributes rttr) throws Exception {
+		String url ="redirect:/book/detail.do";
+		
+		BookVO book = modifyReq.toBookVO();
+		
+		String fileName = savePicture(modifyReq.getOldPicture(), modifyReq.getPicture());
+		book.setPhoto(fileName);
+		
+		if (modifyReq.getPicture().isEmpty()) {
+			book.setPhoto(modifyReq.getOldPicture());
+		}
+		
+		bookService.modify(book);
+		
+		rttr.addFlashAttribute("from","modify");
+		rttr.addAttribute("book_no", book.getBook_no());
+		return url;
+	}
+	
+	
+	
+	
+	
 }
 
 
