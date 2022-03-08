@@ -143,6 +143,7 @@ public class BookModifyCommand {
 
 	public BookVO toBookVO() throws ParseException {
 		BookVO book = new BookVO();
+		book.setBook_no(book_no);
 		book.setTitle(title);
 		book.setWriter(writer);
 		book.setOri_title(ori_title);

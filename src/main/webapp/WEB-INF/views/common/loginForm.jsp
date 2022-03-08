@@ -26,10 +26,10 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="hold-transition login-page" style="background-color : white">
+<div class="login-box" style="width : 450px">
 		<div class="login-logo">
-			<a href="#"><b>관리자 로그인</b></a>
+			<img src="<%=request.getContextPath() %>/resources/images/booklogo.png" alt="AdminLTE Logo" style="height : 150px">
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">
@@ -46,14 +46,14 @@
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
-					<div class="col-sm-8">
-						<div class="checkbox icheck">
-							<label> <input type="checkbox" name="rememberMe" value="check"> Remember Me
-							</label>
-						</div>
-					</div>
+<!-- 					<div class="col-sm-8"> -->
+<!-- 						<div class="checkbox icheck"> -->
+<!-- 							<label> <input type="checkbox" name="rememberMe" value="check"> Remember Me -->
+<!-- 							</label> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<!-- /.col -->
-					<div class="col-sm-4">
+					<div class="col-sm-4"  style="margin : 0 auto">
 						<button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
 					</div>
 					<!-- /.col -->
@@ -62,7 +62,7 @@
 
 			
 
-			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
+<!-- 			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br>  -->
 			
 
 		</div>

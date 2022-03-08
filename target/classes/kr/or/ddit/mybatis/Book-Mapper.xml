@@ -83,12 +83,12 @@
 	</select>
 	
 	<update id="updateBook" parameterType="book">
-	/* insertBook 책 업데이트*/
+	/* updateBook 책 업데이트*/
 	    update book 
 		set 
         title=#{title},
         writer=#{writer},
-        ori_writer=#{ori_writer},
+        ori_title=#{ori_title},
         translator=#{translator},
         publisher=#{publisher},
         publishing_date=#{publishing_date},
@@ -97,6 +97,7 @@
         book_index=#{book_index}, 
         writer_intro=#{writer_intro}, 
         photo=#{photo}
+        where book_no=#{book_no}
 	
 	
 	</update>

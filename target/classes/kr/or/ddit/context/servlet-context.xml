@@ -41,6 +41,5 @@
 	
 	<context:component-scan base-package="kr.or.ddit.controller" />
 	
-	<beans:bean id="downloadFile" class="kr.or.ddit.view.FileDownloadView" />
 	
 </beans:beans>

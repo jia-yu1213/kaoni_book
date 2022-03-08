@@ -45,7 +45,7 @@
 		    	<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">
 		        	<div class="card-body" >
 						<div class="row">
-							<input type="hidden" value="${book.book_no }"/>
+							<input type="hidden" name="book_no" value="${book.book_no }"/>
 							<div class="col-sm-4">
 							
 								<input id="inputFile" name="picture" type="file" class="form-control" onchange="changePicture_go();" style="display:none;">

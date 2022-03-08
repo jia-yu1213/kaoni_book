@@ -10,7 +10,7 @@
 
 </head>
   
-<title>Kim's System</title>
+<title>KAONI-BOOK</title>
   
 <body>  
   <div class="content-wrapper" style="background-color:#fff;">
