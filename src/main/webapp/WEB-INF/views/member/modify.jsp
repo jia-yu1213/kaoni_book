@@ -101,7 +101,8 @@
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="phone" class="col-sm-4">전화번호</label>
-	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" style="width: 80px; text-align:center;" value="${member.phone.substring(0,3) }-${member.phone.substring(3,7) }-${member.phone.substring(7)}">
+								<c:set var="phone" value="${member.phone.replace('-','') }" />
+	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" style="width: 80px; text-align:center;" value="${phone.substring(0,3) }-${phone.substring(3,7) }-${phone.substring(7)}">
                  			</div>
                  		</div>
        		          	<div class="top3">
