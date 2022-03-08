@@ -42,6 +42,7 @@
 		book_rent(rent_no,book_no,mem_id)
 		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{mem_id}) 
 	</update>	
+	
 
 </mapper>
 

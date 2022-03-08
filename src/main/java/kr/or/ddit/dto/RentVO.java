@@ -10,6 +10,21 @@ public class RentVO {
 	private Date rent_end;
 	private Date real_end;
 	private String book_no;
+	private String book_title;
+	private String writer;
+	
+	public String getBook_title() {
+		return book_title;
+	}
+	public void setBook_title(String book_title) {
+		this.book_title = book_title;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}

@@ -36,7 +36,10 @@
 	<bean id="rentDAO" 
 		  class="kr.or.ddit.dao.RentDAOImpl"
 	      p:sqlSession-ref="sqlSession" />
-	
+	<bean id="mylistDAO" 
+		  class="kr.or.ddit.dao.MyListDAOImpl"
+	      p:sqlSession-ref="sqlSession" />
+	      
 	<!-- service  -->
 	<bean id="menuService"
 	      class="kr.or.ddit.service.MenuServiceImpl"
@@ -57,7 +60,10 @@
 		  p:rentDAO-ref="rentDAO"
 		  p:bookDAO-ref="bookDAO"
 		  />
-             
+   <bean id="mylistService"
+		  class="kr.or.ddit.service.MyListServiceImpl"
+		  p:mylistDAO-ref="mylistDAO"
+		  />        
 </beans>
 
 

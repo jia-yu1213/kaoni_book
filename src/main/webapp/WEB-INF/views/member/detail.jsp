@@ -47,22 +47,40 @@
   <div >
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
-          		<div>
-          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-primary pull-right" style="margin-left: 20px;">수 정</button>
-          		</div>
-         		
-          		<div>
-          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" id="deleteBtn" class="btn btn-primary pull-right" >삭 제</button>
-          		</div>
-         			
-          		<div>
-          			<c:if test="${member.enabled eq 0 }">
-          			<button type="button" onclick="location.href='stop.do?id=${member.id}';" id="stopBtn" class="btn btn-primary pull-right" >비활성</button>
-          			</c:if>
-          			<c:if test="${member.enabled eq 1 }">
-						<button type="button" onclick="location.href='active.do?id=${member.id}';" id="activeBtn" class="btn btn-primary pull-right" >활&nbsp;&nbsp;성</button>
-          			</c:if>
-          		</div>
+	  			<c:choose>
+	  				<c:when test="${loginUser.authority eq 0 }">
+			  			<div>
+		          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-primary pull-right" style="margin-left: 20px;">수 정</button>
+		          		</div>
+		         		
+		          		<div>
+		          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" id="deleteBtn" class="btn btn-primary pull-right" >삭 제</button>
+		          		</div>
+		         			
+		          		<div>
+		          			<c:if test="${member.enabled eq 0 }">
+		          			<button type="button" onclick="location.href='stop.do?id=${member.id}';" id="stopBtn" class="btn btn-primary pull-right" >비활성</button>
+		          			</c:if>
+		          			<c:if test="${member.enabled eq 1 }">
+								<button type="button" onclick="location.href='active.do?id=${member.id}';" id="activeBtn" class="btn btn-primary pull-right" >활&nbsp;&nbsp;성</button>
+		          			</c:if>
+		          		</div>
+	  				</c:when>
+	  				<c:when test="${loginUser.authority eq 1 }">
+	  					<div>
+		          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-primary pull-right" style="margin-left: 20px;">수 정</button>
+		          		</div>
+		         		
+		          		<div>
+		          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" id="deleteBtn" class="btn btn-primary pull-right" >탈 퇴</button>
+		          		</div>
+	  				</c:when>
+	  			</c:choose>
+	  		
+	  		
+	  		
+	  		
+
 	  	</div>
   <!-- 	</section> -->
     <!-- Main content -->
