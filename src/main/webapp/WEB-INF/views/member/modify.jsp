@@ -53,43 +53,61 @@
     <!-- Main content -->
     <section class="content register-page" style="background-color: ghostwhite;">       
 		<div class="register-box" style="width:500px;">         
-	    	<form role="form" class="form-horizontal"  action="modify.do" method="post">
+	    	<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">
 	    		<div class="register-card-header" >
 	    			<h1 class="text-center" style="font-size: 35px;">회원정보 수정</h1>
 	    		</div>
 	    		
-	        	<div class="register-card-body" style="width:500px; height: 350px;">
+	        	<div class="register-card-body" style="width:500px; height: 440px;">
 						
-						<div class = "picdiv" style="border: 1px solid green;" data-id="${member.id }"></div>
+						<input type="hidden" name="oldPicture"  value="${member.picture }"/>
+						<input type="file" id="inputFile" onchange="changePicture_go();" name="picture" style="display:none" />
+					
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group">
+           	  				
+           	  					<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon" style="border-radius: 3px; height:38px;">사진변경</label>
+								<input id="inputFileName" class="form-control" type="text" name="tempPicture" style="width: 380px;" value="${member.picture.split('\\$\\$')[1] }" disabled/>
+								<input id="picture" class="form-control" type="hidden" name="uploadPicture" />
+                 			</div>
+                 		</div>
+						
+						<div class = "picdiv" id="pictureView" style="margin-top: 20px; border: 1px solid green;"></div>
            	  			<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
-								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
-	                   			<input name="id" type="text" class="form-control col-sm-8 id" style="width: 80px; text-align:center;" value="${member.id }" >
+       	  						<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
+	                   			<input name="id" type="text" class="form-control col-sm-8 id" style="width: 80px; text-align:center;" value="${member.id }" readonly >
+                 			</div>
+                 		</div>
+           	  			<div class="top3">
+           	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
+								<label for="id" class="col-sm-4">패스워드</label>
+								<input class="form-control" name="pwd" type="password" class="form-control col-sm-8 pwd" id="pwd" style="width: 196px; text-align:center;"  value="${member.pwd }" readonly>
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="name" class="col-sm-4">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</label>
-	                   			<input name="name" type="text" class="form-control col-sm-8 name" style="width: 80px; text-align:center;" value="${member.name }" >
+	                   			<input name="name" type="text" class="form-control col-sm-8 name" style="width: 80px; text-align:center;"  value="${member.name }">
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="birth_date" class="col-sm-4">생년월일</label>
 								<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd" var="birth_date"/>
-	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" style="width: 80px; text-align:center;" value="${birth_date }" >
+	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" style="width: 80px; text-align:right;"  value="${birth_date }">
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="phone" class="col-sm-4">전화번호</label>
-	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" style="width: 80px; text-align:center;" value="${member.phone }" >
+	                   			<input name="phone" type="text" class="form-control col-sm-8 phone" style="width: 80px; text-align:center;" value="${member.phone.substring(0,3) }-${member.phone.substring(3,7) }-${member.phone.substring(7)}">
                  			</div>
                  		</div>
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="email" class="col-sm-4">이&nbsp;&nbsp;메&nbsp;&nbsp;일</label>
-	                   			<input name="email" type="text" class="form-control col-sm-8 email" style="width: 80px; text-align:center;" value="${member.email }" >
+	                   			<input name="email" type="text" class="form-control col-sm-8 email" placeholder="example@naver.com" style="width: 80px; text-align:center;" value="${member.email }" >
                  			</div>
                  		</div>
        		          	<div class="top3">
@@ -101,16 +119,15 @@
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px 0;">
 								<label for="detail_address"  style="padding: 0; width:80px;">상세주소</label>
-	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }" >
+	                   			<input name="detail_address" type="text" class="form-control detailAddress" style="width: 375px; text-align:center;" value="${member.detail_address }">
                  			</div>
                  		</div>
                  		
                  	</div>	
  	                
-		          <div class="card-footer" style="padding:10px 0;" >
+		          	<div class="card-footer" style="padding:10px 0;" >
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
-<!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
 			            		<button type="button" id="listBtn" onclick="history.go(-1);" class="btn btn-sm btn-secondary float-center" style="width:60px;">취소 </button>
 			            		
 			            	</div>

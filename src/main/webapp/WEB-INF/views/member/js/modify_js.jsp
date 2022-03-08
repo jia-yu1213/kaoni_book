@@ -55,38 +55,6 @@ function modify_go(){
 } 
 
 
-/* function modify_go(){
-	
-	var id 	   		   = $('input[name="id"]').val($('.id').val());
-	var name 	   	   = $('input[name="name"]').val($('.name').val());
-	var birth          = $('input[name="birth"]').val($('.birth').val());
-	var phone    	   = $('input[name="phone"]').val($('.phone').val());
-	var email  	 	   = $('input[name="email"]').val($('.email').val());
-	var address  	   = $('input[name="address"]').val($('.address').val());
-	var detailAddress  = $('input[name="detailAddress"]').val($('.detailAddress').val());
-	
-	var form = $("#modifyData").serialize();
-	
-	var data = {"id":$('.id').val(), "name":$('.name').val(), "birth":$('.birth').val(),  "phone":$('.phone').val(),  "email":$('.email').val(),  "address":$('.address').val(),  "detailAddress":$('.detailAddress').val()};
-	console.log(data);
-	
-	$.ajax({
-		type : "post",
-		contentType : 'application/json; charset=utf-8',
-		url : "modify.do",
- 		data : JSON.stringify(data),
- 		dataType : "json",
-		success: function(data){
-			alert("회원정보가 수정되었습니다.");
-			window.opener.parent.location.reload(true);
-			window.close();
-		},
-		error:function(error){
-			alert("에러가 발생했습니다. ");
-		}
-	})
-
-} */
 </script>  
 
 

@@ -202,7 +202,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "/modify")
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(MemberModifyCommand modifyReq,HttpSession session,
 						 RedirectAttributes rttr)throws Exception {
 		String url="redirect:/member/detail.do";
@@ -214,14 +214,9 @@ public class MemberController {
 		member.setPicture(fileName);
 		
 		//파일변경 없을시 기존 파일명 유지
-		if (modifyReq.getPicture()==null) {
-			member.setPicture("");
-		}else {
-			if (modifyReq.getPicture().isEmpty()) {
-				member.setPicture(modifyReq.getOldPicture());
-			}
+		if (modifyReq.getPicture().isEmpty()) {
+			member.setPicture(modifyReq.getOldPicture());
 		}
-		
 		//DB 내용 수정
 		memberService.modify(member);
 		
@@ -297,11 +292,11 @@ public class MemberController {
 		memberService.remove(id);
 		
 		// 삭제되는 회원이 로그인 회원인경우 로그아웃 해야함.
-/*		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser.getId().equals(member.getId())) {
 			session.invalidate();
 		}
-*/
+
 		rttr.addFlashAttribute("removeMember",member);
 		
 		rttr.addAttribute("from","remove");		
