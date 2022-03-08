@@ -18,6 +18,12 @@
     	window.close();
     	</script>
     </c:if>
+    <c:if test="${from eq 'login'}" >
+		<script>
+		alert("로그인이 필요한 서비스입니다. \n로그인 후 이용해주시기 바랍니다.")
+    	location.reload();	
+    	</script>
+    </c:if>
 	 <!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">

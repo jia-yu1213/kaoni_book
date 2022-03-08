@@ -20,13 +20,13 @@ public class MyListDAOImpl implements MyListDAO {
 	}
 	
 	@Override
-	public List<RentVO> selectRentListByID( SearchCriteria cri, String mem_id) throws SQLException {
+	public List<RentVO> selectRentListByID( SearchCriteria cri, String id) throws SQLException {
 		
 		int offset=cri.getStartRowNum();
 		int limit=cri.getPerPageNum();		
 		RowBounds rowBounds=new RowBounds(offset,limit);		
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("mem_id", mem_id);
+		dataMap.put("id", id);
 		dataMap.put("cri", cri);
 		List<RentVO> rentList=
 				session.selectList("MyList-Mapper.selectRentListByID",dataMap,rowBounds);
@@ -34,9 +34,9 @@ public class MyListDAOImpl implements MyListDAO {
 	}
 
 	@Override
-	public int selectRentListByIDCount( SearchCriteria cri, String mem_id) throws SQLException {
+	public int selectRentListByIDCount( SearchCriteria cri, String id) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("mem_id", mem_id);
+		dataMap.put("id", id);
 		dataMap.put("cri", cri);
 		int count=session.selectOne("MyList-Mapper.selectRentListByIDCount",dataMap);
 		return count;

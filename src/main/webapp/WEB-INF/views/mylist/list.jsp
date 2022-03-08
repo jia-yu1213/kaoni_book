@@ -11,13 +11,7 @@
 
 <body>	
 <input type="hidden" id="loginUser" value="${loginUser}" >
-	<c:if test="${from eq 'regist'}" >
-		<script>
-    	alert("도서 등록이 성공했습니다.");
-    	window.opener.location.reload();	
-    	window.close();
-    	</script>
-    </c:if>
+
 	 <!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">
@@ -45,17 +39,6 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-				<c:choose>
-	      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
-	      			</c:when>
-	      			<c:when test="${loginUser.authority eq 0}">
-	      				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',800,700);">도서등록</button>
-	      			</c:when>
-	      		</c:choose>
-			
-			
-			
-								
 				<div id="keyword" class="card-tools" style="width:540px;">
 					<div class="input-group row">
 						<select style="display:none"class="form-control col-md-3" name="perPageNum" id="perPageNum"
@@ -86,64 +69,44 @@
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
 						<th style="width:8%;">번 호</th>
-						<th style="width:8%;">분 류</th>
-						<th style="width:45%;">제 목</th>
+						<th style="width:8%;">상 태</th>
+						<th style="width:30%;">제 목</th>
 						<th style="width:15%;">저 자</th>
+						<th>대여시작일</th>
 						<th>대여종료일</th>
-						<th style="width:15%;">대여하기</th>
+						<th>반납일</th>
+						<th style="width:15%;">반납하기</th>
 					</tr>				
-					<c:if test="${empty bookList }" >
+					<c:if test="${empty rentList }" >
 						<tr>
 							<td colspan="5">
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
 					</c:if>				
-					<c:forEach items="${bookList }" var="book">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }&from=list','상세보기',800,700);">
-							<td style='vertical-align:middle'>${book.rownum }</td>
-							<td style='vertical-align:middle'>${book.cate_name }</td>
+					<c:forEach items="${rentList }" var="rent">
+						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${rent.book_no }&from=list','상세보기',800,700);">
+							<td style='vertical-align:middle'>${rent.rownum }</td>
+							<td style='vertical-align:middle'></td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 												white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">
-							${book.title }
+							${rent.title }
 							</td>			
 							<td style='vertical-align:middle'>
-							${book.writer }
+							${rent.writer }
 							</td>
 							<td style='vertical-align:middle'>
-							<jsp:useBean id="now" class="java.util.Date" />
-							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
-							<fmt:formatDate value="${book.rent_end }" pattern="yyyy-MM-dd" var="rent_end" />
-							
-								<c:choose>
-									<c:when test="${rent_end eq null}">
-									
-									</c:when>
-									<c:when test="${rent_end eq today}">
-										반납예정일
-									</c:when>
-									<c:when test="${rent_end < today}">
-										연체중
-									</c:when>
-									<c:when test="${rent_end > today}">
-										${rent_end }
-									</c:when>
-									
-								</c:choose>
+								${rent.rent_start }
+							</td>
+							<td style='vertical-align:middle'>
+								${rent.rent_end }
 							
 							</td>
-							<td style='vertical-align:middle' onclick="event.stopPropagation()">
-							<c:choose>
-								<c:when test="${book.book_status eq 0}">
-									<button type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
-								</c:when>
-								<c:when test="${book.book_status eq 1}">
-									<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
-								</c:when>
-								
-							</c:choose>
+							<td style='vertical-align:middle'>
 							
+								${rent.real_end }
 							</td>		
+							<td style='vertical-align:middle' onclick="event.stopPropagation()"></td>		
 						</tr>
 					</c:forEach>
 				</table>				
