@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class RentVO {
 	
-	private String mem_id;
+	private String id;
 	private String rent_no;
 	private Date rent_start;
 	private Date rent_end;
@@ -32,11 +32,12 @@ public class RentVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getMem_id() {
-		return mem_id;
+
+	public String getId() {
+		return id;
 	}
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getRent_no() {
 		return rent_no;

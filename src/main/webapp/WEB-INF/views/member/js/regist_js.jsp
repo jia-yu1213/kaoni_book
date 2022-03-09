@@ -47,7 +47,8 @@ function picture_go(){
 	      reader.readAsDataURL(picture.files[0]);
 	      
 	   }
-
+   upload_go();
+   
 }
 
 function upload_go(){

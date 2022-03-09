@@ -12,7 +12,7 @@
 			type:"get",
 			success:function(menu){
 				window.opener.parent.location.href="<%=request.getContextPath()%>/index.do?mCode="+menu.mcode;
-				window.close();				
+				window.close();				 
 			}
 		});		
 	}

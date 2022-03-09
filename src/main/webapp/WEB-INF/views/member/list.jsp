@@ -11,6 +11,15 @@
 <title>회원목록</title>
 
 <body>
+
+<c:if test="${from eq 'regist' }">
+	<script>
+		alert("회원등록에 성공했습니다.\n 회원리스트 페이지로 이동합니다.");
+		window.opener.location.reload();
+		window.close();
+	</script>
+</c:if>
+
 	 <!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">

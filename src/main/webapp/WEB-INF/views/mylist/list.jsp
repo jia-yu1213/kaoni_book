@@ -68,10 +68,10 @@
 			<div class="card-body">
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
-						<th style="width:8%;">번 호</th>
+						<th style="width:6%;">번 호</th>
 						<th style="width:8%;">상 태</th>
 						<th style="width:30%;">제 목</th>
-						<th style="width:15%;">저 자</th>
+						<th style="width:10%;">저 자</th>
 						<th>대여시작일</th>
 						<th>대여종료일</th>
 						<th>반납일</th>
@@ -85,7 +85,7 @@
 						</tr>
 					</c:if>				
 					<c:forEach items="${rentList }" var="rent">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${rent.book_no }&from=list','상세보기',800,700);">
+						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/book/detail.do?book_no=${rent.book_no }','상세보기',800,700);">
 							<td style='vertical-align:middle'>${rent.rownum }</td>
 							<td style='vertical-align:middle'></td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
@@ -96,17 +96,28 @@
 							${rent.writer }
 							</td>
 							<td style='vertical-align:middle'>
-								${rent.rent_start }
+								<fmt:formatDate value="${rent.rent_start }" pattern="yyyy-MM-dd" var="rent_start" />
+								${rent_start }
 							</td>
 							<td style='vertical-align:middle'>
-								${rent.rent_end }
-							
+								<fmt:formatDate value="${rent.rent_end }" pattern="yyyy-MM-dd" var="rent_end" />
+								${rent_end }
 							</td>
 							<td style='vertical-align:middle'>
-							
-								${rent.real_end }
+								<fmt:formatDate value="${rent.real_end }" pattern="yyyy-MM-dd" var="real_end" />
+								${real_end }
 							</td>		
-							<td style='vertical-align:middle' onclick="event.stopPropagation()"></td>		
+							<td style='vertical-align:middle' onclick="event.stopPropagation()">
+								<c:if test="${real_end eq null }">
+									<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${book.book_no }');">반납하기</button>
+								
+								</c:if>
+								<c:if test="${real_end ne null }">
+									<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
+								
+								</c:if>
+							
+							</td>		
 						</tr>
 					</c:forEach>
 				</table>				
@@ -119,8 +130,11 @@
 		
     </section>
     <!-- /.content -->
-<jsp:include page="./js/rent_js.jsp" />  
-    
+	<script>
+	function returnBook(book_no){
+			
+	}
+	</script>    
 </body>
 
 

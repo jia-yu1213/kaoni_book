@@ -6,7 +6,7 @@
 		/* selectNowRentCount 현재 연체가 아니면서 대여중인 책의 갯수*/
 		select count(rent_no) 
 		from book_rent 
-		where mem_id = #{mem_id} 
+		where id = #{id} 
 	     <![CDATA[
 		and rent_end>sysdate 
 		and real_end is null
@@ -16,19 +16,19 @@
 	<select id="selectOverdueRentCount" resultType="int">
 		/* selectOverdueRentCount 현재 연체중인 책의 갯수*/
 		select count(rent_no) from book_rent
-        where mem_id=#{mem_id}
+        where id=#{id}
         <![CDATA[
         and rent_end<sysdate 
         and real_end is null
 		]]>
 	</select>
 	
-	<select id="selectOverdueDate" resultType="String">
+	<select id="selectOverdueDate" resultType="str">
 		/* selectOverdueDate 연체 기간*/
         <![CDATA[
         select a.overdue from (
         select max(real_end+((real_end)-(rent_end))) overdue from book_rent
-        where mem_id='1'
+        where id=#{id}
         and real_end is not null
         and rent_end<real_end) a
         where overdue>=sysdate
@@ -39,8 +39,8 @@
 	<update id="insertRent" parameterType="rent">
 	/* insertRent 대여이력 업데이트*/
 		insert into 
-		book_rent(rent_no,book_no,mem_id)
-		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{mem_id}) 
+		book_rent(rent_no,book_no,id)
+		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{id}) 
 	</update>	
 	
 

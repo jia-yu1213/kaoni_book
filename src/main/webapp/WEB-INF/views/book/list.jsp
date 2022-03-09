@@ -70,8 +70,7 @@
 					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
 					  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
 					  		<option value="100" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
-					  		
-					  	</select>						
+					  	</select>	
 						<select class="form-control col-md-4" name="searchType" id="searchType">
 							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
 							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
@@ -106,7 +105,7 @@
 						</tr>
 					</c:if>				
 					<c:forEach items="${bookList }" var="book">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }&from=list','상세보기',800,700);">
+						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }','상세보기',800,700);">
 							<td style='vertical-align:middle'>${book.rownum }</td>
 							<td style='vertical-align:middle'>${book.cate_name }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 

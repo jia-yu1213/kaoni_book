@@ -167,11 +167,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(MemberRegistCommand memberReq) throws Exception {
-		String url = "member/regist_success";
+	public String regist(MemberRegistCommand memberReq, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/member/list";
 
 		MemberVO member = memberReq.toMemberVO();
 		memberService.regist(member);
+		
+		rttr.addFlashAttribute("from", "regist");
 
 		return url;
 	}
@@ -196,7 +198,6 @@ public class MemberController {
 
 		MemberVO member = memberService.getMember(id);
 		model.addAttribute("member", member);
-		
 
 		return url;
 	}
@@ -225,6 +226,7 @@ public class MemberController {
 		// 로그인한 사용자의 경우 수정된 정보로 session 업로드
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser != null && member.getId().equals(loginUser.getId())) {
+			member.setAuthority(loginUser.getAuthority());
 			session.setAttribute("loginUser", member);
 			rttr.addFlashAttribute("parentReload",true);
 		}

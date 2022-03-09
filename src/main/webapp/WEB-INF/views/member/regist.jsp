@@ -77,9 +77,9 @@
            	  				<input type="hidden" name="picture" />
            	  					<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon" style="border-radius: 3px; height:38px;">파일선택</label>
 								<input id="inputFileName" class="form-control" type="text" name="tempPicture" style="width: 310px;" disabled/>
-								<span class="input-group-append-sm">											
+<!-- 								<span class="input-group-append-sm">											
 									<button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();" style="width: 70px; height:38px; ">업로드</button>											
-								</span>
+								</span> -->
                  			</div>
                  		</div>
                  		
