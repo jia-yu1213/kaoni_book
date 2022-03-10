@@ -60,5 +60,12 @@ public class RentServiceImpl implements RentService {
 		book.setBook_status(1);
 		bookDAO.updateBookStatus(book);
 	}
+
+	@Override
+	public void updateReturn(RentVO rent) throws SQLException {
+		
+		rentDAO.updateReturnBook(rent);
+		
+	}
  
 }

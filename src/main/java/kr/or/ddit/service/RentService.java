@@ -9,6 +9,9 @@ public interface RentService {
 	
 	Map<String, Object> checkRent(String mem_id) throws SQLException;
 	
-	// 등록
+	// 대여이력
 	void registRent(RentVO rent)throws SQLException;
+	
+	//반납
+	void updateReturn(RentVO rent) throws SQLException;
 }
