@@ -44,7 +44,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
   <!-- Content Wrapper. Contains page content -->
-  <div >
+  <div style="overflow-x: hidden; overflow-y: hidden; background-color: ghostwhite;">
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
 	  			<c:choose>
@@ -84,16 +84,16 @@
 	  	</div>
   <!-- 	</section> -->
     <!-- Main content -->
-    <section class="content register-page" style="background-color: ghostwhite;">       
+    <section class="content" style="background-color: ghostwhite; margin-top:20px;">       
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal"  method="post">
 	    		<div class="register-card-header" >
-	    			<h1 class="text-center" style="font-size: 35px;">회원정보 상세보기</h1>
+	    			<h1 class="text-center" style="font-size: 35px; margin-left: 165px;">회원정보 상세보기</h1>
 	    		</div>
 	    		
-	        	<div class="register-card-body" style="width:500px; height: 350px;">
+	        	<div class="register-card-body" style="width:500px; height: 350px; margin-left:100px">
 						
-						<div class = "picdiv"  id="pictureView" data-id="${member.id }" style="border: 1px solid green;"></div>
+						<div class = "picdiv"  id="pictureView" data-id="${member.id }" style="border: 1px solid green; "></div>
            	  			<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
 								<label for="id" class="col-sm-4">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>
@@ -144,7 +144,7 @@
 		          <div class="card-footer" style="padding:10px 0;" >
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
-			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-sm btn-secondary float-center" style="width:60px;">닫 기</button>
+			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-sm btn-secondary float-center" style="width:60px; margin-left:184px;">닫 기</button>
 			            		
 			            	</div>
 		          	    </div> 

@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	  
 	@Override
-	public void login(String id, String pwd) throws SQLException, NotFoundIDException, InvalidPasswordException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException {
+	public void login(String id, String pwd) throws SQLException, NullPointerException, NotFoundIDException, InvalidPasswordException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException {
 		MemberVO member = memberDAO.selectMemberById(id);
 		String key = "a1b2c3d4e5f6g7h8";
 		

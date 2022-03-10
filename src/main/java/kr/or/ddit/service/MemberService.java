@@ -21,7 +21,7 @@ import kr.or.ddit.exception.NotFoundIDException;
 public interface MemberService {
 	
 	// 로그인 
-	void login(String id, String pwd) throws SQLException, NotFoundIDException, 
+	void login(String id, String pwd) throws SQLException, NullPointerException, NotFoundIDException, 
 															InvalidPasswordException,InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException ;
 	
 	// 회원정보조회

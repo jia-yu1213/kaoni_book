@@ -47,7 +47,7 @@
    	<section class="content">
    		<div class="card">
    			<div class="card-header with-border">
-   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do','회원등록',700,670);" >회원등록</button>
+   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do','회원등록',708, 587);" >회원등록</button>
    				<div id="keyword" class="card-tools" style="width:550px;">
    					 <div class="input-group row">
    					 	<!-- search bar -->
@@ -106,7 +106,7 @@
 		               	</tr>
 		            
 		               	<c:forEach items="${memberList }" var="member" >
-		               	  <tr  onclick="OpenWindow('detail.do?id=${member.id}','','700','600');" style="cursor:pointer;">
+		               	  <tr  onclick="OpenWindow('detail.do?id=${member.id}','','704','518');" style="cursor:pointer;">
 		               		<td>${member.id }</td>
 		               		<td>${member.name }</td>
 		              		<td>

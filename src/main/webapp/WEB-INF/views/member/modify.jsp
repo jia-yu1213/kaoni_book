@@ -89,7 +89,7 @@
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="birth_date" class="col-sm-4">생년월일</label>
 								<fmt:formatDate value="${member.birth_date }" pattern="yyyy-MM-dd" var="birth_date"/>
-	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" style="width: 80px; text-align:right;"  value="${birth_date }">
+	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" style="width: 80px; text-align:right;"  value="${birth_date }" >
                  			</div>
                  		</div>
        		          	<div class="top3">
