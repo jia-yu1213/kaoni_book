@@ -11,6 +11,15 @@
 <title>회원목록</title>
 
 <body>
+
+<c:if test="${from eq 'regist' }">
+	<script>
+		alert("회원등록에 성공했습니다.\n 회원리스트 페이지로 이동합니다.");
+		window.opener.location.reload();
+		window.close();
+	</script>
+</c:if>
+
 	 <!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">
@@ -63,8 +72,17 @@
 						</select>
 						<!-- keyword -->
 						
-						<%-- <c:if test="${cri.searchType eq 's' &&  cri.keyword = '휴면'}">${cri.keyword}='0'</c:if> --%>
-   					 	<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+						<c:choose>
+							<c:when test="${cri.searchType eq 's' &&  cri.keyword eq '활성'}">
+	   					 		<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value=""/>
+	 					 	</c:when>
+							<c:when test="${cri.searchType eq 's' &&  cri.keyword eq '휴면'}">
+	   					 		<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value=""/>
+	 					 	</c:when>
+	 					 	<c:otherwise>
+	   					 		<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+	 					 	</c:otherwise>
+						</c:choose>
 						
 						<span class="input-group-append">
 							<button class="btn btn-primary" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">

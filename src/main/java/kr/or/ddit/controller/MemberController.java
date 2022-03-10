@@ -167,11 +167,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(MemberRegistCommand memberReq) throws Exception {
-		String url = "member/regist_success";
+	public String regist(MemberRegistCommand memberReq, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/member/list";
 
 		MemberVO member = memberReq.toMemberVO();
 		memberService.regist(member);
+		
+		rttr.addFlashAttribute("from", "regist");
 
 		return url;
 	}
