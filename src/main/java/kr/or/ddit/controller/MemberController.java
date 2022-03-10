@@ -32,6 +32,7 @@ import kr.or.ddit.command.MemberRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.service.MemberService;
+import kr.or.ddit.util.CryptoUtil;
 import kr.or.ddit.util.MakeFileName;
 
 @Controller
@@ -169,10 +170,19 @@ public class MemberController {
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String regist(MemberRegistCommand memberReq, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/member/list";
-
-		MemberVO member = memberReq.toMemberVO();
-		memberService.regist(member);
 		
+		String key = "a1b2c3d4e5f6g7h8";
+		System.out.println("암호화 하기 전 : " + memberReq.getPwd());
+		
+		String enc = CryptoUtil.encryptAES256(memberReq.getPwd(), key);
+		System.out.println("암호화 후 : " + enc );
+		
+		
+		MemberVO member = memberReq.toMemberVO();
+		member.setPwd(enc);
+		
+		memberService.regist(member);
+
 		rttr.addFlashAttribute("from", "regist");
 
 		return url;
@@ -183,7 +193,7 @@ public class MemberController {
 													throws SQLException {
 
 		String url = "member/detail";
-
+		
 		MemberVO member = memberService.getMember(id);
 		model.addAttribute("member", member);
 		
