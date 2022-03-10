@@ -109,7 +109,7 @@
 							</td>		
 							<td style='vertical-align:middle' onclick="event.stopPropagation()">
 								<c:if test="${real_end eq null }">
-									<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${book.book_no }');">반납하기</button>
+									<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
 								
 								</c:if>
 								<c:if test="${real_end ne null }">
@@ -131,8 +131,9 @@
     </section>
     <!-- /.content -->
 	<script>
-	function returnBook(book_no){
-			
+	function returnBook(rent_no){
+		location.href="returnBook?rent_no="+rent_no;
+		
 	}
 	</script>    
 </body>

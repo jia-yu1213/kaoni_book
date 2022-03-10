@@ -43,7 +43,12 @@
 		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{id}) 
 	</update>	
 	
-
+	<update id="updateReturnBook" parameterType="rent">
+	/* updateReturnBook 반납 업데이트*/
+		update book_rent set 
+		real_end = sysdate
+		where rent_no=#{rent_no}
+	</update>
 </mapper>
 
 

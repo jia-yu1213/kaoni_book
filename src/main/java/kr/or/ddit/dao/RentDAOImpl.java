@@ -36,6 +36,12 @@ public class RentDAOImpl implements RentDAO {
 	public void insertRent(RentVO rent) throws SQLException {
 		session.update("Rent-Mapper.insertRent",rent);
 	}
+
+	@Override
+	public void updateReturnBook(RentVO rent) throws SQLException {
+		session.update("Rent-Mapper.updateReturnBook",rent);
+		
+	}
 	
 	
 }
