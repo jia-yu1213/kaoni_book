@@ -67,10 +67,10 @@
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal" action="regist.do" method="post">
 	    		<div class="register-card-header" >
-					<h1 class="text-center" style="font-size: 35px;">회원등록 </h1>
+					<h1 class="text-center" style="font-size: 35px; margin-left: 187px;">회원등록 </h1>
 	    		</div>
 	    		
-	        	<div class="register-card-body" style="width:500px; height: 440px;">
+	        	<div class="register-card-body" style="width:500px; height: 440px; margin-left: 101px;">
 						
            	  			<div class="top3">
            	  				<div class="form-inline form-group">
@@ -141,7 +141,7 @@
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
 <!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
-			            		<button type="button" id="listBtn" onclick="CloseWindow()" class="btn btn-sm btn-secondary float-center" style="width:60px;">닫기 </button>
+			            		<button type="button" id="listBtn" onclick="CloseWindow()" class="btn btn-sm btn-secondary float-center" style="width:60px; margin-left: 203px;">닫기 </button>
 			            		
 			            	</div>
 		          	    </div> 

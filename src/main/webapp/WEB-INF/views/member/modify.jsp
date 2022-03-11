@@ -33,7 +33,7 @@
 </style>
 
 </head>
-<body>
+<body style="">
 
   <!-- Content Wrapper. Contains page content -->
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
@@ -45,7 +45,7 @@
           		</div>
   <!-- 	</section> -->
     <!-- Main content -->
-    <section class="content register-page" style="background-color: ghostwhite;">       
+    <section class="content" style="background-color: ghostwhite;">       
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">
 	    		<div class="register-card-header" >
