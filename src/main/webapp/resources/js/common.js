@@ -7,6 +7,7 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 							+"height="+ WinHeight +", top="+ wintop +", left=" 
 							+ winleft +", resizable=yes, status=yes"  );
 	win.focus() ; 
+	
 }
 
 //팝업창 닫기

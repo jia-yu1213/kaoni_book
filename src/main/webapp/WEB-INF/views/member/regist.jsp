@@ -52,7 +52,7 @@
 
 <body>
 
-<div style="overflow-x: hidden; overflow-y: hidden; background-color: ghostwhite;">
+<div style="overflow-x: hidden; overflow-y: hidden; background-color: ghostwhite; height: 607px;">
 	<!-- Content Wrapper. Contains page content -->
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
@@ -76,7 +76,7 @@
            	  				<div class="form-inline form-group">
            	  				<input type="hidden" name="picture" />
            	  					<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon" style="border-radius: 3px; height:38px;">파일선택</label>
-								<input id="inputFileName" class="form-control" type="text" name="tempPicture" style="width: 310px;" disabled/>
+								<input id="inputFileName" class="form-control" type="text" name="tempPicture" style="width: 381px;" disabled/>
 <!-- 								<span class="input-group-append-sm">											
 									<button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();" style="width: 70px; height:38px; ">업로드</button>											
 								</span> -->
@@ -141,7 +141,7 @@
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
 <!-- 			            	<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button> -->
-			            		<button type="button" id="listBtn" onclick="CloseWindow()" class="btn btn-sm btn-secondary float-center" style="width:60px; margin-left: 203px;">닫기 </button>
+			            		<button type="button" id="listBtn" onclick="CloseWindow()" class="btn btn-sm btn-secondary float-center" style="width:60px; margin-left: 203px; margin-top: 10px;">닫기 </button>
 			            		
 			            	</div>
 		          	    </div> 
