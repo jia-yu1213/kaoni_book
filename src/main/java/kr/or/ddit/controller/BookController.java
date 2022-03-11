@@ -2,17 +2,26 @@ package kr.or.ddit.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,7 +40,6 @@ import kr.or.ddit.command.BookModifyCommand;
 import kr.or.ddit.command.BookRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
-import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.service.BookService;
 import kr.or.ddit.util.MakeFileName;
 
@@ -210,10 +219,99 @@ public class BookController {
 		return url;
 	}
 	
+	@RequestMapping(value="/saveBook")
+	@ResponseBody
+	public ResponseEntity<String> saveChat(String title, HttpSession session) throws Exception{
+		//공통파일 테이블에 파일 첨부
+		String fileName = MakeFileName.toUUIDFileName(title, "$$");
+		
+		//bookList 디비에서 가져오기
+		List<BookVO> bookList = bookService.saveBookList();
+		
+		writeBookListToFile("c:/kaonibook/"+fileName+".xlsx", bookList);
+		HttpStatus status = HttpStatus.OK;
+		ResponseEntity<String> entity = new ResponseEntity<>("ok",status);
+		return entity;
+		
+	}
 	
+    public static void writeBookListToFile(String fileName, List<BookVO> bookList) throws Exception{
+        Workbook workbook = null;
+        
+        if(fileName.endsWith("xlsx")){
+            workbook = new XSSFWorkbook();
+        }else if(fileName.endsWith("xls")){
+            workbook = new HSSFWorkbook();
+        }else{
+            throw new Exception("invalid file name, should be xls or xlsx");
+        }
+         
+        Sheet sheet = workbook.createSheet("cordova");
+         
+        Iterator<BookVO> iterator = bookList.iterator();
+         
+        int rowIndex = 0;
+        int excelname=0; // 처음에는 고정값을 넣기 위해 사용한 변수
+        do{
+        	BookVO book = iterator.next();
+            Row row = sheet.createRow(rowIndex++);
+            
+            if(excelname==0){ // 처음에 고정값 
+                 Cell cell0 = row.createCell(0);
+                 cell0.setCellValue("분류");
+                 Cell cell1 = row.createCell(1);
+                 cell1.setCellValue("제목");
+                 Cell cell2 = row.createCell(2);
+                 cell2.setCellValue("작가");
+                 Cell cell3 = row.createCell(3);
+                 cell3.setCellValue("출판사");
+                 Cell cell4 = row.createCell(4);
+                 cell4.setCellValue("출판일");
+                 excelname++;
+                
+            }else{  // 다음부터는 순차적으로 값이 들어감 
+                 
+                 Cell cell0 = row.createCell(0);
+                 cell0.setCellValue(book.getCate_name());
+                 Cell cell1 = row.createCell(1);
+                 cell1.setCellValue(book.getTitle());
+                 Cell cell2 = row.createCell(2);
+                 cell2.setCellValue(book.getWriter());
+                 Cell cell3 = row.createCell(3);
+                 cell3.setCellValue(book.getPublisher());
+                 Cell cell4 = row.createCell(4);
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                 cell4.setCellValue(sdf.format(book.getPublishing_date()));
+            }
+            
+        }while(iterator.hasNext());
+     
+        //lets write the excel data to file now
+        FileOutputStream fos = new FileOutputStream(fileName);
+        workbook.write(fos);
+        fos.close();
+        
+        System.out.println(fileName + " written successfully");
+    }
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="/excelUpload")
+	public ModelAndView excelUpload(MultipartFile file, MultipartHttpServletRequest request)throws SQLException, IllegalStateException, IOException{
+		
+		ModelAndView view = new ModelAndView();
+		
+		MultipartFile excelFile = request.getFile("excelFile");
+		
+		File destFile = new File("c:\\upload\\"+excelFile.getOriginalFilename());
+		//내가 설정한 위치에 파일 올리고
+		excelFile.transferTo(destFile);
+		//업로드 진행 후 제거
+		bookService.excelUpload(destFile);
+		destFile.delete();
+		
+		view.setViewName("book/list");
+		return view;
+	}
 }
 
 

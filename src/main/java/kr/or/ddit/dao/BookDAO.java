@@ -2,6 +2,7 @@ package kr.or.ddit.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
@@ -10,7 +11,10 @@ public interface BookDAO {
 
 	//책 목록 조회
 	List<BookVO> selectSearchBookList(SearchCriteria cri) throws SQLException;
-
+	
+	//책 목록 조회
+	List<BookVO> saveBookList() throws SQLException;
+	
 	//책 목록 갯수
 	int selectSearchBookListCount(SearchCriteria cri) throws SQLException;
 	
@@ -28,4 +32,7 @@ public interface BookDAO {
 	
 	//책 수정하기
 	void updateBook(BookVO book) throws SQLException;
+	
+	//엑셀 책 추가
+	void insertExcelBook(Map<String, Object> paramMap) throws SQLException;
 }
