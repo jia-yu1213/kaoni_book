@@ -2,6 +2,7 @@ package kr.or.ddit.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -23,10 +24,10 @@ public class BookDAOImpl implements BookDAO {
 		int limit=cri.getPerPageNum();		
 		RowBounds rowBounds=new RowBounds(offset,limit);		
 		
-		List<BookVO> noticeList=
+		List<BookVO> bookList=
 				session.selectList("Book-Mapper.selectSearchBookList",cri,rowBounds);
 		
-		return noticeList;
+		return bookList;
 	}
 
 	@Override
@@ -62,6 +63,19 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public void updateBook(BookVO book) throws SQLException {
 		session.update("Book-Mapper.updateBook",book);
+	}
+
+	@Override
+	public List<BookVO> saveBookList() throws SQLException {
+		List<BookVO> bookList=
+				session.selectList("Book-Mapper.selectSearchBookList");
+		
+		return bookList;
+	}
+
+	@Override
+	public void insertExcelBook(Map<String, Object> paramMap) throws SQLException {
+		session.update("Book-Mapper.updateExcelBook",paramMap);
 	}
 	
 

@@ -17,9 +17,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <jsp:include page="/WEB-INF/views/include/style.jsp" />	
   
   <sitemesh:write property="head" />
-  
+
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="overflow-y: hidden;">
 <div class="wrapper">
 
   <!-- navigation -->

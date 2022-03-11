@@ -1,5 +1,7 @@
 package kr.or.ddit.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,8 @@ import kr.or.ddit.command.PageMaker;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dao.BookDAO;
 import kr.or.ddit.dto.BookVO;
+import kr.or.ddit.dto.ExcelReadOption;
+import kr.or.ddit.util.ExcelRead;
 
 public class BookServiceImpl implements BookService {
 
@@ -70,6 +74,28 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void modify(BookVO book) throws SQLException {
 		bookDAO.updateBook(book);
+	}
+
+	@Override
+	public List<BookVO> saveBookList() throws SQLException {
+		List<BookVO> bookList = bookDAO.saveBookList();
+		return bookList;
+	}
+
+	@Override
+	public void excelUpload(File destFile) throws SQLException, IOException {
+		ExcelReadOption excelReadOption = new ExcelReadOption();
+		//파일 경로 추가
+		excelReadOption.setFilePath(destFile.getAbsolutePath());
+		//추출할 컬럼명 추가
+		excelReadOption.setOutputColumns("A","B","C");
+		//시작행
+		excelReadOption.setStartRow(2);
+
+		List<Map<String, String>> excelContent = ExcelRead.read(excelReadOption);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("excelContent", excelContent);
+		bookDAO.insertExcelBook(paramMap);
 	}
 
 	

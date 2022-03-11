@@ -5,7 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cri" value="${pageMaker.cri }" />
 
-<head></head>
+<head>
+
+</head>
 
 <title>도서목록</title>
 
@@ -51,6 +53,13 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
+			
+			<form id="excelUpload" name="excelUpload" enctype="multipart/form-data" method="post" action="excelUpload">
+				<input id="excelFile" type="file" name="excelFile">
+				<button id="addexcelImport" onclick="check()">추가</button>
+			</form>
+			
+			
 				<c:choose>
 	      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
 	      			</c:when>
@@ -58,9 +67,7 @@
 	      				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',800,700);">도서등록</button>
 	      			</c:when>
 	      		</c:choose>
-			
-			
-			
+	      		<button type="button" class="btn btn-primary" id="saveBookBtn" onclick="saveBook();">도서저장</button>
 								
 				<div id="keyword" class="card-tools" style="width:540px;">
 					<div class="input-group row">

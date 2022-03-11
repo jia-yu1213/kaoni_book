@@ -52,7 +52,7 @@
 		/* insertBook 책 목록 추가*/
 		insert into book(book_no,title, writer,ori_title,translator,publisher,publishing_date,book_intro,cate_no,book_index,writer_intro,photo)
         values(
-	       	concat('EM',LPAD(seq_book.nextval,6,0)), 
+	       	(select concat('EM',LPAD((select nvl(max(substr(book_no,3)),0)+1 from book),6,0)) from dual), 
 	       	#{title}, 
 	       	#{writer}, 
 	       	#{ori_title}, 
@@ -102,7 +102,16 @@
 	
 	</update>
 	
-	
+	<update id="updateExcelBook" parameterType="java.util.List">
+		/* insertExcelBook 액셀 집어넣기*/
+        insert into book
+		(book_no, title, writer, publisher)
+		select (select concat('EM',LPAD((select nvl(max(substr(book_no,3)),0)+1 from book),6,0)) from dual) as book_no, A.* from (
+		<foreach collection="excelContent" item="item" index="index" separator=" union all ">
+			select #{item.A} as title,#{item.B} as writer, #{item.C} as publisher from dual 
+		</foreach>
+		) A
+	</update>
 </mapper>
 
 

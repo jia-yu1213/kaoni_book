@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<script>
+<script src="http://malsup.github.com/jquery.form.js">
 function rentBook(book_no){
 	var login = $('#loginUser').val();
 	//로그인체크
@@ -43,6 +43,68 @@ function rentBook(book_no){
 		});		
 	}
 	
+}
+
+
+
+function saveBook(){
+	
+	var title = prompt('제목을 입력해주세요');
+	
+	$.ajax({
+		url : "saveBook?title="+title,
+// 		type : "post",
+//		     dataType: 'application/json',
+		success : function(result){
+			if (result == "ok") {
+				
+			alert("도서목록 저장에 성공했습니다. ");
+			opener.location.reload();
+			//openwindow
+    		$('#acceptModal').modal('hide');
+			}
+		}, 
+		error : function(){
+			alert("실패")
+		}
+	});
+
+	
+}
+
+
+// 파일 타입 체크
+function checkFileType(filePath){
+	var fileFormat = filePath.split(".");
+	if (fileFormat.indexOf("xls")>-1||fileFormat.indexOf("xlsx")>-1) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function check(){
+	var file = $("#excelFile").val();
+	if (file==""||file==null) {
+		alert("파일을 선택해주세요");
+		return false;
+	}else if (!checkFileType(file)) {
+		alert("엑셀 파일만 업로드 가능합니다.");
+		return false;
+	}
+	
+	if (confirm("업로드 하시겠습니까?")) {
+		var options = {
+				success : function(data){
+					alert("모든데이터가 업로드 되었습니다.");
+				},
+				processData : false,
+				contentType: false,
+				type:"POST"
+		};
+		$("#excelUpload").ajaxSubmit(options);
+		
+	}
 }
 
 </script>

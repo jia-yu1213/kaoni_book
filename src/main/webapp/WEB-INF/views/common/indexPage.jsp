@@ -15,7 +15,7 @@
 <body>  
   <div class="content-wrapper" style="background-color:#fff;">
   
-  	<iframe name="ifr" src="" frameborder="0" style="width:100%;height:85vh;"></iframe>
+  	<iframe name="ifr" src="" frameborder="0" style="width:100%;height:80vh;"></iframe>
   
   </div>
 
@@ -62,7 +62,7 @@ function printData(dataArr,target,templateObject,removeClass){
 
 
 <!-- handlebars  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" ></script>\
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" ></script>
 <script type="text/x-handlebars-template"  id="subMenu-list-template" >
 {{#each .}}
 	<li class="nav-item subMenu" >
