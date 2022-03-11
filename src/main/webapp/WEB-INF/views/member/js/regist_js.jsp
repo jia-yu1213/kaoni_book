@@ -94,7 +94,7 @@ function idCheck_go(){
     var input_ID=$('input[name="id"]');
     
     if(input_ID.val()==""){
-       alert("아이디를 입력하시오");
+       alert("아이디를 입력하세요.");
        input_ID.focus();
        return;
        
@@ -129,6 +129,32 @@ function idCheck_go(){
            alert("시스템장애로 가입이 불가합니다.");
          }
     });
+}
+
+
+var checkedPwd=""
+
+	function pwdCheck_go(){
+		//alert("id check btn");
+	    var input_PWD=$('input[name="pwd"]');
+	    
+	    if(input_PWD.val()==""){
+	       alert("비밀번호를 입력하세요.");
+	       input_PWD.focus();
+	       return;
+	       
+	    }else{
+	       
+	       //아이디는 4~12자의 영문자와 숫자로만 입력
+	       var reqPWD=/^[a-z]{1}[a-zA-Z0-9]{3,12}$/;
+	       if(!reqPWD.test($('input[name="pwd"]').val())){
+	          alert("비밀번호 첫글자는 영소문자이며, \n 4~13자의 영문자와 숫자로만 입력해야합니다");
+	          $('input[name="pwd"]').focus();
+	          return;
+	       }
+	       
+	    }
+	    
 }
 
 function regist_go(){

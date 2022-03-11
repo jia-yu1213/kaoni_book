@@ -52,7 +52,7 @@
 
 <body>
 
-<div>
+<div style="overflow-x: hidden; overflow-y: hidden; background-color: ghostwhite;">
 	<!-- Content Wrapper. Contains page content -->
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
 	  		<div class="row md-2">
@@ -63,7 +63,7 @@
           	</div>
   <!-- 	</section> -->
     <!-- Main content -->
-    <section class="content register-page" style="background-color: ghostwhite;">       
+    <section class="content" style="background-color: ghostwhite;">       
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal" action="regist.do" method="post">
 	    		<div class="register-card-header" >
@@ -93,8 +93,9 @@
                  		</div>
            	  			<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 0px 5px 5px;">
-								<label for="id" class="col-sm-4">패스워드</label>
-								<input class="form-control" name="pwd" type="password" class="form-control col-sm-8 pwd" id="pwd" placeholder="20글자 영문자,숫자 조합" style="width: 196px; text-align:center;" />
+								<label for="pwd" class="col-sm-4">패스워드</label>
+	                   			<input name="pwd" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="password" class="form-control col-sm-5 pwd" id="pwd" placeholder="영문자,숫자" style="wpwdth: 50px; text-align:center;">
+									<button type="button" onclick="pwdCheck_go();"  class="btn btn-info btn-sm btn-append col-sm-3" style="width: 30px; height:38px; font-size:0.87rem;">확&nbsp;&nbsp;&nbsp;인</button>
                  			</div>
                  		</div>
        		          	<div class="top3">
@@ -106,7 +107,7 @@
        		          	<div class="top3">
            	  				<div class="form-inline form-group" style="margin: 5px;">
 								<label for="birth_date" class="col-sm-4">생년월일</label>
-	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" placeholder="0000-00-00" style="width: 80px; text-align:center;">
+	                   			<input name="birth_date" type="date" class="form-control col-sm-8 birth" placeholder=" " style="width: 80px; text-align:center;">
                  			</div>
                  		</div>
        		          	<div class="top3">

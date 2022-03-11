@@ -1,10 +1,19 @@
 package kr.or.ddit.command;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import kr.or.ddit.dto.MemberVO;
+import kr.or.ddit.util.CryptoUtil;
 
 public class MemberRegistCommand {
 	
@@ -20,8 +29,8 @@ public class MemberRegistCommand {
 	private String birth_date;
 	
 	
-	public MemberVO toMemberVO() throws ParseException {
-
+	public MemberVO toMemberVO() throws Exception {
+		
 		String phone="";
 		for (String data : this.phone) {
 			phone += data;
@@ -29,6 +38,7 @@ public class MemberRegistCommand {
 
 		// MemberVO setting
 		MemberVO member = new MemberVO();
+		
 		member.setName(name);
 		member.setId(id);
 		member.setPwd(pwd);
@@ -143,7 +153,5 @@ public class MemberRegistCommand {
 	public void setBirth_date(String birth_date) {
 		this.birth_date = birth_date;
 	}
-	
-	
 	
 }

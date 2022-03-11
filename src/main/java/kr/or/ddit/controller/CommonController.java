@@ -75,7 +75,7 @@ public class CommonController {
 			memberService.login(id, pwd);
 			
 			session.setAttribute("loginUser", memberService.getMember(id));
-		} catch (NotFoundIDException | InvalidPasswordException e) {
+		} catch (NullPointerException | NotFoundIDException | InvalidPasswordException e) {
 			rttr.addFlashAttribute("message",e.getMessage());
 			url="redirect:/common/loginForm.do";
 			

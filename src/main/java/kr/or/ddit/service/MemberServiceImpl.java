@@ -1,9 +1,17 @@
 package kr.or.ddit.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import kr.or.ddit.command.Criteria;
 import kr.or.ddit.command.PageMaker;
@@ -12,6 +20,7 @@ import kr.or.ddit.dao.MemberDAO;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.exception.InvalidPasswordException;
 import kr.or.ddit.exception.NotFoundIDException;
+import kr.or.ddit.util.CryptoUtil;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -23,11 +32,14 @@ public class MemberServiceImpl implements MemberService {
 
 	  
 	@Override
-	public void login(String id, String pwd) throws SQLException, NotFoundIDException, InvalidPasswordException {
+	public void login(String id, String pwd) throws SQLException, NullPointerException, NotFoundIDException, InvalidPasswordException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException {
 		MemberVO member = memberDAO.selectMemberById(id);
+		String key = "a1b2c3d4e5f6g7h8";
+		
+		String dec = CryptoUtil.decryptAE256(member.getPwd(), key);
 		if (member == null)
 			throw new NotFoundIDException();
-		if (!pwd.equals(member.getPwd()))
+		if (!pwd.equals(dec))
 			throw new InvalidPasswordException();
 
 	}

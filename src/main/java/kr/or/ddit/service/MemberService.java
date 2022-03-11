@@ -1,8 +1,16 @@
 package kr.or.ddit.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import kr.or.ddit.command.Criteria;
 import kr.or.ddit.command.SearchCriteria;
@@ -13,8 +21,8 @@ import kr.or.ddit.exception.NotFoundIDException;
 public interface MemberService {
 	
 	// 로그인 
-	void login(String id, String pwd) throws SQLException, NotFoundIDException, 
-															InvalidPasswordException;
+	void login(String id, String pwd) throws SQLException, NullPointerException, NotFoundIDException, 
+															InvalidPasswordException,InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException ;
 	
 	// 회원정보조회
 	MemberVO getMember(String id) throws SQLException;
