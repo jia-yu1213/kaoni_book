@@ -225,6 +225,7 @@ window.onload=function(){
 									<button type="button" class="btn-sm btn-block btn-secondary">예약하기</button>
 								</c:when>
 								<c:when test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
+								
 									<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
 								</c:when>
 

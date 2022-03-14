@@ -60,6 +60,11 @@
 										<td style='vertical-align:middle'>${rent.rent_no }</td>
 										<td style='vertical-align:middle'>
 											<c:choose>
+											
+												<c:when test="${rent.book_status eq 5 }">
+													반납 반려
+												</c:when>
+											
 												<c:when test="${empty rent.real_end}">대여중</c:when>
 												<c:otherwise>반납완료</c:otherwise>
 											</c:choose>
@@ -85,10 +90,19 @@
 											<fmt:formatDate value="${rent.real_end }" pattern="yyyy-MM-dd" var="real_end" />
 											${real_end }
 										</td>		
+
 										<td style='vertical-align:middle' onclick="event.stopPropagation()">
-											<c:if test="${real_end eq null }">
-												<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
 											
+	
+											<c:if test="${real_end eq null }">
+												<c:if test="${rent.book_status ne 3 }">
+											
+													<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
+												</c:if>
+												<c:if test="${rent.book_status eq 3 }">
+													<button type="button" class="btn-sm btn-block btn-secondary">반납대기</button>
+											
+												</c:if>
 											</c:if>
 											<c:if test="${real_end ne null }">
 												<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>

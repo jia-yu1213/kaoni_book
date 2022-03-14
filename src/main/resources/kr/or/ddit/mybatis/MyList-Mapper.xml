@@ -16,10 +16,10 @@
 	    select 
 	    	rownum, a.* 
         from(
-        	select b.*, c.title, c.writer
+        	select b.*, c.title, c.writer, c.book_status
         	from book_rent b, book c where b.book_no=c.book_no and b.id = #{id}
 			<include refid="search" />
-			order by b.rent_no desc
+			order by to_number(b.rent_no) desc
         ) A
 	</select>
 	
