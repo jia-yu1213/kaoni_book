@@ -1,4 +1,4 @@
-package kr.or.ddit.service;
+  package kr.or.ddit.service;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -95,4 +95,17 @@ public class RentServiceImpl implements RentService {
 		return rent;
 	}
  
+
+//	@Override
+//	public RentVO getRent(String rent_no) throws SQLException {
+//		RentVO rent = rentDAO.selectRentDetail(rent_no);
+//		return rent;
+//	}
+
+	@Override
+	public void modifyRentStatus(String rent_no) throws SQLException {
+		
+		rentDAO.updateRentStatus(rent_no);
+		
+	}
 }

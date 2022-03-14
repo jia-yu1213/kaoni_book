@@ -30,6 +30,26 @@
 		<include refid="search" />
 	</select>
 	
+	<select id="selectRentDetail" resultType="rent">
+		select a.*,
+		       b.real_end, 
+		       b.id
+		 from book a, book_rent b
+		where a.book_no = b.book_no and
+		      b.rent_no = #{rent_no}
+			</select>
+	
+	<update id="updateRentStatus" >
+		update book_rent
+		   set real_end = sysdate
+		 where rent_no = #{rent_no}
+	</update>
+	
+	<update id="updateBookStatus">
+		update book
+		   set book_status = '0'
+		 where book_no=#{book_no}
+	</update>
 	
 </mapper>
 
