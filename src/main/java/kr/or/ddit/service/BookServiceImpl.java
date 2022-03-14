@@ -88,7 +88,7 @@ public class BookServiceImpl implements BookService {
 		//파일 경로 추가
 		excelReadOption.setFilePath(destFile.getAbsolutePath());
 		//추출할 컬럼명 추가
-		excelReadOption.setOutputColumns("A","B","C");
+		excelReadOption.setOutputColumns("A","B","C","D","E","F","G","H","I","J","K");
 		//시작행
 		excelReadOption.setStartRow(2);
 
