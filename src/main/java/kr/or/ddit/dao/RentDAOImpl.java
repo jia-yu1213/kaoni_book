@@ -1,14 +1,15 @@
 package kr.or.ddit.dao;
 
 import java.sql.SQLException;
-
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 
 public class RentDAOImpl implements RentDAO {
 
 	private SqlSession session;
+	private String namespace = "Rent-Mapper.";
 	
 	public void setSqlSession(SqlSession session) {
 		this.session=session;
@@ -41,6 +42,27 @@ public class RentDAOImpl implements RentDAO {
 	public void updateReturnBook(RentVO rent) throws SQLException {
 		session.update("Rent-Mapper.updateReturnBook",rent);
 		
+	}
+
+	@Override
+	public void updateBookResStatus(ReservationVO resVO) throws SQLException {
+		session.update(namespace + "updateBookResStatus");
+	}
+
+	@Override
+	public void insertResveration(ReservationVO resVO) throws SQLException {
+		session.update(namespace + "insertResveration");
+	}
+
+	@Override
+	public void deleteResveration(ReservationVO resVO) throws SQLException {
+		session.update(namespace + "deleteResveration");
+	}
+
+	@Override
+	public List<ReservationVO> selectResveration() throws SQLException {
+		List<ReservationVO> resList = session.selectList(namespace + "selectResveration");
+		return resList;
 	}
 	
 	

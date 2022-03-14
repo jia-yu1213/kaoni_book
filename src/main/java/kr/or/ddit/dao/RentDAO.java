@@ -1,8 +1,11 @@
 package kr.or.ddit.dao;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 
 public interface RentDAO {
 	//현재 연체가 아니면서 대여중인 책의 갯수
@@ -19,4 +22,18 @@ public interface RentDAO {
 	
 	//책 반납 업데이트
 	void updateReturnBook(RentVO rent) throws SQLException;
+	
+	
+	// 책 예약 상태 업데이트
+	void updateBookResStatus(ReservationVO resVO)throws SQLException;
+	
+	// 예약 테이블 insert
+	void insertResveration(ReservationVO resVO)throws SQLException;
+	
+	// 예약 테이블 delete
+	void deleteResveration(ReservationVO resVO)throws SQLException;
+	
+	//나의 도서 예약내역 출력
+	List<ReservationVO> selectResveration() throws SQLException;
+	
 }
