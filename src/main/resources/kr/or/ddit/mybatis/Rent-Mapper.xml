@@ -49,6 +49,30 @@
 		real_end = sysdate
 		where rent_no=#{rent_no}
 	</update>
+	
+	
+	<update id="updateBookResStatus">
+		update book
+		   set res_status = #{res_status}
+		 where book_no = #{book_no}
+	</update>
+	
+	<update id="insertResveration">
+		insert into book_reservation 
+		     	values(res_seq.NEXTVAL,sysdate,#{res_date}, #{book_no}, #{id})   
+	</update>
+	
+	<update id="deleteResveration">
+		delete from book_reservation
+		 where id = #{id} 
+		   and book_no = #{book_no}
+	</update>
+	
+	<select id="selectResveration" resultType="res">
+		select *
+		  from book_reservation
+		 where id = #{id}
+	</select>
 </mapper>
 
 

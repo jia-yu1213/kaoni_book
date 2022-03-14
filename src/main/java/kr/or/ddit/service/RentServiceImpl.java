@@ -4,12 +4,14 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.dao.BookDAO;
 import kr.or.ddit.dao.RentDAO;
 import kr.or.ddit.dto.BookVO;
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 
 public class RentServiceImpl implements RentService {
 
@@ -66,6 +68,25 @@ public class RentServiceImpl implements RentService {
 		
 		rentDAO.updateReturnBook(rent);
 		
+	}
+
+	@Override
+	public void modifyBookResStatus(ReservationVO resVO) throws SQLException {
+		rentDAO.updateBookResStatus(resVO);
+		rentDAO.insertResveration(resVO);
+		
+	}
+
+	@Override
+	public void removeReservation(ReservationVO resVO) throws SQLException {
+		rentDAO.deleteResveration(resVO);
+		rentDAO.updateBookResStatus(resVO);
+	}
+
+	@Override
+	public List<ReservationVO> getReservationList() throws SQLException {
+		List<ReservationVO> resList = rentDAO.selectResveration();
+		return resList;
 	}
  
 }

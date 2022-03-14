@@ -12,6 +12,7 @@
 		<typeAlias type="kr.or.ddit.dto.MenuVO" alias="menu" />
 		<typeAlias type="kr.or.ddit.dto.BookVO"  alias="book"/>	
 		<typeAlias type="kr.or.ddit.dto.RentVO"  alias="rent"/>	
+		<typeAlias type="kr.or.ddit.dto.ReservationVO"  alias="res"/>	
 	</typeAliases>			
 	
 </configuration>

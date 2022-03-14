@@ -13,26 +13,8 @@ public class RentVO {
 	private String title;
 	private String writer;
 	private int rownum;
-
-	public int getRownum() {
-		return rownum;
-	}
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
+	private int rent_res;
+	
 	public String getId() {
 		return id;
 	}
@@ -68,6 +50,30 @@ public class RentVO {
 	}
 	public void setBook_no(String book_no) {
 		this.book_no = book_no;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+	public int getRent_res() {
+		return rent_res;
+	}
+	public void setRent_res(int rent_res) {
+		this.rent_res = rent_res;
 	}
 	
 	

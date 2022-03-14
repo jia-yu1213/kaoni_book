@@ -21,7 +21,17 @@ public class BookVO {
 	private String cate_name;
 	private String cate_no;
 	private String photo;
+	private int res_status;
 	
+	
+	public int getRes_status() {
+		return res_status;
+	}
+
+	public void setRes_status(int res_status) {
+		this.res_status = res_status;
+	}
+
 	public String getPhoto() {
 		return photo;
 	}

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 import kr.or.ddit.service.RentService;
 
 @Controller
@@ -50,6 +51,12 @@ public class RentController {
 		
 		return url;
 	}
+	
+	
+	
+// 도서 예약
+	
+	
 
 }
 
