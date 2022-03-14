@@ -1,7 +1,11 @@
 package kr.or.ddit.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.util.CellReference;
 
 public class ExcelCellRef {
@@ -27,7 +31,12 @@ public class ExcelCellRef {
 			if (cell.getCellType()== CellType.FORMULA) {
 				value=cell.getCellFormula();
 			}else if (cell.getCellType()== CellType.NUMERIC) {
-				value=cell.getNumericCellValue()+"";
+				if( DateUtil.isCellDateFormatted(cell)) {
+					Date date = cell.getDateCellValue();
+					value = new SimpleDateFormat("yyyy-MM-dd").format(date);
+				}
+				else
+					value=cell.getNumericCellValue()+"";
 			}else if (cell.getCellType()== CellType.STRING) {
 				value=cell.getStringCellValue()+"";
 			}else if (cell.getCellType()== CellType.BOOLEAN) {

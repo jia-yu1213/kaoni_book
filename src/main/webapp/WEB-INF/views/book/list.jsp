@@ -12,6 +12,54 @@
 <title>도서목록</title>
 
 <body>	
+<style type="text/css">
+label {
+text-align : center;
+border: 1px solid #ccc;
+display: inline-block;
+position: relative;
+width : 120px;
+}
+
+label input {
+display: none;
+}
+
+label span {
+
+width:120px;
+height: 30px;
+overflow: hidden;
+line-height: 1;
+text-align: center;
+padding: 5px;
+font-size: 10pt;
+left: 0;
+top: 50%;
+margin-top: -7.5px;
+}
+
+</style>
+<script>
+window.onload=function(){
+	var id = $('input[name="cateType"]:checked').val();
+	console.log(id);
+	$('#label'+id).css({"background" : "#d2d2d2","border-color":"#d2d2d2"});
+	
+	target = document.getElementById('excelFile');
+	target.addEventListener('change', function(){
+        fileList = "";
+        for(i = 0; i < target.files.length; i++){
+            fileList += target.files[i].name + '<br>';
+        }
+        console.log(target.files[0].name)
+        target2 = document.getElementById('file_route');
+        target2.innerHTML = fileList;
+    });
+}
+
+</script>
+
 <input type="hidden" id="loginUser" value="${loginUser}" >
 	<c:if test="${from eq 'regist'}" >
 		<script>
@@ -53,48 +101,62 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-			
-			<form id="excelUpload" name="excelUpload" enctype="multipart/form-data" method="post" action="excelUpload">
-				<input id="excelFile" type="file" name="excelFile">
-				<button id="addexcelImport" onclick="check()">추가</button>
-			</form>
-			
-			
-				<c:choose>
-	      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
-	      			</c:when>
-	      			<c:when test="${loginUser.authority eq 0}">
-	      				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',800,700);">도서등록</button>
-	      			</c:when>
-	      		</c:choose>
-	      		<button type="button" class="btn btn-primary" id="saveBookBtn" onclick="saveBook();">도서저장</button>
-								
-				<div id="keyword" class="card-tools" style="width:540px;">
-					<div class="input-group row">
-						<select style="display:none"class="form-control col-md-3" name="perPageNum" id="perPageNum"
-					  		onchange="list_go();">
-					  		<option value="10" >정렬개수</option>
-					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
-					  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
-					  		<option value="100" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
-					  	</select>	
-						<select class="form-control col-md-4" name="searchType" id="searchType">
-							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
-							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>저 자</option>
-							<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>출판사</option>
-						</select>					
-						<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${param.keyword }"/>
-						<span class="input-group-append">
-							<button class="btn btn-primary" type="button" onclick="list_go(1);" 
-							data-card-widget="search">
-								<i class="fa fa-fw fa-search"></i>
-							</button>
-						</span>
-					</div>
-				</div>						
+				<div class="row">
+					<div style="float : left; margin-right : 10px">
+		      			<button type="button" class="btn btn-secondary" id="saveBookBtn" onclick="saveBook();">목록 엑셀 저장</button>
+	      			
+	      			</div>
+					<c:choose>
+		      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
+		      			</c:when>
+		      			<c:when test="${loginUser.authority eq 0}">
+		      				<button type="button" class="btn btn-secondary" style="height: 40px;" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',900,700);">도서등록</button>
+		      				<form id="excelUpload" name="excelUpload" enctype="multipart/form-data" method="post" action="excelUpload">
+		      					<div style="border : 2px solid lightgrey;border-radius : 5px; margin-left : 10px">
+		      					<label class="btn btn-secondary" style="float: left;font-weight : 400">
+		      						엑셀 등록 <input id="excelFile" type="file" name="excelFile" style="display : none">
+		      					</label>
+								<div id="file_route" style="width : 200px;float: left;padding-top : 5px;
+								text-align:left; overflow: hidden;white-space: nowrap; text-overflow: ellipsis;"></div>
+								<button class="btn btn-secondary" id="addexcelImport" onclick="check()">추가</button>
+								</div>
+							</form>
+		      			</c:when>
+	      			</c:choose>
+	      			
+				
+					<div id="keyword" class="card-tools" style="width:400px; margin-left : auto ">
+						<div class="input-group row">
+							<select style="display:none"class="form-control col-md-3" name="perPageNum" id="perPageNum"
+						  		onchange="list_go2();">
+						  		<option value="10" >정렬개수</option>
+						  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
+						  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
+						  		<option value="100" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
+						  	</select>	
+							<select class="form-control col-md-4" name="searchType" id="searchType">
+								<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
+								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
+								<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>저 자</option>
+								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>출판사</option>
+							</select>					
+							<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${param.keyword }"/>
+							<span class="input-group-append">
+								<button class="btn btn-primary" type="button" onclick="list_go2(1);" data-card-widget="search">
+									<i class="fa fa-fw fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>	
+				</div>
 			</div>
+
 			<div class="card-body">
+				<div class="row" style="padding-left : 15px">
+					<c:forEach items="${cateList }" var ="cate">
+						<label id="label${cate.cate_no }"><input type="radio" name="cateType" value="${cate.cate_no }" onclick="list_go2()" ${cri.cateType eq cate.cate_no? 'checked':''}/><span>${cate.cate_name }</span></label>
+					</c:forEach>
+				</div>
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
 						<th style="width:8%;">번 호</th>
@@ -112,7 +174,7 @@
 						</tr>
 					</c:if>				
 					<c:forEach items="${bookList }" var="book">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }','상세보기',800,700);">
+						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?book_no=${book.book_no }','상세보기',800,800);">
 							<td style='vertical-align:middle'>${book.rownum }</td>
 							<td style='vertical-align:middle'>${book.cate_name }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
@@ -161,7 +223,7 @@
 				</table>				
 			</div>
 			<div class="card-footer">
-				<%@ include file="/WEB-INF/views/common/pagination.jsp" %>
+				<%@ include file="/WEB-INF/views/common/pagination2.jsp" %>
 			</div>
 		
 		</div>

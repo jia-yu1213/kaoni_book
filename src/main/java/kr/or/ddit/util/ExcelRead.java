@@ -52,8 +52,9 @@ public class ExcelRead {
 			row = sheet.getRow(rowIndex);
 			if (row!=null) {
 				numOfCells = row.getPhysicalNumberOfCells();
+			
 				map = new HashedMap<String, String>();
-				for (int cellIndex = 0; cellIndex < numOfCells; cellIndex++) {
+				for (int cellIndex = 0; cellIndex < 10; cellIndex++) {
 					cell = row.getCell(cellIndex);
 					cellName = ExcelCellRef.getName(cell, cellIndex);
 					if (!excelReadOption.getOutputColumns().contains(cellName)) {

@@ -3,6 +3,11 @@
 <mapper namespace="Book-Mapper">
 	
 	<sql id="search">
+		<if test="searchType == 'tcw'.toString()">
+			and title like '%'||#{keyword}||'%'
+			or writer like '%'||#{keyword}||'%'
+			or publisher like '%'||#{keyword}||'%'
+		</if>
 		<if test="searchType == 't'.toString()">
 			and title like '%'||#{keyword}||'%'			
 		</if>
@@ -13,6 +18,11 @@
 			and publisher like '%'||#{keyword}||'%'			
 		</if>
 
+	</sql>
+	<sql id="cate">
+		<if test="cateType != null and !cateType.equals('')">
+			and cate_no = #{cateType}			
+		</if>
 	</sql>
 	<select id="selectSearchBookList" resultType="book">
 	    select 
@@ -27,6 +37,7 @@
 			where b.book_no is not null
 			and b.book_status != 2
 			<include refid="search" />
+			<include refid="cate" />
 			order by b.book_no desc
         ) A
 	</select>
@@ -38,6 +49,7 @@
 		where book_no is not null
 		and book_status != 2
 		<include refid="search" />
+		<include refid="cate" />
 		order by book_no desc
 	</select>
 	
@@ -52,7 +64,7 @@
 		/* insertBook 책 목록 추가*/
 		insert into book(book_no,title, writer,ori_title,translator,publisher,publishing_date,book_intro,cate_no,book_index,writer_intro,photo)
         values(
-	       	(select concat('EM',LPAD((select nvl(max(substr(book_no,3)),0)+1 from book),6,0)) from dual), 
+	       	(concat('EM',LPAD(seq_book.nextval,6,0))), 
 	       	#{title}, 
 	       	#{writer}, 
 	       	#{ori_title}, 
@@ -104,13 +116,24 @@
 	
 	<update id="updateExcelBook" parameterType="java.util.List">
 		/* insertExcelBook 액셀 집어넣기*/
-        insert into book
-		(book_no, title, writer, publisher)
-		select (select concat('EM',LPAD((select nvl(max(substr(book_no,3)),0)+1 from book),6,0)) from dual) as book_no, A.* from (
-		<foreach collection="excelContent" item="item" index="index" separator=" union all ">
-			select #{item.A} as title,#{item.B} as writer, #{item.C} as publisher from dual 
+       
+		<foreach collection="excelContent" item="item" open="insert  all" close="select * from dual" separator=" ">
+				 into book(book_no, title, writer, ori_title,translator,publisher,publishing_date,book_intro,book_index,writer_intro,cate_no)
+				values
+				(#{item.A, jdbcType=VARCHAR} ,
+			    #{item.B, jdbcType=VARCHAR} , 
+			    #{item.C, jdbcType=VARCHAR},
+			    #{item.D, jdbcType=VARCHAR},
+			    #{item.E, jdbcType=VARCHAR},
+			    #{item.F, jdbcType=VARCHAR},
+			    #{item.G, jdbcType=DATE},
+			    #{item.H, jdbcType=CLOB},
+			    #{item.I, jdbcType=CLOB},
+			    #{item.J, jdbcType=CLOB},
+			    (select cate_no from category where cate_name=#{item.K, jdbcType=VARCHAR})
+			    )
 		</foreach>
-		) A
+		
 	</update>
 </mapper>
 

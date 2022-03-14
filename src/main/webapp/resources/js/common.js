@@ -41,6 +41,27 @@ function list_go(page,url){
 	}).submit();
 	
 }
+// 목록 검색
+function list_go2(page,url){
+	if(!url) url="list.do";
+	
+	var jobForm=$('#jobForm');
+	
+	if(!page) page=1;
+	
+	jobForm.find("[name='page']").val(page);
+	jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
+	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+	jobForm.find("[name='cateType']").val($('input:radio[name="cateType"]:checked').val());
+	jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());
+	
+	jobForm.attr({
+		action:url,
+		method:'get'
+	}).submit();
+	
+}
+
 
 
 //사용자 사진 출력

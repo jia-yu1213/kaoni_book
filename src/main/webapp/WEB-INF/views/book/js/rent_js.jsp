@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<script src="http://malsup.github.com/jquery.form.js">
+<script>
 function rentBook(book_no){
 	var login = $('#loginUser').val();
 	//로그인체크
@@ -50,24 +50,26 @@ function rentBook(book_no){
 function saveBook(){
 	
 	var title = prompt('제목을 입력해주세요');
-	
-	$.ajax({
-		url : "saveBook?title="+title,
-// 		type : "post",
-//		     dataType: 'application/json',
-		success : function(result){
-			if (result == "ok") {
-				
-			alert("도서목록 저장에 성공했습니다. ");
-			opener.location.reload();
-			//openwindow
-    		$('#acceptModal').modal('hide');
+	if (title != null) {
+		$.ajax({
+			url : "saveBook?title="+title,
+//	 		type : "post",
+//			     dataType: 'application/json',
+			success : function(result){
+				if (result == "ok") {
+					
+				alert("도서목록 저장에 성공했습니다. ");
+				opener.location.reload();
+				//openwindow
+	    		$('#acceptModal').modal('hide');
+				}
+			}, 
+			error : function(){
+				alert("실패")
 			}
-		}, 
-		error : function(){
-			alert("실패")
-		}
-	});
+		});
+	}
+
 
 	
 }
@@ -97,6 +99,7 @@ function check(){
 		var options = {
 				success : function(data){
 					alert("모든데이터가 업로드 되었습니다.");
+					opener.location.reload();
 				},
 				processData : false,
 				contentType: false,

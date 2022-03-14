@@ -25,8 +25,5 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/local_policy.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/US_export_policy.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

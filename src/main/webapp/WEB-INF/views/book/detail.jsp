@@ -36,7 +36,7 @@ ul.tabs li.current{
 	display: none;
 	background: #ededed;
 	padding: 15px;
-	height : 200px;
+	height : 240px;
 	overflow-y : scroll;
 }
 

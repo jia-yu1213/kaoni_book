@@ -4,9 +4,15 @@ public class SearchCriteria extends Criteria {
 
 	private String searchType=""; // 검색구분
 	private String keyword=""; //검색어
+	private String cateType="";
 	
 	
-	
+	public String getCateType() {
+		return cateType;
+	}
+	public void setCateType(String cateType) {
+		this.cateType = cateType;
+	}
 	public String getSearchType() {
 		return searchType;
 	}
