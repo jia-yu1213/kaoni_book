@@ -1,9 +1,11 @@
 package kr.or.ddit.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 
 public interface RentService {
 	
@@ -14,4 +16,12 @@ public interface RentService {
 	
 	//반납
 	void updateReturn(RentVO rent) throws SQLException;
+	
+	
+	//예약
+	void modifyBookResStatus(ReservationVO resVO) throws SQLException;
+	
+	void removeReservation(ReservationVO resVO) throws SQLException;
+	
+	List<ReservationVO> getReservationList() throws SQLException; 
 }
