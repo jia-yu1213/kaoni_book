@@ -56,7 +56,13 @@
 								<c:forEach items="${rentList }" var="rent">
 									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/book/detail.do?book_no=${rent.book_no }','상세보기',800,700);">
 										<td style='vertical-align:middle'>${rent.rownum }</td>
-										<td style='vertical-align:middle'></td>
+										<td style='vertical-align:middle'>
+<%-- 											<c:choose> --%>
+<%-- 												<c:when test="${empty real_end}">대여중</c:when> --%>
+<%-- 												<c:otherwise>반납완료</c:otherwise> --%>
+<%-- 											</c:choose> --%>
+											<c:if test="${real_end ne null }">반납완료</c:if>
+										</td>
 										<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 															white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">
 										${rent.title }
