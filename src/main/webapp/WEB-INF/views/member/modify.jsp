@@ -33,7 +33,8 @@
 </style>
 
 </head>
-<body style="">
+<body>
+<div style="overflow-x: hidden; overflow-y: hidden; background-color: ghostwhite; height: 611px; ">
 
   <!-- Content Wrapper. Contains page content -->
   	 <!-- <section class="content-header" style="background-color:  #E9ECEF; padding: 0;"> -->
@@ -49,10 +50,10 @@
 		<div class="register-box" style="width:500px;">         
 	    	<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">
 	    		<div class="register-card-header" >
-	    			<h1 class="text-center" style="font-size: 35px;">회원정보 수정</h1>
+	    			<h1 class="text-center" style="font-size: 35px; margin-left: 191px;">회원정보 수정</h1>
 	    		</div>
 
-	        	<div class="register-card-body" style="width:500px; height: 440px;">
+	        	<div class="register-card-body" style="width:500px; height: 440px; margin-left: 97px;">
 
 						<input type="hidden" name="oldPicture"  value="${member.picture }"/>
 						<input type="file" id="inputFile" onchange="changePicture_go();" name="picture" style="display:none" />
@@ -123,7 +124,7 @@
 		          	<div class="card-footer" style="padding:10px 0;" >
 		          		<div class="row">
 			          		<div class="col-sm-12 text-center">
-			            		<button type="button" id="listBtn" onclick="history.go(-1);" class="btn btn-sm btn-secondary float-center" style="width:60px;">취소 </button>
+			            		<button type="button" id="listBtn" onclick="history.go(-1);" class="btn btn-sm btn-secondary float-center" style="width:60px; margin-left: 198px; margin-top: 10px;">취소 </button>
 
 			            	</div>
 		          	    </div> 
@@ -135,6 +136,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+ </div>
+ 
 <script>
  
 window.onload=function(){
