@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
 
@@ -46,6 +47,8 @@ public interface RentDAO {
 	void deleteResveration(ReservationVO resVO)throws SQLException;
 	
 	//나의 도서 예약내역 출력
-	List<ReservationVO> selectResveration() throws SQLException;
+	List<ReservationVO> selectResveration(SearchCriteria cri, String id) throws SQLException;
+	
+	int selectResverationCount(SearchCriteria cri, String id) throws SQLException;
 	
 }

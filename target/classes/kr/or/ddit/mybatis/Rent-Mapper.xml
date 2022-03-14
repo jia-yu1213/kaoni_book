@@ -62,19 +62,28 @@
 	</update>
 	
 	<update id="insertResveration">
-		insert into book_reservation 
-		     	values(res_seq.NEXTVAL,sysdate,#{res_date}, #{book_no}, #{id})   
+		insert into book_resveration 
+		     	values(res_seq.NEXTVAL, sysdate, #{book_no}, #{id})   
 	</update>
 	
 	<update id="deleteResveration">
-		delete from book_reservation
+		delete from book_resveration
 		 where id = #{id} 
 		   and book_no = #{book_no}
 	</update>
 	
 	<select id="selectResveration" resultType="res">
-		select *
-		  from book_reservation
+		select rownum,
+			   a.*,
+    		   b.res_date 
+		  from book a, book_resveration b
+		 where a.book_no = b.book_no and 
+	  	       b.id = #{id}
+	</select>
+
+	<select id="selectResverationCount" resultType="int">
+		select count(*)
+		  from book_resveration
 		 where id = #{id}
 	</select>
 </mapper>
