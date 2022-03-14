@@ -66,6 +66,8 @@ public class MyListController {
 			
 			Map<String,Object> dataMap = mylistService.getRentList(cri, id);		
 			model.addAllAttributes(dataMap);
+			Map<String,Object> dataMap2 = rentService.getResList(cri, id);		
+			model.addAllAttributes(dataMap2);
 			return url;
 		}
 	}

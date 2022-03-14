@@ -15,13 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.ddit.command.ResverationCommand;
+import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
@@ -159,6 +163,48 @@ public class RentController {
 	
 	
 // 도서 예약
+	
+	//리스트 출력
+//	@RequestMapping("/reseveration")
+//	public String list(RedirectAttributes rttr,HttpSession session,SearchCriteria cri, Model model)throws Exception{
+//		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+//			String url="mylist/reseveration";
+//			String id = member.getId();
+//			
+//			Map<String,Object> dataMap = rentService.getResList(cri, id);		
+//			model.addAllAttributes(dataMap);
+//			System.out.println("여기로 안오냐!!!!!!!!!!!!!");
+//			return url;
+//	}
+	
+	//예약하기
+	@RequestMapping(value="/registRes")
+	public String registRes(ResverationCommand resCom, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/book/list";
+		
+		ReservationVO res = resCom.toRegist();
+		
+		rentService.modifyBookResStatus(res);
+		rttr.addFlashAttribute("form", "registRes");
+		
+		return url;
+		
+	}
+	
+	
+	//예약취소
+	@RequestMapping(value="/deleteRes")
+	public String deleteRes(ResverationCommand resCom, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/mylist/list";
+		
+		ReservationVO res = resCom.toRegist();
+		
+		rentService.removeReservation(res);
+		rttr.addFlashAttribute("form", "deleteRes");
+		
+		return url;
+		
+	}
 	
 	
 

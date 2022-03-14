@@ -1,8 +1,14 @@
 package kr.or.ddit.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+
+import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
 
@@ -59,11 +65,6 @@ public class RentDAOImpl implements RentDAO {
 		session.update(namespace + "deleteResveration");
 	}
 
-	@Override
-	public List<ReservationVO> selectResveration() throws SQLException {
-		List<ReservationVO> resList = session.selectList(namespace + "selectResveration");
-		return resList;
-	}
 
 	@Override
 	public RentVO selectRentByRentNo(String rent_no) throws SQLException {
@@ -86,6 +87,32 @@ public class RentDAOImpl implements RentDAO {
 	@Override
 	public void updateBookStatus(String book_no) throws SQLException {
 		session.update("MyList-Mapper.updateBookStatus", book_no);
+	}
+
+	@Override
+	public List<ReservationVO> selectResveration(SearchCriteria cri, String id) throws SQLException {
+		
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();		
+		RowBounds rowBounds=new RowBounds(offset,limit);		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("id", id);
+		dataMap.put("cri", cri);
+		
+		List<ReservationVO> resList = session.selectList(namespace + "selectResveration", dataMap, rowBounds);
+		
+		return resList;
+	}
+
+	@Override
+	public int selectResverationCount(SearchCriteria cri, String id) throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("id", id);
+		dataMap.put("cri", cri);
+		int count = session.selectOne("Rent-Mapper.selectResverationCount", dataMap); 
+		System.out.println("/////////////////////////////////////////////////////////////"+id);
+		return count;
 	}
 	
 }

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.command.PageMaker;
+import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dao.BookDAO;
 import kr.or.ddit.dao.RentDAO;
 import kr.or.ddit.dto.BookVO;
@@ -83,11 +85,6 @@ public class RentServiceImpl implements RentService {
 		rentDAO.updateBookResStatus(resVO);
 	}
 
-	@Override
-	public List<ReservationVO> getReservationList() throws SQLException {
-		List<ReservationVO> resList = rentDAO.selectResveration();
-		return resList;
-	}
 
 	@Override
 	public RentVO getRent(String rent_no) throws SQLException {
@@ -107,5 +104,25 @@ public class RentServiceImpl implements RentService {
 		
 		rentDAO.updateRentStatus(rent_no);
 		
+	}
+
+	@Override
+	public Map<String, Object> getResList(SearchCriteria cri, String id) throws SQLException {
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		List<ReservationVO> resList = rentDAO.selectResveration(cri, id);
+		
+		int totalCount = rentDAO.selectResverationCount(cri, id);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(totalCount);
+		
+		dataMap.put("resList", resList);
+		dataMap.put("pageMaker", pageMaker);
+		
+		
+		return dataMap;
 	}
 }
