@@ -23,5 +23,17 @@ public interface RentService {
 	
 	void removeReservation(ReservationVO resVO) throws SQLException;
 	
-	List<ReservationVO> getReservationList() throws SQLException; 
+	List<ReservationVO> getReservationList() throws SQLException;
+	
+	
+	
+	// 회원 책 정보 상세조회
+	RentVO getRent(String rent_no) throws SQLException;
+	
+	// 반납하기로 변경
+	void modifyRentStatus(String rent_no) throws SQLException;
+	
 }
+
+
+

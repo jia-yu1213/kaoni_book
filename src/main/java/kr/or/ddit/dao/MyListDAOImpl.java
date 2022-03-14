@@ -42,9 +42,6 @@ public class MyListDAOImpl implements MyListDAO {
 		return count;
 	}
 
-
-
-
 }
 
 

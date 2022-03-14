@@ -66,13 +66,23 @@ public class RentDAOImpl implements RentDAO {
 	}
 	
 	
+	@Override
+	public RentVO selectRentDetail(String rent_no) throws SQLException {
+		RentVO rent = session.selectOne("MyList-Mapper.selectRentDetail", rent_no);
+		return rent;
+	}
+
+	@Override
+	public void updateRentStatus(String rent_no) throws SQLException {
+		session.update("MyList-Mapper.updateRentStatus", rent_no);
+	}
+
+	@Override
+	public void updateBookStatus(String book_no) throws SQLException {
+		session.update("MyList-Mapper.updateBookStatus", book_no);
+	}
+	
 }
-
-
-
-
-
-
 
 
 
