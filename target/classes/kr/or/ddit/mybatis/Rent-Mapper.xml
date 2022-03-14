@@ -35,12 +35,16 @@
 		]]>
 	</select>
 	
+	<select id="selectRentByRentNo" resultType="rent">
+		/* selectRentByRentNo rent번호로 rent내역 가져오기*/
+		select * from book_rent where rent_no=#{rent_no}
+	</select>
 	
 	<update id="insertRent" parameterType="rent">
 	/* insertRent 대여이력 업데이트*/
 		insert into 
 		book_rent(rent_no,book_no,id)
-		values((select nvl(max(rent_no),0)+1 from book_rent),#{book_no},#{id}) 
+		values(seq_rent.nextval,#{book_no},#{id}) 
 	</update>	
 	
 	<update id="updateReturnBook" parameterType="rent">

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.command.SearchCriteria;
+import kr.or.ddit.dto.BookVO;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.service.BookService;
 import kr.or.ddit.service.MyListService;
 import kr.or.ddit.service.RentService;
 
@@ -25,6 +27,9 @@ public class MyListController {
 	
 	@Autowired
 	private RentService rentService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	
 	@RequestMapping("/main")
@@ -49,14 +54,20 @@ public class MyListController {
 		}
 	}
 	
-	@RequestMapping("/returnBook")
+	@RequestMapping("/returnBookWait")
 	public String returnBook(String rent_no) throws Exception{
 		String url = "redirect:/mylist/list";
 
-		RentVO rent = new RentVO();
-		rent.setRent_no(rent_no);
-		rentService.updateReturn(rent);
+//		RentVO rent1 = new RentVO();
+//		rent1.setRent_no(rent_no);
+//		rentService.updateReturn(rent1);
 		
+		RentVO rent = rentService.getRent(rent_no);
+		
+		BookVO book = new BookVO();
+		book.setBook_no(rent.getBook_no());
+		book.setBook_status(3);
+		bookService.modifyStatus(book);
 		return url;
 	}
 	

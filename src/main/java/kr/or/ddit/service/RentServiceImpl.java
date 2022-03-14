@@ -88,5 +88,11 @@ public class RentServiceImpl implements RentService {
 		List<ReservationVO> resList = rentDAO.selectResveration();
 		return resList;
 	}
+
+	@Override
+	public RentVO getRent(String rent_no) throws SQLException {
+		RentVO rent = rentDAO.selectRentByRentNo(rent_no);
+		return rent;
+	}
  
 }

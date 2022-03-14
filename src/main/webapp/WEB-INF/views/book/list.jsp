@@ -79,7 +79,15 @@ window.onload=function(){
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>도서 목록</h1>  				
+	  				<h1>도서 목록</h1>
+	  				
+	  				<c:choose>
+		      			<c:when test="${loginUser eq null || loginUser.authority eq 1}">
+		      			</c:when>
+		      			<c:when test="${loginUser.authority eq 0}">
+		      				<button type="button" class="btn btn-secondary" style="height: 40px;" id="registBtn" onclick="OpenWindow('returnBookMaster.do','도서반납',900,700);">반납 관리</button>
+		      			</c:when>
+	      			</c:choose>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
@@ -207,14 +215,19 @@ window.onload=function(){
 							
 							</td>
 							<td style='vertical-align:middle' onclick="event.stopPropagation()">
+							
+							<!-- 예약한 사람한테는 예약완료로 보이게, 대여가능 상태일때도 예약이 된 경우는 예약한 사람만 가능하게 -->
 							<c:choose>
 								<c:when test="${book.book_status eq 0}">
 									<button type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
 								</c:when>
 								<c:when test="${book.book_status eq 1}">
+									<button type="button" class="btn-sm btn-block btn-secondary">예약하기</button>
+								</c:when>
+								<c:when test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
 									<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
 								</c:when>
-								
+
 							</c:choose>
 							
 							</td>		

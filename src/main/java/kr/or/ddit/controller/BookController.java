@@ -40,7 +40,9 @@ import kr.or.ddit.command.BookModifyCommand;
 import kr.or.ddit.command.BookRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
+import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.service.BookService;
+import kr.or.ddit.service.RentService;
 import kr.or.ddit.util.MakeFileName;
 
 @Controller
@@ -50,6 +52,9 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private RentService rentService;
+	
 	@RequestMapping("/main")
 	public String main()throws Exception{
 		return "book/list";
@@ -58,10 +63,15 @@ public class BookController {
 	@RequestMapping("/list")
 	public void list(SearchCriteria cri, Model model)throws Exception{
 		List<BookVO> cateList =  bookService.selectCateList();
-		System.out.println(cri.getCateType());
 	
 		model.addAttribute("cateList",cateList);
 		Map<String,Object> dataMap = bookService.getBookList(cri);		
+		model.addAllAttributes(dataMap);
+	}
+	@RequestMapping("/returnBookMaster")
+	public void returnList(SearchCriteria cri, Model model)throws Exception{
+	
+		Map<String,Object> dataMap = bookService.getWaitList(cri);		
 		model.addAllAttributes(dataMap);
 	}
 	
@@ -181,7 +191,7 @@ public class BookController {
 
 		BookVO book = new BookVO();
 		book.setBook_no(book_no);
-		book.setBook_status(2);
+		book.setBook_status(4);
 		bookService.modifyStatus(book);
 		
 		rttr.addAttribute("book_no",book_no);
@@ -315,6 +325,37 @@ public class BookController {
 		view.setViewName("book/list");
 		return view;
 	}
+	
+	
+	@RequestMapping("/returnAccept")
+	public String returnBook(String book_no,String rent_no) throws Exception{
+		String url = "redirect:/book/returnBookMaster";
+		
+		RentVO rent1 = new RentVO();
+		rent1.setRent_no(rent_no);
+		rentService.updateReturn(rent1);
+		
+		BookVO book = new BookVO();
+		book.setBook_no(book_no);
+		book.setBook_status(0);
+		bookService.modifyStatus(book);
+		
+		return url;
+	}
+	
+	@RequestMapping("/returnCancle")
+	public String returnCancle(String book_no,String rent_no) throws Exception{
+		String url = "redirect:/book/returnBookMaster";
+
+		BookVO book = new BookVO();
+		book.setBook_no(book_no);
+		book.setBook_status(5);
+		bookService.modifyStatus(book);
+		
+		return url;
+	}
+	
+	
 }
 
 

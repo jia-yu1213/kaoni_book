@@ -34,4 +34,7 @@ public interface BookService {
 	
 	//엑셀 업로드
 	void excelUpload(File destFile) throws SQLException, IOException;
+	
+	// 목록조회
+	Map<String, Object> getWaitList(SearchCriteria cri) throws SQLException;
 }

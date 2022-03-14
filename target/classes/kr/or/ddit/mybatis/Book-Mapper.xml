@@ -30,11 +30,11 @@
     	    select
 				b.* ,(select cate_name from category where cate_no=b.cate_no) cate_name,
         		case when b.book_status=0 then null
-             		 when b.book_status=1 then (select max(rent_end) from book_rent where book_no=b.book_no)
+             		 when b.book_status=1 or b.book_status=2 or b.book_status=3 then (select max(rent_end) from book_rent where book_no=b.book_no)
         		end rent_end
 			from book b
 			where b.book_no is not null
-			and b.book_status != 2
+			and b.book_status != 4
 			<include refid="search" />
 			<if test="cateType != null and !cateType.equals('')">
 				and cate_no = #{cateType}			
@@ -49,7 +49,7 @@
 		count(*) 
 		from book
 		where book_no is not null
-		and book_status != 2
+		and book_status != 4
 		<include refid="search" />
 		<if test="cateType != null and !cateType.equals('')">
 			and cate_no = #{cateType}			
@@ -139,6 +139,35 @@
 		</foreach>
 		
 	</update>
+	
+		<select id="selectWaitBookList" resultType="book">
+		/* selectWaitBookList 반납 목록 가져오기*/
+		    select 
+		    	rownum, a.* 
+	        from(
+	    	    select
+					b.* ,(select cate_name from category where cate_no=b.cate_no) cate_name,
+	                c.real_end, (select name from member where id=c.id) name, c.rent_no
+				from book b, book_rent c
+				where b.book_no is not null
+				and b.book_status = 3
+	            and b.book_no=c.book_no
+	            and c.real_end is null
+				order by b.book_no desc
+	        ) A
+		</select>
+	
+		<select id="selectWaitBookListCount" resultType="int">
+			/* selectWaitBookListCount 반납 목록 갯수 가져오기*/
+			select
+			count(*) 
+			from book b, book_rent c
+				where b.book_no is not null
+				and b.book_status = 3
+	            and b.book_no=c.book_no
+	             and c.real_end is null
+				order by b.book_no desc
+		</select>
 </mapper>
 
 

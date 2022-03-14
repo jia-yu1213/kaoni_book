@@ -77,6 +77,20 @@ public class BookDAOImpl implements BookDAO {
 	public void insertExcelBook(Map<String, Object> paramMap) throws SQLException {
 		session.update("Book-Mapper.updateExcelBook",paramMap);
 	}
+
+	@Override
+	public List<BookVO> rentWaitBook(SearchCriteria cri) throws SQLException {
+		List<BookVO> bookList=
+				session.selectList("Book-Mapper.selectWaitBookList",cri);
+		
+		return bookList;
+	}
+
+	@Override
+	public int rentWaitBookCount(SearchCriteria cri) throws SQLException {
+		int count=session.selectOne("Book-Mapper.selectWaitBookListCount",cri);
+		return count;
+	}
 	
 
 

@@ -35,4 +35,10 @@ public interface BookDAO {
 	
 	//엑셀 책 추가
 	void insertExcelBook(Map<String, Object> paramMap) throws SQLException;
+	
+	//반납 대기 목록
+	List<BookVO> rentWaitBook(SearchCriteria cri) throws SQLException;
+	
+	//반납 목록 갯수
+	int rentWaitBookCount(SearchCriteria cri) throws SQLException;
 }

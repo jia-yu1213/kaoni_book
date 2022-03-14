@@ -64,6 +64,12 @@ public class RentDAOImpl implements RentDAO {
 		List<ReservationVO> resList = session.selectList(namespace + "selectResveration");
 		return resList;
 	}
+
+	@Override
+	public RentVO selectRentByRentNo(String rent_no) throws SQLException {
+		RentVO rent = session.selectOne("Rent-Mapper.selectRentByRentNo",rent_no);
+		return rent;
+	}
 	
 	
 }

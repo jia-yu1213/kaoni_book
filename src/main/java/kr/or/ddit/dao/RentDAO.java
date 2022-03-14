@@ -8,6 +8,9 @@ import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
 
 public interface RentDAO {
+	
+	RentVO selectRentByRentNo(String rent_no) throws SQLException;
+	
 	//현재 연체가 아니면서 대여중인 책의 갯수
 	int selectNowRentCount(String mem_id) throws SQLException;
 	

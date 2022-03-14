@@ -114,7 +114,7 @@
 
 	<script>
 	function returnBook(rent_no){
-		location.href="returnBook?rent_no="+rent_no;
+		location.href="returnBookWait?rent_no="+rent_no;
 		
 	}
 	</script>

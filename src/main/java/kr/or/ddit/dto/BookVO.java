@@ -18,11 +18,38 @@ public class BookVO {
 	private String writer_intro;
 	private int book_status;
 	private Date rent_end;
+	private Date real_end;
 	private String cate_name;
 	private String cate_no;
 	private String photo;
 	private int res_status;
+	private String name;
+	private String rent_no;
 	
+	
+	public String getRent_no() {
+		return rent_no;
+	}
+
+	public void setRent_no(String rent_no) {
+		this.rent_no = rent_no;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getReal_end() {
+		return real_end;
+	}
+
+	public void setReal_end(Date real_end) {
+		this.real_end = real_end;
+	}
 	
 	public int getRes_status() {
 		return res_status;

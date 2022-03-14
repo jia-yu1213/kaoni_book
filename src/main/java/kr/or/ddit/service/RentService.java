@@ -17,6 +17,8 @@ public interface RentService {
 	//반납
 	void updateReturn(RentVO rent) throws SQLException;
 	
+	//하나 가져오기
+	RentVO getRent(String rent_no) throws SQLException;
 	
 	//예약
 	void modifyBookResStatus(ReservationVO resVO) throws SQLException;
