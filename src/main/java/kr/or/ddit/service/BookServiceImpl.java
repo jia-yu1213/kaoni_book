@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(totalCount);
-
+		
 		dataMap.put("bookList", bookList);
 		dataMap.put("cateList", cateList);
 		dataMap.put("pageMaker", pageMaker);

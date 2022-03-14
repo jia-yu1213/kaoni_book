@@ -58,7 +58,7 @@ public class BookController {
 	@RequestMapping("/list")
 	public void list(SearchCriteria cri, Model model)throws Exception{
 		List<BookVO> cateList =  bookService.selectCateList();
-
+		System.out.println(cri.getCateType());
 	
 		model.addAttribute("cateList",cateList);
 		Map<String,Object> dataMap = bookService.getBookList(cri);		
