@@ -66,6 +66,37 @@ public class RentController {
 		return url;
 	}
 	
+	@RequestMapping("/reservation")
+	public String reservation(ResverationCommand cmd, HttpSession session) throws Exception{
+		String url = "redirect:/book/list";
+		
+		
+		System.out.println("book_no : " + cmd.getBook_no());
+		System.out.println("book_status : " +cmd.getBook_status());
+		
+		System.out.println("id : " + cmd.getId());
+		
+		ReservationVO res = cmd.toRegist();
+		rentService.modifyBookResStatus(res);
+		
+		return url;
+	}
+	
+	@RequestMapping("/delRes")
+	public String delRes(String book_no, int book_status, HttpSession session) throws Exception{
+		String url = "redirect:/book/list";
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		
+		ReservationVO res = new ReservationVO();
+		res.setId(member.getId());
+		res.setBook_no(book_no);
+		res.setBook_status(book_status);
+		rentService.removeReservation(res);
+		
+		return url;
+	}  
+	
 	
 	@Resource(name = "bookPicturePath")
 	private String picturePath;

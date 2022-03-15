@@ -28,7 +28,7 @@
 								<c:forEach items="${resList }" var="res">
 									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?rent_no=${rent.rent_no }','상세보기',802,730);">
 										<td style='vertical-align:middle'>${res.rownum }</td>
-										<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">${res.title }</td>			
+										<td id="boardTitle" style="vertical-align:middle; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">${res.title }</td>			
 										<td style='vertical-align:middle'>${res.writer }</td>
 										<td style='vertical-align:middle'>
 											<fmt:formatDate value="${res.res_date }" pattern="yyyy-MM-dd" var="res_date" />
@@ -38,7 +38,7 @@
 											<c:if test="${real_end eq null }">
 												<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
 											
-											</c:if>
+											</c:if> 
 											<c:if test="${real_end ne null }">
 												<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
 											
@@ -46,7 +46,6 @@
 										
 										</td>	
 										
-										<td></td>	
 									</tr>
 								</c:forEach>
 							</table>				
@@ -56,7 +55,7 @@
 	
 	<script>
 	function returnBook(rent_no){
-		location.href="returnBook?rent_no="+rent_no;
+		location.href="returnBookWait?rent_no="+rent_no;
 		
 	}
 	</script>    

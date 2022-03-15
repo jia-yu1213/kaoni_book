@@ -71,7 +71,8 @@ public class RentServiceImpl implements RentService {
 		rentDAO.updateReturnBook(rent);
 		
 	}
-
+    
+	// 예약
 	@Override
 	public void modifyBookResStatus(ReservationVO resVO) throws SQLException {
 		rentDAO.updateBookResStatus(resVO);

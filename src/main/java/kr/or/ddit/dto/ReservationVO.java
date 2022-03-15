@@ -25,6 +25,8 @@ public class ReservationVO {
 	private String photo;
 	private int res_status;
 	
+	
+	
 	public int getRownum() {
 		return rownum;
 	}

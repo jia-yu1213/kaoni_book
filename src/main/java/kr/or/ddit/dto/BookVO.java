@@ -26,7 +26,35 @@ public class BookVO {
 	private String name;
 	private String rent_no;
 	
+	private String check_no;
+	private int check_status;
+	private String check_id;
 	
+	
+	public String getCheck_no() {
+		return check_no;
+	}
+
+	public void setCheck_no(String check_no) {
+		this.check_no = check_no;
+	}
+
+	public int getCheck_status() {
+		return check_status;
+	}
+
+	public void setCheck_status(int check_status) {
+		this.check_status = check_status;
+	}
+
+	public String getCheck_id() {
+		return check_id;
+	}
+
+	public void setCheck_id(String check_id) {
+		this.check_id = check_id;
+	}
+
 	public String getRent_no() {
 		return rent_no;
 	}

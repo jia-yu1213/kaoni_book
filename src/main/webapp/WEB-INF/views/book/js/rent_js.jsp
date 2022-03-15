@@ -46,7 +46,7 @@ function rentBook(book_no){
 }
 
 
-function resBook(book_no){
+function resBook(book_no, id){
 	var login = $('#loginUser').val();
 	//로그인체크
 	if (!login) {
@@ -61,21 +61,20 @@ function resBook(book_no){
 				
 				var status = dataMap.status;
 				var data = dataMap.data;
+				var book_status = '2';
 			
 				var answer;
-				if (status=="overdueRent") {
-					answer = confirm(data+"권이 연체중입니다. \n연체중에는 이용이 불가합니다. \n반납하시겠습니까?");
-					if(answer){
-						location = "<%=request.getContextPath()%>/mylist/list.do";
-					}
-				}else if (status=="overdueDate") {
+			    if (status=="overdueDate") {
 					 alert("연체 기간입니다. \n"+data.split(" ")[0]+"까지 이용이 불가합니다.");
 				}else if (status=="nowRent") {
 					//대여가능
-					answer = confirm(data+"권이 대여중입니다. \n대여하시겠습니까?");
+					answer = confirm(data+"권이 예약중입니다. \n예약하시겠습니까?");
 					if(answer){
 					
-						location = "<%=request.getContextPath()%>/rent/registRent.do?book_no="+book_no;
+						location = "<%=request.getContextPath()%>/rent/reservation.do?book_no="+book_no+"&book_status="+book_status +"&id="+id;
+						console.log(book_status);
+						console.log(book_no);
+						console.log(id);
 					}
 				}
 					

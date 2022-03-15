@@ -37,4 +37,8 @@ public interface BookService {
 	
 	// 목록조회
 	Map<String, Object> getWaitList(SearchCriteria cri) throws SQLException;
+	
+	
+	//나의 책 대여 현황 체크하기 
+	Map<String, Object> selectCheckStatus(String id, String book_no) throws SQLException;
 }

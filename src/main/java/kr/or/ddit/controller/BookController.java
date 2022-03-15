@@ -356,6 +356,14 @@ public class BookController {
 	}
 	
 	
+	//나의 책 대여 현황 체크하기 
+	@RequestMapping("/statusCheck")
+	public ModelAndView Status(ModelAndView mnv, HttpSession session, String id, String book_no) throws SQLException{
+		Map<String, Object> dataMap = bookService.selectCheckStatus(id, book_no);
+		mnv.addObject("dataMap", dataMap);
+		
+		return mnv;
+	}
 }
 
 
