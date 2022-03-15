@@ -41,4 +41,7 @@ public interface BookDAO {
 	
 	//반납 목록 갯수
 	int rentWaitBookCount(SearchCriteria cri) throws SQLException;
+	
+	//나의 책 대여 현황 체크하기 
+	List<BookVO> selectCheckStatus(String book_no, String id) throws SQLException;
 }

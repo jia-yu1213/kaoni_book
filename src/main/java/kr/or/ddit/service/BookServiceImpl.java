@@ -152,6 +152,17 @@ public class BookServiceImpl implements BookService {
 		return dataMap;
 	}
 
+	@Override
+	public Map<String, Object> selectCheckStatus(String id, String book_no) throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		List<BookVO> scList = bookDAO.selectCheckStatus(book_no, id);
+		
+		dataMap.put("scList", scList);
+		
+		return dataMap;
+	}
+
 	
 
 }

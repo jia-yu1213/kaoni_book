@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
@@ -90,6 +91,19 @@ public class BookDAOImpl implements BookDAO {
 	public int rentWaitBookCount(SearchCriteria cri) throws SQLException {
 		int count=session.selectOne("Book-Mapper.selectWaitBookListCount",cri);
 		return count;
+	}
+
+	//나의 책 대여 현황 체크하기 
+	@Override
+	public List<BookVO> selectCheckStatus(String id, String book_no) throws SQLException {
+		
+		Map<String, Object> dataMap = new HashedMap<String, Object>();
+		dataMap.put("id", id);
+		dataMap.put("book_no", book_no);
+		
+		List<BookVO> scList = session.selectList("Book-Mapper.selectCheckStatus", dataMap);
+		
+		return scList;
 	}
 	
 

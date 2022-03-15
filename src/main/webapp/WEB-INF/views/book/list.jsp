@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="cri" value="${pageMaker.cri }" />
+<c:set var="scList" value="${dataMap.scList}" />
 
 <head>
 
@@ -218,13 +219,15 @@ label span {
 											<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
 										</c:if>
 									</c:when>
+
 									<c:when test="${book.book_status eq 1}">
-										<button type="button" class="btn-sm btn-block btn-secondary"onclick="resBook('${id}');">예약하기</button>
+										<button type="button" class="btn-sm btn-block btn-secondary"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
+
 									</c:when>
 									<c:when test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
 										<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
 									</c:when>
-
+										
 								</c:choose>
 
 							</td>

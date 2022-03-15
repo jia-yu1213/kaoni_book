@@ -3,6 +3,8 @@ package kr.or.ddit.command;
 import java.text.ParseException;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.ReservationVO;
 
@@ -13,16 +15,29 @@ public class ResverationCommand {
 	private String id;
 	private int book_status;
 	
-	
+	HttpSession session;
+
 	public ReservationVO toRegist() throws Exception {
 		
-		ReservationVO resver = new ReservationVO();
 		
-		resver.setBook_no(book_no);
-		resver.setId(id);
-		resver.setBook_status(book_status);
+		ReservationVO res = new ReservationVO();
 		
-		return resver;
+		res.setBook_no(book_no);
+		res.setId(id);
+		res.setBook_status(book_status);
+		
+		return res;
+	}
+	
+	public ReservationVO toRemove() throws Exception{
+		
+		ReservationVO res = new ReservationVO();
+		
+		res.setBook_no(book_no);
+		res.setId(id);
+		res.setBook_status(book_status);
+		
+		return res;
 	}
 	
 	

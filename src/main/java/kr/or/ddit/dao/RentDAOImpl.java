@@ -52,17 +52,17 @@ public class RentDAOImpl implements RentDAO {
 
 	@Override
 	public void updateBookResStatus(ReservationVO resVO) throws SQLException {
-		session.update(namespace + "updateBookResStatus");
+		session.update(namespace + "updateBookResStatus", resVO);
 	}
 
 	@Override
 	public void insertResveration(ReservationVO resVO) throws SQLException {
-		session.update(namespace + "insertResveration");
+		session.update(namespace + "insertResveration", resVO);
 	}
 
 	@Override
 	public void deleteResveration(ReservationVO resVO) throws SQLException {
-		session.update(namespace + "deleteResveration");
+		session.update(namespace + "deleteResveration", resVO);
 	}
 
 

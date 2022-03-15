@@ -17,7 +17,7 @@ public class MyListDAOImpl implements MyListDAO {
 	private SqlSession session;
 	public void setSqlSession(SqlSession session) {
 		this.session=session;
-	}
+	} 
 	
 	@Override
 	public List<RentVO> selectRentListByID( SearchCriteria cri, String id) throws SQLException {

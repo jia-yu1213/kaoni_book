@@ -168,6 +168,18 @@
 	             and c.real_end is null
 				order by b.book_no desc
 		</select>
+		
+		
+		<select id="selectCheckStatus" resultType="book">
+			select a. book_no as check_no,
+				   a.book_status as check_status,
+	       		   b.id as checkID
+	  		  from book a, book_rent b
+		     where a.book_no = b.book_no and
+	               b.real_end is null and 
+	               b.id = #{id} and
+	               a.book_no = #{book_no}
+		</select>
 </mapper>
 
 
