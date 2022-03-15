@@ -47,12 +47,12 @@ public class BookServiceImpl implements BookService {
 		for(BookVO book : bookList) {
 			if (book.getBook_status()==0) {
 				for(ReservationVO res : resList) {
-					if (res.getBook_no()==book.getBook_no()) {
-						if (res.getId()==member.getId()) {
-							book.setRent_able(0);
-							break;
-						}else if (member==null || res.getId()!=member.getId()) {
+					if (res.getBook_no().equals(book.getBook_no())) {
+						if (member==null || !res.getId().equals(member.getId())) {
 							book.setRent_able(1);
+							break;
+						}else if (res.getId().equals(member.getId())) {
+							book.setRent_able(0);
 							break;
 						}
 						break;
@@ -99,8 +99,27 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public BookVO getBook(String book_no) throws SQLException {
+	public BookVO getBook(HttpSession session, String book_no) throws SQLException {
 		BookVO book = bookDAO.selectBookByBookNo(book_no);
+		
+		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		if (book.getBook_status()==0) {
+			for(ReservationVO res : resList) {
+				if (res.getBook_no().equals(book.getBook_no())) {
+					if (member==null || !res.getId().equals(member.getId())) {
+						book.setRent_able(1);
+						break;
+					}else if (res.getId().equals(member.getId())) {
+						book.setRent_able(0);
+						break;
+					}
+					break;
+				}else {
+					book.setRent_able(0);
+				}
+			}
+		}
 		return book;
 	}
 

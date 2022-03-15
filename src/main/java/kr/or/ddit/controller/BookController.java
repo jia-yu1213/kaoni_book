@@ -179,9 +179,9 @@ public class BookController {
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(String book_no, ModelAndView mnv) throws SQLException{
+	public ModelAndView detail(String book_no, ModelAndView mnv,HttpSession session) throws SQLException{
 			String url = "book/detail";
-			BookVO book = bookService.getBook(book_no);
+			BookVO book = bookService.getBook(session,book_no);
 			mnv.addObject("book",book);
 			mnv.setViewName(url);
 			return mnv;
@@ -202,12 +202,12 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/modifyForm")
-	public ModelAndView modifyForm(String book_no, ModelAndView mnv)throws SQLException {
+	public ModelAndView modifyForm(String book_no, ModelAndView mnv,HttpSession session)throws SQLException {
 
 		String url = "book/modify";
 		List<BookVO> cateList =  bookService.selectCateList();
 		mnv.addObject("cateList",cateList);
-		BookVO book = bookService.getBook(book_no);
+		BookVO book = bookService.getBook(session,book_no);
 		mnv.addObject("book", book);
 		
 		mnv.setViewName(url);

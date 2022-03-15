@@ -55,7 +55,7 @@
 	</update>
 	
 	
-	<update id="updateBookResStatus">
+	<update id="updateBookResStatus" parameterType="res">
 		update book
 		   set book_status = #{book_status}
 		 where book_no = #{book_no}
@@ -92,10 +92,10 @@
 	</select>
 	
 	<update id="updateRentStatus" parameterType="rent">
-		update book 
+		update book_rent 
 		set 
 		rent_status=#{rent_status}		
-		where rent=#{rent_no}
+		where rent_no=#{rent_no}
 	</update>
 	
 </mapper>

@@ -186,16 +186,13 @@ label span {
 								style="text-align: left; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle">
 								${book.title }</td>
 							<td style='vertical-align: middle'>${book.writer }</td>
-							<td style='vertical-align: middle'><jsp:useBean id="now"
-									class="java.util.Date" /> <fmt:formatDate value="${now}"
-									pattern="yyyy-MM-dd" var="today" /> <fmt:formatDate
-									value="${book.rent_end }" pattern="yyyy-MM-dd" var="rent_end" />
-
+							<td style='vertical-align: middle'><jsp:useBean id="now" class="java.util.Date" /> 
+								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+								<fmt:formatDate value="${book.rent_end }" pattern="yyyy-MM-dd" var="rent_end" />
 								<c:choose>
 									<c:when test="${rent_end eq null}">
 									
 									</c:when>
-
 									<c:when test="${rent_end eq today}"> 
 										반납예정일 
 									</c:when>

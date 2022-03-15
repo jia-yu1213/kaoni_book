@@ -30,7 +30,7 @@
     	    select
 				b.* ,(select cate_name from category where cate_no=b.cate_no) cate_name,
         		case when b.book_status=0 then null
-             		 when b.book_status=1 or b.book_status=2 or b.book_status=3 then (select max(rent_end) from book_rent where book_no=b.book_no)
+             		 when b.book_status=1 or b.book_status=2 or b.book_status=3 or b.book_status=5 then (select max(rent_end) from book_rent where book_no=b.book_no)
         		end rent_end
 			from book b
 			where b.book_no is not null

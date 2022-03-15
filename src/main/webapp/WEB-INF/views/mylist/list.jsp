@@ -65,12 +65,20 @@
 										<td style='vertical-align:middle'>
 											<c:choose>
 											
-												<c:when test="${rent.book_status eq 5 }">
+												<c:when test="${rent.rent_status eq 1 }">
 													반납 반려
 												</c:when>
-											
-												<c:when test="${empty rent.real_end}">대여중</c:when>
-												<c:otherwise>반납완료</c:otherwise>
+												<c:when test="${rent.rent_status eq 3 }">
+													반납 대기
+												</c:when>
+												<c:when test="${empty rent.real_end && rent.rent_status eq 0}">
+													대여중
+												</c:when>
+												<c:when test="${rent.rent_status eq 2 }">
+													반납 완료
+												</c:when>
+												
+										
 											</c:choose>
 <%-- 											<c:if test="${real_end eq null}">대여중</c:if> --%>
 <%-- 											<c:if test="${real_end ne null}">반납완료</c:if> --%>

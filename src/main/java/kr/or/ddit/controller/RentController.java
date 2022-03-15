@@ -26,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.command.ResverationCommand;
 import kr.or.ddit.command.SearchCriteria;
+import kr.or.ddit.dto.BookVO;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
+import kr.or.ddit.service.BookService;
 import kr.or.ddit.service.RentService;
 import kr.or.ddit.util.MakeFileName;
 
@@ -38,6 +40,9 @@ public class RentController {
 
 	@Autowired
 	private RentService rentService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	@RequestMapping(value="/checkRent",method=RequestMethod.POST)
 	@ResponseBody
@@ -172,12 +177,14 @@ public class RentController {
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(String rent_no, ModelAndView mnv) throws SQLException {
+	public ModelAndView detail(String rent_no, ModelAndView mnv,HttpSession session) throws SQLException {
 			
 			String url = "mylist/detail";
 			
 			RentVO rent = rentService.getRent(rent_no);
+			BookVO book = bookService.getBook(session, rent.getBook_no());
 			mnv.addObject("rent", rent);
+			mnv.addObject("book", book);
 			mnv.setViewName(url);
 			
 			return mnv;

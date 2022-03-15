@@ -29,7 +29,7 @@ public interface BookService {
 	List<BookVO> selectCateList() throws SQLException;
 	
 	//상세보기
-	BookVO getBook(String book_no) throws SQLException;
+	BookVO getBook(HttpSession session,String book_no) throws SQLException;
 	
 	//수정하기
 	void modify(BookVO book) throws SQLException;
