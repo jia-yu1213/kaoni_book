@@ -209,17 +209,18 @@ label span {
 
 								<c:choose>
 									<c:when test="${rent_end eq null}">
-
+									
 									</c:when>
+
 									<c:when test="${rent_end eq today}"> 
-반납예정일 
-</c:when>
+										반납예정일 
+									</c:when>
 									<c:when test="${rent_end < today}"> 
-연체중 
-</c:when>
+										연체중 
+									</c:when>
 									<c:when test="${rent_end > today}"> 
-${rent_end } 
-</c:when>
+										${rent_end } 
+									</c:when>
 
 								</c:choose></td>
 							<td style='vertical-align: middle'
