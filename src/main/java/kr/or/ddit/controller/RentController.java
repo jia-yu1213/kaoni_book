@@ -88,18 +88,19 @@ public class RentController {
 	}
 	
 	@RequestMapping("/delRes")
-	public String delRes(String book_no, int book_status, HttpSession session) throws Exception{
-		String url = "redirect:/book/list";
+	public ResponseEntity<ReservationVO> delRes(ResverationCommand cmd, HttpSession session) throws Exception{
 		
-		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		ResponseEntity<ReservationVO> entity = null;
 		
-		ReservationVO res = new ReservationVO();
-		res.setId(member.getId());
-		res.setBook_no(book_no);
-		res.setBook_status(book_status);
-		rentService.removeReservation(res);
+		ReservationVO res = cmd.toRemove();
+		try {
+			rentService.removeReservation(res);
+			entity = new ResponseEntity<ReservationVO>(HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<ReservationVO>(HttpStatus.BAD_REQUEST);
+		}
 		
-		return url;
+		return entity;
 	}  
 	
 	

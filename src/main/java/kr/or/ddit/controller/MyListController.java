@@ -88,8 +88,10 @@ public class MyListController {
 		book.setBook_status(3);
 		bookService.modifyStatus(book);
 		
+
 		rent.setRent_status(3);
 		rentService.updateRealRentStatus(rent);
+
 		return url;
 	}
 	

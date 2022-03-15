@@ -35,28 +35,45 @@
 											${res_date }
 										</td>		
 										<td style='vertical-align:middle' onclick="event.stopPropagation()">
-											<c:if test="${real_end eq null }">
-												<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
-											
-											</c:if> 
-											<c:if test="${real_end ne null }">
-												<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
-											
-											</c:if>
+											<c:choose>
+												<c:when test="${res.book_status eq '0' }">
+													<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">대여하기</button>
+												</c:when>
+												<c:otherwise>
+													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${rent.book_no }','${loginUser.id }');">에약취소</button>
+												</c:otherwise>
+											</c:choose>
 										
 										</td>	
 										
 									</tr>
 								</c:forEach>
-							</table>				
+							</table>		
+							
 						</div>
 		
 
 	
-	<script>
+<script>
 	function returnBook(rent_no){
 		location.href="returnBookWait?rent_no="+rent_no;
 		
 	}
-	</script>    
+	
+	
+	function removeRes(book_no, id){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/rent/delRes",
+			data : {"book_no":book_no, "id":id},
+			success: function(data){
+				alert("예약이 취소되었습니다.");
+				window.location.reload();
+			},
+			error : function(error){
+				console.log(error);
+				alert("에러 발생");
+			}
+			});
+	}
+</script>    
 </body>
