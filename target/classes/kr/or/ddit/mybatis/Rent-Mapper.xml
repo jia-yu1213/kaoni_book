@@ -95,7 +95,7 @@
 		update book 
 		set 
 		rent_status=#{rent_status}		
-		where rent=#{rent_no}
+		where rent_no=#{rent_no}
 	</update>
 	
 </mapper>
