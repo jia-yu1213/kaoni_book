@@ -229,7 +229,7 @@ label span {
 								<c:choose>
 									<c:when test="${book.book_status eq 0}">
 										<button type="button" class="btn-sm btn-block btn-primary"
-											onclick="resBook('${book.book_no }');">대여하기</button>
+											onclick="rentBook('${book.book_no }');">대여하기</button>
 									</c:when>
 									<c:when test="${book.book_status eq 1}">
 										<button type="button" class="btn-sm btn-block btn-secondary"
