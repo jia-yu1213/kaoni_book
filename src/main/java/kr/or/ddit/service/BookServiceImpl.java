@@ -4,14 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.command.PageMaker;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dao.BookDAO;
+import kr.or.ddit.dao.RentDAO;
 import kr.or.ddit.dto.BookVO;
 import kr.or.ddit.dto.ExcelReadOption;
+import kr.or.ddit.dto.MemberVO;
+import kr.or.ddit.dto.ReservationVO;
 import kr.or.ddit.util.ExcelRead;
 
 public class BookServiceImpl implements BookService {
@@ -21,14 +27,41 @@ public class BookServiceImpl implements BookService {
 	public void setBookDAO(BookDAO bookDAO) {
 		this.bookDAO = bookDAO;
 	}
-
+	
+	private RentDAO rentDAO;
+	
+	public void setRentDAO(RentDAO rentDAO) {
+		this.rentDAO = rentDAO;
+	}
+	
 	@Override
-	public Map<String, Object> getBookList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> getBookList(HttpSession session, SearchCriteria cri) throws SQLException {
 
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		
 		// 현재 page 번호에 맞는 리스트를 perPageNum 개수 만큼 가져오기.
 		List<BookVO> bookList = bookDAO.selectSearchBookList(cri);
+		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
+		
+		for(BookVO book : bookList) {
+			if (book.getBook_status()==0) {
+				for(ReservationVO res : resList) {
+					if (res.getBook_no()==book.getBook_no()) {
+						if (res.getId()==member.getId()) {
+							book.setRent_able(0);
+							break;
+						}else if (member==null || res.getId()!=member.getId()) {
+							book.setRent_able(1);
+							break;
+						}
+						break;
+					}else {
+						book.setRent_able(0);
+					}
+				}
+			}
+		}
 		
 		//cateList
 		List<BookVO> cateList = bookDAO.selectCateList();

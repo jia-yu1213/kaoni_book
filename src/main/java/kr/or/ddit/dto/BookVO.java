@@ -26,7 +26,16 @@ public class BookVO {
 	private String name;
 	private String rent_no;
 	
+	private int rent_able; //0대여가능 1대여불가
 	
+	public int getRent_able() {
+		return rent_able;
+	}
+
+	public void setRent_able(int rent_able) {
+		this.rent_able = rent_able;
+	}
+
 	public String getRent_no() {
 		return rent_no;
 	}

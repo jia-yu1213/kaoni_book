@@ -78,21 +78,34 @@ label span {
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row md-2">
-				<div class="col-sm-6">
+				<div class="col-sm-2">
 					<h1>도서 목록</h1>
-
+				</div>
+				<div class="col-sm-8" style="margin-bottom : 0px">
 					<c:choose>
 						<c:when test="${loginUser eq null || loginUser.authority eq 1}">
 						</c:when>
 						<c:when test="${loginUser.authority eq 0}">
-							<button type="button" class="btn btn-secondary"
-								style="height: 40px;" id="registBtn"
-								onclick="OpenWindow('returnBookMaster.do','도서반납',900,700);">반납
-								관리</button>
+							<button type="button" class="btn btn-secondary" style="height: 40px;float:left" id="registBtn" onclick="OpenWindow('returnBookMaster.do','도서반납',900,700);">
+								반납관리
+							</button>
+							<button type="button" class="btn btn-secondary" style="height: 40px;float:left; margin-left : 10px" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',900,700);">
+								도서등록
+							</button>
+							<form id="excelUpload" name="excelUpload" enctype="multipart/form-data" style="float: left; width : 400px;margin-left : 10px;height: 40px" method="post" action="excelUpload">
+								<div style="border: 2px solid lightgrey; border-radius: 5px;">
+									<label class="btn btn-secondary" style="float: left; font-weight: 400"> 엑셀 등록 
+										<input id="excelFile" type="file" name="excelFile" style="display: none">
+									</label>
+									<div id="file_route"style="width: 218px; float: left; padding-top: 5px; text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+									</div>
+									<button class="btn btn-secondary" id="addexcelImport"onclick="check()">추가</button>
+								</div>
+							</form>
 						</c:when>
 					</c:choose>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-2">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="list.do"> <i
 								class="fa fa-dashboard"></i>도서
@@ -110,35 +123,8 @@ label span {
 			<div class="card-header with-border">
 				<div class="row">
 					<div style="float: left; margin-right: 10px">
-						<button type="button" class="btn btn-secondary" id="saveBookBtn"
-							onclick="saveBook();">목록 엑셀 저장</button>
-
+						<button type="button" class="btn btn-secondary" id="saveBookBtn" onclick="saveBook();">목록 엑셀 저장</button>
 					</div>
-					<c:choose>
-						<c:when test="${loginUser eq null || loginUser.authority eq 1}">
-						</c:when>
-						<c:when test="${loginUser.authority eq 0}">
-							<button type="button" class="btn btn-secondary"
-								style="height: 40px;" id="registBtn"
-								onclick="OpenWindow('registForm.do','도서등록',900,700);">도서등록</button>
-							<form id="excelUpload" name="excelUpload"
-								enctype="multipart/form-data" method="post" action="excelUpload">
-								<div
-									style="border: 2px solid lightgrey; border-radius: 5px; margin-left: 10px">
-									<label class="btn btn-secondary"
-										style="float: left; font-weight: 400"> 엑셀 등록 <input
-										id="excelFile" type="file" name="excelFile"
-										style="display: none">
-									</label>
-									<div id="file_route"
-										style="width: 200px; float: left; padding-top: 5px; text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></div>
-									<button class="btn btn-secondary" id="addexcelImport"
-										onclick="check()">추가</button>
-								</div>
-							</form>
-						</c:when>
-					</c:choose>
-
 
 					<div id="keyword" class="card-tools"
 						style="width: 400px; margin-left: auto">
@@ -151,12 +137,9 @@ label span {
 								<option value="100" ${cri.perPageNum == 100 ? 'selected':''}>100개씩</option>
 							</select> <select class="form-control col-md-4" name="searchType"
 								id="searchType">
-								<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전
-									체</option>
-								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제
-									목</option>
-								<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>저
-									자</option>
+								<option value="tcw" ${cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
+								<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
+								<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>저 자</option>
 								<option value="c" ${cri.searchType eq 'c' ? 'selected':'' }>출판사</option>
 							</select> <input class="form-control" type="text" name="keyword"
 								placeholder="검색어를 입력하세요." value="${param.keyword }" /> <span
@@ -228,15 +211,17 @@ label span {
 								<!-- 예약한 사람한테는 예약완료로 보이게, 대여가능 상태일때도 예약이 된 경우는 예약한 사람만 가능하게 -->
 								<c:choose>
 									<c:when test="${book.book_status eq 0}">
-										<button type="button" class="btn-sm btn-block btn-primary"
-											onclick="rentBook('${book.book_no }');">대여하기</button>
+										<c:if test="${book.rent_able eq 0 }">
+											<button type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
+										</c:if>
+										<c:if test="${book.rent_able eq 1 }">
+											<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
+										</c:if>
 									</c:when>
 									<c:when test="${book.book_status eq 1}">
-										<button type="button" class="btn-sm btn-block btn-secondary"
-										    onclick="resBook('${id}');">예약하기</button>
+										<button type="button" class="btn-sm btn-block btn-secondary"onclick="resBook('${id}');">예약하기</button>
 									</c:when>
-									<c:when
-										test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
+									<c:when test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
 										<button type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
 									</c:when>
 

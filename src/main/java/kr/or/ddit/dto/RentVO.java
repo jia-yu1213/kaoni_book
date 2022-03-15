@@ -28,7 +28,14 @@ public class RentVO {
 	private String photo;
 	private int res_status;
 	
+	private int rent_status;
 	
+	public int getRent_status() {
+		return rent_status;
+	}
+	public void setRent_status(int rent_status) {
+		this.rent_status = rent_status;
+	}
 	public String getId() {
 		return id;
 	}

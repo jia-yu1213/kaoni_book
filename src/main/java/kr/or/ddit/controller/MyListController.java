@@ -75,7 +75,7 @@ public class MyListController {
 
 	@RequestMapping("/returnBookWait")
 	public String returnBook(String rent_no) throws Exception{
-		String url = "redirect:/mylist/list";
+		String url = "redirect:/mylist/list.do";
 
 //		RentVO rent1 = new RentVO();
 //		rent1.setRent_no(rent_no);
@@ -87,6 +87,9 @@ public class MyListController {
 		book.setBook_no(rent.getBook_no());
 		book.setBook_status(3);
 		bookService.modifyStatus(book);
+		
+		rent.setRent_status(0);
+		rentService.updateRealRentStatus(rent);
 		return url;
 	}
 	

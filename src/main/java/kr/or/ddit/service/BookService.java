@@ -6,13 +6,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
 
 public interface BookService {
 	
 	// 목록조회
-	Map<String, Object> getBookList(SearchCriteria cri) throws SQLException;
+	Map<String, Object> getBookList(HttpSession session,SearchCriteria cri) throws SQLException;
 	
 	//저장 목록 가져오기
 	List<BookVO> saveBookList() throws SQLException;

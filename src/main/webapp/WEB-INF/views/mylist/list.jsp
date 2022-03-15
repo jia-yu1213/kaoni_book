@@ -101,7 +101,7 @@
 											<c:if test="${real_end eq null }">
 												<c:if test="${rent.book_status ne 3 }">
 											
-													<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">반납하기</button>
+													<button type="button" class="btn-sm btn-block btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
 												</c:if>
 												<c:if test="${rent.book_status eq 3 }">
 													<button type="button" class="btn-sm btn-block btn-secondary">반납대기</button>
@@ -124,26 +124,15 @@
 				<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
 						<%@include file="./reseveration.jsp" %>
 				</div>
-<!-- 				<div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab"> -->
-<!-- 					Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna. -->
-<!-- 				</div> -->
-<!-- 				<div class="tab-pane fade active show" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-settings-tab"> -->
-<!-- 					Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis. -->
-<!-- 				</div> -->
 				
 				
 			</div>
 		</div>
 
 </div>
-	
-	
-	
-	
-
-
 	<script>
-	function returnBook(rent_no){
+	function returnBookWait(rent_no){
+		
 		location.href="returnBookWait?rent_no="+rent_no;
 		
 	}

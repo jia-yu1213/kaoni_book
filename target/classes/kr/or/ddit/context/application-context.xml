@@ -53,6 +53,7 @@
 	<bean id="bookService"
 		  class="kr.or.ddit.service.BookServiceImpl"
 		  p:bookDAO-ref="bookDAO"
+		  p:rentDAO-ref="rentDAO"
 		  />
 		  
 	<bean id="rentService"

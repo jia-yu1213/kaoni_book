@@ -35,6 +35,7 @@ public interface RentDAO {
 	
 	void updateBookStatus(String book_no) throws SQLException;
 	
+	void updateRealRentStatus(RentVO rent) throws SQLException;
 	
 	
 	// 책 예약 상태 업데이트
@@ -51,4 +52,6 @@ public interface RentDAO {
 	
 	int selectResverationCount(SearchCriteria cri, String id) throws SQLException;
 	
+	//status0인 예약
+	List<ReservationVO> selectReservationStatus0()throws SQLException;
 }

@@ -41,6 +41,7 @@ import kr.or.ddit.command.BookRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
 import kr.or.ddit.dto.RentVO;
+import kr.or.ddit.dto.ReservationVO;
 import kr.or.ddit.service.BookService;
 import kr.or.ddit.service.RentService;
 import kr.or.ddit.util.MakeFileName;
@@ -61,11 +62,12 @@ public class BookController {
 	}
 	
 	@RequestMapping("/list")
-	public void list(SearchCriteria cri, Model model)throws Exception{
+	public void list(SearchCriteria cri, Model model,HttpSession session)throws Exception{
 		List<BookVO> cateList =  bookService.selectCateList();
-	
+//		List<ReservationVO> resList = rentService.getResStatus0List();
+//		model.addAttribute("resList",resList);
 		model.addAttribute("cateList",cateList);
-		Map<String,Object> dataMap = bookService.getBookList(cri);		
+		Map<String,Object> dataMap = bookService.getBookList(session,cri);		
 		model.addAllAttributes(dataMap);
 	}
 	@RequestMapping("/returnBookMaster")
@@ -340,6 +342,10 @@ public class BookController {
 		book.setBook_status(0);
 		bookService.modifyStatus(book);
 		
+		RentVO rent = rentService.getRent(rent_no);
+		rent.setRent_status(2);
+		rentService.updateRealRentStatus(rent);
+		
 		return url;
 	}
 	
@@ -351,7 +357,9 @@ public class BookController {
 		book.setBook_no(book_no);
 		book.setBook_status(5);
 		bookService.modifyStatus(book);
-		
+		RentVO rent = rentService.getRent(rent_no);
+		rent.setRent_status(1);
+		rentService.updateRealRentStatus(rent);
 		return url;
 	}
 	

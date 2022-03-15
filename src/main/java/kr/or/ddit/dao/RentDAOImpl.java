@@ -111,8 +111,19 @@ public class RentDAOImpl implements RentDAO {
 		dataMap.put("id", id);
 		dataMap.put("cri", cri);
 		int count = session.selectOne("Rent-Mapper.selectResverationCount", dataMap); 
-		System.out.println("/////////////////////////////////////////////////////////////"+id);
+	
 		return count;
+	}
+
+	@Override
+	public List<ReservationVO> selectReservationStatus0() throws SQLException {
+		List<ReservationVO> resList = session.selectList("Rent-Mapper.selectReservationStatus0");
+		return resList;
+	}
+
+	@Override
+	public void updateRealRentStatus(RentVO rent) throws SQLException {
+		session.update("Rent-Mapper.updateRentStatus",rent);
 	}
 	
 }

@@ -125,4 +125,11 @@ public class RentServiceImpl implements RentService {
 		
 		return dataMap;
 	}
+
+	@Override
+	public void updateRealRentStatus(RentVO rent) throws SQLException {
+		rentDAO.updateRealRentStatus(rent);
+	}
+
+
 }

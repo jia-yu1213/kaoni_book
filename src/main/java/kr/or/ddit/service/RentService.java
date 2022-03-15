@@ -33,6 +33,8 @@ public interface RentService {
 	//예약 내역리스트
 	Map<String, Object> getResList(SearchCriteria crt, String id) throws SQLException;
 	
+	//rentstatus업데이트
+	void updateRealRentStatus(RentVO rent) throws SQLException;
 }
 
 
