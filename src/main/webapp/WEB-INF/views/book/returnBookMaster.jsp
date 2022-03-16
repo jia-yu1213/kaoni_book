@@ -72,9 +72,7 @@
 					</c:forEach>
 				</table>				
 			</div>
-			<div class="card-footer">
-				<%@ include file="/WEB-INF/views/common/pagination.jsp" %>
-			</div>
+
     </section>
     <!-- /.content -->
   </div>

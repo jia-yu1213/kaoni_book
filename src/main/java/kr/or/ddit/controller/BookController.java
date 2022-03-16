@@ -179,10 +179,13 @@ public class BookController {
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(String book_no,int rent_able, ModelAndView mnv,HttpSession session) throws SQLException{
+	public ModelAndView detail(String book_no,Integer rent_able, ModelAndView mnv,HttpSession session) throws SQLException{
 			String url = "book/detail";
 			BookVO book = bookService.getBook(session,book_no);
-			book.setRent_able(rent_able);
+			if (rent_able != null) {
+				book.setRent_able(rent_able);
+				
+			}
 			mnv.addObject("book",book);
 			mnv.setViewName(url);
 			return mnv;
@@ -310,11 +313,11 @@ public class BookController {
         System.out.println(fileName + " written successfully");
     }
 	
-	@ResponseBody
+	
 	@RequestMapping(value="/excelUpload")
-	public ModelAndView excelUpload(MultipartFile file, MultipartHttpServletRequest request)throws SQLException, IllegalStateException, IOException{
+	public String excelUpload(MultipartFile file, MultipartHttpServletRequest request)throws SQLException, IllegalStateException, IOException{
 		
-		ModelAndView view = new ModelAndView();
+		String url = "redirect:/book/list";
 		
 		MultipartFile excelFile = request.getFile("excelFile");
 		
@@ -325,8 +328,8 @@ public class BookController {
 		bookService.excelUpload(destFile);
 		destFile.delete();
 		
-		view.setViewName("book/list");
-		return view;
+		
+		return url;
 	}
 	
 	

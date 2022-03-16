@@ -87,7 +87,7 @@ label span {
 						<c:when test="${loginUser eq null || loginUser.authority eq 1}">
 						</c:when>
 						<c:when test="${loginUser.authority eq 0}">
-							<button type="button" class="btn btn-secondary" style="height: 40px;float:left" id="registBtn" onclick="OpenWindow('returnBookMaster.do','도서반납',900,700);">
+							<button type="button" class="btn btn-secondary" style="height: 40px;float:left" id="registBtn" onclick="OpenWindow('returnBookMaster.do','도서반납',900,500);">
 								반납관리
 							</button>
 							<button type="button" class="btn btn-secondary" style="height: 40px;float:left; margin-left : 10px" id="registBtn" onclick="OpenWindow('registForm.do','도서등록',900,700);">

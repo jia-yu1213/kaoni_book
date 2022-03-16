@@ -107,31 +107,6 @@ public class BookServiceImpl implements BookService {
 	public BookVO getBook(HttpSession session, String book_no) throws SQLException {
 		BookVO book = bookDAO.selectBookByBookNo(book_no);
 		
-//		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
-//		MemberVO member = (MemberVO) session.getAttribute("loginUser");
-		
-//		if (book.getBook_status()==0) {
-//			if (book.getRes_status()==0) {
-//				book.setRent_able(0);
-//			}else if (book.getRes_status()==1) {
-//				for(ReservationVO res : resList) {
-//					if (res.getBook_no().equals(book.getBook_no())) {
-//						if (member==null|| !res.getId().equals(member.getId())) {
-//							book.setRent_able(2);
-//						}else if (res.getId().equals(member.getId())) {
-//							book.setRent_able(0);
-//						}
-//					}
-//				}
-//			}
-//		}else if (book.getBook_status()==1) {
-//			if (book.getRes_status()==0) {
-//				book.setRent_able(1);
-//			}else if (book.getRes_status()==1) {
-//				book.setRent_able(2);
-//			}
-//		}
-		
 		return book;
 	}
 

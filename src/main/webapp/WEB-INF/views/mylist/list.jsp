@@ -16,11 +16,11 @@
 		<section class="content-header">
 		<div class="container-fluid">
 			<div class="row md-2">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<h1>대여/예약 목록</h1>
 
 				</div>
-				<div class="col-sm-8" style="margin-bottom : 0px">
+				<div class="col-sm-7" style="margin-bottom : 0px">
 				</div>
 				<div class="col-sm-2">
 					<ol class="breadcrumb float-sm-right">

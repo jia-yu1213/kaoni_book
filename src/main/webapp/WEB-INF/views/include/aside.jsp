@@ -17,9 +17,9 @@
       
 		<c:choose>
 			<c:when test="${loginUser eq null }">
-       			<div class="info">
-          			<div class="row">
-						<button onclick="location.href='<%=request.getContextPath() %>/common/loginForm.do';" class="btn btn-primary col-xs-3 " type="button" >LOGIN</button>
+       			<div >
+          			<div class="row"style="margin :auto">
+						<button onclick="location.href='<%=request.getContextPath() %>/common/loginForm.do';" class="btn btn-primary col-xs-3 " style="margin :auto"type="button" >LOGIN</button>
 				    </div>
 		       	</div>
 			</c:when>

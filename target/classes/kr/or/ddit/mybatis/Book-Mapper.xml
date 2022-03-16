@@ -85,7 +85,7 @@
 	
 	<select id="selectCateList" resultType="book">
 	/* selectCateList 카테고리 목록 가져오기*/
-	 	select * from category order by cate_no
+	 	select * from category order by lpad(cate_no,3,'0')
 	</select>
 	
 	

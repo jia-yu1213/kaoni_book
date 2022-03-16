@@ -27,14 +27,17 @@ public class BookVO {
 	private String rent_no;
 	
 
-	private int rent_able; //0대여가능 1예약가능 2예약불가(대여불가)  
+	private Integer rent_able; //0대여가능 1예약가능 2예약불가(대여불가)  
 	
-	public int getRent_able() {
+
+
+	public Integer getRent_able() {
 		return rent_able;
 	}
 
-	public void setRent_able(int rent_able) {
-		this.rent_able = rent_able;}
+	public void setRent_able(Integer rent_able) {
+		this.rent_able = rent_able;
+	}
 
 	private String check_no;
 	private int check_status;
