@@ -57,7 +57,7 @@ public class MyListController {
 	public String list(RedirectAttributes rttr,HttpSession session,SearchCriteria cri, Model model)throws Exception{
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
 		if (member==null) {
-			String url="redirect:/book/list.do";
+			String url="redirect:/mylist/list.do";
 			rttr.addFlashAttribute("from","login");
 			return url;
 		}else {

@@ -9,7 +9,6 @@
 
 <title>도서목록</title>
 
-						<div class="card-body">
 							<table class="table table-bordered text-center" >					
 								<tr style="font-size:0.95em;">
 									<th style="width:6%;">번 호</th>
@@ -50,7 +49,6 @@
 								</c:forEach>
 							</table>		
 							
-						</div>
 		
 
 	
