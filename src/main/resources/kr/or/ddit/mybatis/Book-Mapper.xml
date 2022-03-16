@@ -150,7 +150,7 @@
 	                c.real_end, (select name from member where id=c.id) name, c.rent_no
 				from book b, book_rent c
 				where b.book_no is not null
-				and b.book_status = 3
+				and c.rent_status = 3
 	            and b.book_no=c.book_no
 	            and c.real_end is null
 				order by b.book_no desc
@@ -163,7 +163,7 @@
 			count(*) 
 			from book b, book_rent c
 				where b.book_no is not null
-				and b.book_status = 3
+				and c.rent_status = 3
 	            and b.book_no=c.book_no
 	             and c.real_end is null
 				order by b.book_no desc

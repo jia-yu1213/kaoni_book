@@ -104,23 +104,17 @@
 										</td>		
 
 										<td style='vertical-align:middle' onclick="event.stopPropagation()">
-											
-	
-											<c:if test="${real_end eq null }">
-												<c:if test="${rent.book_status ne 3 }">
-											
+											<c:choose>
+												<c:when test="${rent.rent_status eq 0 ||rent.rent_status eq 1}">
 													<button type="button" class="btn-sm btn-block btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
-												</c:if>
-												<c:if test="${rent.book_status eq 3 }">
+												</c:when>
+												<c:when test="${rent.rent_status eq 2 }">
+													<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
+												</c:when>
+												<c:when test="${rent.rent_status eq 3 }">
 													<button type="button" class="btn-sm btn-block btn-secondary">반납대기</button>
-											
-												</c:if>
-											</c:if>
-											<c:if test="${real_end ne null }">
-												<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
-											
-											</c:if>
-										
+												</c:when>
+											</c:choose>
 										</td>		
 									</tr>
 								</c:forEach>
