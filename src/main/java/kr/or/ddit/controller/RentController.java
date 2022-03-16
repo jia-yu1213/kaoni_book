@@ -103,6 +103,22 @@ public class RentController {
 		return entity;
 	}  
 	
+	@RequestMapping("/delSuccesRes")
+	public ResponseEntity<ReservationVO> delSuccesRes(ResverationCommand cmd, HttpSession session) throws Exception{
+		
+		ResponseEntity<ReservationVO> entity = null;
+		
+		ReservationVO res = cmd.toSuccessResRemove();
+		try {
+			rentService.removeSuccesRes(res);
+			entity = new ResponseEntity<ReservationVO>(HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<ReservationVO>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}  
+	
 	
 	@Resource(name = "bookPicturePath")
 	private String picturePath;

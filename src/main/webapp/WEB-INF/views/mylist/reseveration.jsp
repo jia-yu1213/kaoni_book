@@ -25,21 +25,22 @@
 									</tr>
 								</c:if>				
 								<c:forEach items="${resList }" var="res">
-									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?rent_no=${rent.rent_no }','상세보기',802,730);">
+									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?book_no=${res.book_no }','상세보기',802,730);">
 										<td style='vertical-align:middle'>${res.rownum }</td>
 										<td id="boardTitle" style="vertical-align:middle; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">${res.title }</td>			
 										<td style='vertical-align:middle'>${res.writer }</td>
-										<td style='vertical-align:middle'>
+										<td style='vertical-align:middle' style="width:50px;">
 											<fmt:formatDate value="${res.res_date }" pattern="yyyy-MM-dd" var="res_date" />
 											${res_date }
 										</td>		
-										<td style='vertical-align:middle' onclick="event.stopPropagation()">
+										<td style='padding-top: 12px;' onclick="event.stopPropagation()">
 											<c:choose>
 												<c:when test="${res.book_status eq '0' }">
-													<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">대여하기</button>
+													<button type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${res.book_no }'), removeSuccessRes('${res.book_no }','${loginUser.id }');" style="width:76px;; display: inline-block;">대여</button>
+													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${res.book_no }','${loginUser.id }');" style="width:76px;; display: inline-block;">취소</button>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${res.book_no }','${loginUser.id }');">에약취소</button>
+													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${res.book_no }','${loginUser.id }');" style="padding-top:12px;">에약취소</button>
 												</c:otherwise>
 											</c:choose>
 										
@@ -58,15 +59,50 @@
 		
 	}
 	
-	
-	function removeRes(book_no, id){
+	function rentBook(book_no){
+		var login = $('#loginUser').val();
 		
-		var res_status = '0';
+		
+			$.ajax({
+				url:"<%=request.getContextPath()%>/rent/checkRent",
+				type:"post",
+				success : function(dataMap){
+					
+					var status = dataMap.status;
+					var data = dataMap.data;
+				
+					var answer;
+					if (status=="overdueRent") {
+						answer = confirm(data+"권이 연체중입니다. \n연체중에는 이용이 불가합니다. \n반납하시겠습니까?");
+						if(answer){
+							location = "<%=request.getContextPath()%>/mylist/list.do";
+						}
+					}else if (status=="overdueDate") {
+						 alert("연체 기간입니다. \n"+data.split(" ")[0]+"까지 이용이 불가합니다.");
+					}else if (status=="nowRent") {
+						//대여가능
+						answer = confirm(data+"권이 대여중입니다. \n대여하시겠습니까?");
+						if(answer){
+						
+							location = "<%=request.getContextPath()%>/rent/registRent.do?book_no="+book_no;
+						}
+					}
+					window.location.reload();
+				},
+				error : function(){
+					alert("대여ajax 에러");		
+				}
+			});		
+		
+	}
+	
+	
+	function removeSuccessRes(book_no, id){
+		
 		$.ajax({
-			url:"<%=request.getContextPath()%>/rent/delRes",
-			data : {"book_no":book_no, "id":id, "res_status": res_status},
+			url:"<%=request.getContextPath()%>/rent/delSuccesRes",
+			data : {"book_no":book_no, "id":id},
 			success: function(data){
-				alert("예약이 취소되었습니다.");
 				window.location.reload();
 			},
 			error : function(error){
@@ -75,5 +111,37 @@
 			}
 			});
 	}
-</script>    
+
+function removeRes(book_no, id){
+	
+	
+	var res_status = '0'; 
+	
+	
+	if (confirm("예약을 취소하시겠습니까?") == true){
+
+		$.ajax({
+			url:"<%=request.getContextPath()%>/rent/delRes",
+			data : {"book_no":book_no, "id":id, "res_status": res_status},
+			success: function(data){
+					alert("예약이 취소되었습니다.")
+					window.location.reload();
+				
+			},
+			error : function(error){
+				console.log(error);
+				alert("에러 발생");
+			}
+		});
+		
+	}else{
+		window.location.reload();
+	}
+	
+}
+
+
+	
+</script>  
+
 </body>

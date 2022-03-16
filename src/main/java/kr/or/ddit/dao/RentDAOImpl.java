@@ -33,6 +33,13 @@ public class RentDAOImpl implements RentDAO {
 		return cnt;
 	}
 	
+	//예약 내역 count
+		@Override
+		public int selectResverationCount(String mem_id) throws SQLException {
+			int countRes = session.selectOne(namespace + "selectResverationCount", mem_id);
+			return countRes;
+		}
+		
 	@Override
 	public String selectOverdueDate(String mem_id) throws SQLException {
 		String date = session.selectOne("Rent-Mapper.selectOverdueDate",mem_id);
@@ -130,6 +137,7 @@ public class RentDAOImpl implements RentDAO {
 	public void updateReturnCancleBook(RentVO rent) throws SQLException {
 		session.update("Rent-Mapper.updateReturnCancleBook",rent);
 	}
+
 	
 }
 

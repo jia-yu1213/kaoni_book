@@ -35,6 +35,8 @@ public class RentServiceImpl implements RentService {
 		
 		int nowRent = rentDAO.selectNowRentCount(mem_id);
 		int overdueRent = rentDAO.selectOverdueRentCount(mem_id);
+		int countRes = rentDAO.selectResverationCount(mem_id);
+		
 		String overdueDate = rentDAO.selectOverdueDate(mem_id);
 		if (overdueRent!=0) {
 			//연체중이 책이 있는 경우
@@ -50,9 +52,24 @@ public class RentServiceImpl implements RentService {
 			dataMap.put("status", "nowRent");
 			dataMap.put("data", nowRent);
 		}
+		
+			dataMap.put("countRes", countRes);
+			
 		return dataMap;
 	}
 
+	
+	//예약 내역 count
+	@Override
+	public Map<String, Object> getResverationCount(String id) throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		int countRes = rentDAO.selectResverationCount(id);
+		dataMap.put("countRes", countRes);
+		
+		return dataMap;
+	}
+	
 	@Override
 	public void registRent(RentVO rent) throws SQLException {
 		//대여이력 업데이트
@@ -79,12 +96,18 @@ public class RentServiceImpl implements RentService {
 		rentDAO.insertResveration(resVO);
 		
 	}
-
+	
+	@Override
+	public void removeSuccesRes(ReservationVO resVO) throws SQLException {
+		rentDAO.deleteResveration(resVO);
+	}
+	
 	@Override
 	public void removeReservation(ReservationVO resVO) throws SQLException {
 		rentDAO.deleteResveration(resVO);
 		rentDAO.updateBookResStatus(resVO);
 	}
+	
 
 
 	@Override
@@ -93,12 +116,6 @@ public class RentServiceImpl implements RentService {
 		return rent;
 	}
  
-
-//	@Override
-//	public RentVO getRent(String rent_no) throws SQLException {
-//		RentVO rent = rentDAO.selectRentDetail(rent_no);
-//		return rent;
-//	}
 
 	@Override
 	public void modifyRentStatus(String rent_no) throws SQLException {
@@ -137,6 +154,9 @@ public class RentServiceImpl implements RentService {
 		rentDAO.updateReturnCancleBook(rent);
 		
 	}
+
+
+
 
 
 }
