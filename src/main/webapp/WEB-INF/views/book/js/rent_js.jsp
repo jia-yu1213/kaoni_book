@@ -61,7 +61,7 @@ function resBook(book_no, id){
 				
 				var status = dataMap.status;
 				var data = dataMap.data;
-				var book_status = '2';
+				var res_status = '1';
 			
 				var answer;
 			    if (status=="overdueDate") {
@@ -71,8 +71,8 @@ function resBook(book_no, id){
 					answer = confirm(data+"권이 예약중입니다. \n예약하시겠습니까?");
 					if(answer){
 					
-						location = "<%=request.getContextPath()%>/rent/reservation.do?book_no="+book_no+"&book_status="+book_status +"&id="+id;
-						console.log(book_status);
+						location = "<%=request.getContextPath()%>/rent/reservation.do?book_no="+book_no+"&res_status="+res_status +"&id="+id;
+						console.log(res_status);
 						console.log(book_no);
 						console.log(id);
 					}

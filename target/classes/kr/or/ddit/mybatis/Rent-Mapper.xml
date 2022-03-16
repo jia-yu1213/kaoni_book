@@ -57,13 +57,13 @@
 	
 	<update id="updateBookResStatus" parameterType="res">
 		update book
-		   set book_status = #{book_status}
+		   set res_status = #{res_status}
 		 where book_no = #{book_no}
 	</update>
 	
 	<update id="insertResveration">
 		insert into book_resveration 
-		     	values(res_seq.NEXTVAL, sysdate, #{book_no}, #{id}, '0')   
+		     	values(res_seq.NEXTVAL, sysdate, #{book_no}, #{id})   
 	</update>
 	
 	<update id="deleteResveration">

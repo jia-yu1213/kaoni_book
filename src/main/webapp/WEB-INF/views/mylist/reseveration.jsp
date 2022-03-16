@@ -63,10 +63,10 @@
 	
 	function removeRes(book_no, id){
 		
-		var book_status = '1';
+		var res_status = '0';
 		$.ajax({
 			url:"<%=request.getContextPath()%>/rent/delRes",
-			data : {"book_no":book_no, "id":id, "book_status": book_status},
+			data : {"book_no":book_no, "id":id, "res_status": res_status},
 			success: function(data){
 				alert("예약이 취소되었습니다.");
 				window.location.reload();
