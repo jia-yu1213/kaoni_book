@@ -78,11 +78,17 @@
   </div>
 <script>
 function return_go(book_no,rent_no){
-	location = "returnAccept.do?book_no="+book_no+"&rent_no="+rent_no;
+	var result = confirm("반납을 수락하시겠습니까?");
+	if (result) {
+		location = "returnAccept.do?book_no="+book_no+"&rent_no="+rent_no;
+	}
 	
 }
 function cancle_go(book_no,rent_no){
-	location = "returnCancle.do?book_no="+book_no+"&rent_no="+rent_no;
+	var result = confirm("반납을 반려하시겠습니까?");
+	if (result) {
+		location = "returnCancle.do?book_no="+book_no+"&rent_no="+rent_no;
+	}
 	
 }
 
