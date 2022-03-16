@@ -50,21 +50,6 @@ ul.tabs li.current{
 </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
-<!--    	 <section class="content-header"  style="background-color: ghostwhite;"> -->
-<!-- 	  	<div class="container-fluid"> -->
-<!-- 	  		<div class="row md-2"> -->
-<!-- 	  			<div class="col-sm-6"> -->
-	  							
-<!-- 	  			</div> -->
-<!-- 	  			<div class="col-sm-6"> -->
-<!-- 	  				<ol class="breadcrumb float-sm-right"> -->
-			              
-<!-- 	    	  </ol> -->
-<!-- 	  			</div> -->
-<!-- 	  		</div> -->
-<!-- 	  	</div> -->
-<!--   	</section> -->
-    <!-- Main content -->
     <section class="content container-fluid" style="background-color: ghostwhite;">       
 		<div class="row justify-content-center" > 
 			<div class="col-md-9">
@@ -78,9 +63,6 @@ ul.tabs li.current{
 								<button type="button" class="btn btn-secondary"  id="deleteBtn" onclick="delete_go();">삭 제</button>
 							</div> 
 			        	</div>
-	<!-- 					<div style="text-align:center"> -->
-	<!-- 						<h1></h1> -->
-	<!-- 					</div> -->
 			        </div>
 				</c:if>
 
@@ -192,94 +174,61 @@ ul.tabs li.current{
  <jsp:include page="./js/rent_js.jsp" />
 
 <script>
-<c:if test="${from eq 'modify'}" >
-alert("정상적으로 수정되었습니다.");	
-window.opener.location.reload();
-</c:if>
-<c:if test="${from eq 'remove'}" >
-alert("삭제되었습니다.");
-window.opener.location.reload();
-window.close();
-</c:if>
-function BookPictureThumb(targetObj, fileName,contextPath){ //(대상, 이미지파일명) 
+	<c:if test="${from eq 'modify'}" >
+		alert("정상적으로 수정되었습니다.");	
+		window.opener.location.reload();
+	</c:if>
+	<c:if test="${from eq 'remove'}" >
+		alert("삭제되었습니다.");
+		window.opener.location.reload();
+		window.close();
+	</c:if>
+	
+function BookPictureThumb(targetObj, fileName,contextPath) { //(대상, 이미지파일명) 
 	
 	targetObj.style.backgroundImage="url('"+contextPath+"/book/getPicture.do?picture="+fileName+"')";
 	targetObj.style.backgroundPosition="center";
 	targetObj.style.backgroundRepeat="no-repeat";
 	targetObj.style.backgroundSize="cover";
 }
+
 window.onload=function(){
-BookPictureThumb(document.querySelector('[data-id="${book.book_no}"]'),'${book.photo}','<%=request.getContextPath()%>');
-$('ul.tabs li').click(function(){
-	var tab_id = $(this).attr('data-tab');
+		BookPictureThumb(document.querySelector('[data-id="${book.book_no}"]'),'${book.photo}','<%=request.getContextPath()%>');
+		
+		$('ul.tabs li').click(function(){
+							var tab_id = $(this).attr('data-tab');
 
-	$('ul.tabs li').removeClass('current');
-	$('.tab-content').removeClass('current');
-
-	$(this).addClass('current');
-	$("#"+tab_id).addClass('current');
-})	
-$('[data-toggle="tooltip"]').tooltip();
+							$('ul.tabs li').removeClass('current');
+							$('.tab-content').removeClass('current');
+						
+							$(this).addClass('current');
+							$("#"+tab_id).addClass('current');
+						})	
+					$('[data-toggle="tooltip"]').tooltip();
 
 }
+
 function delete_go(){
-var formObj = $("form[role='form']");
-//alert("click remove btn");
-var answer = confirm("삭제 후에는 복원이 어렵습니다. \n정말 삭제하시겠습니까?");
-if(answer){		
-	formObj.attr("action", "<%=request.getContextPath()%>/book/remove.do");
-	formObj.attr("method", "post");
-	formObj.submit();
+						var formObj = $("form[role='form']");
+						//alert("click remove btn");
+						var answer = confirm("삭제 후에는 복원이 어렵습니다. \n정말 삭제하시겠습니까?");
+						if(answer){		
+									formObj.attr("action", "<%=request.getContextPath()%>/book/remove.do");
+									formObj.attr("method", "post");
+									formObj.submit();
+			}
 }
-}
+
 function modify_go(){
-var formObj = $("form[role='form']");
-//alert("click modify btn");
-formObj.attr({
-	'action':'<%=request.getContextPath()%>/book/modifyForm.do',
-	'method':'post'
-});
-formObj.submit();
-}
-
-
-// function returnBookWait(rent_no){
 	
-<%-- 	location.href="<%=request.getContextPath()%>/mylist/returnBookWait?rent_no="+rent_no; --%>
-	
-// }
-// function returnBook(book_no){
-// 		$.ajax({
-<%-- 			url:"<%=request.getContextPath()%>/rent/modify", --%>
-// 			type:"post",
-// 			success : function(){
-				
-// 				var answer;
-// 				if (status=="overdueRent") {
-// 					answer = confirm(data+"권이 연체중입니다. \n연체중에는 이용이 불가합니다. \n반납하시겠습니까?");
-// 					if(answer){
-<%-- 						location = "<%=request.getContextPath()%>/mylist/list.do"; --%>
-// 					}
-// 				}else if (status=="overdueDate") {
-// 					 alert("연체 기간입니다. \n"+data.split(" ")[0]+"까지 이용이 불가합니다.");
-// 				}else if (status=="nowRent") {
-// 					//대여가능
-// 					answer = confirm(data+"권이 대여중입니다. \n대여하시겠습니까?");
-// 					if(answer){
-					
-<%-- 						location = "<%=request.getContextPath()%>/rent/registRent.do?rent_no="+rent_no; --%>
-// 					}
-// 				}
-					
-// 			},
-// 			error : function(){
-// 				alert("반납ajax 에러");		
-// 			}
-// 		});		
-// 	}
-	
-
-
+	var formObj = $("form[role='form']");
+			//alert("click modify btn");
+			formObj.attr({
+				'action':'<%=request.getContextPath()%>/book/modifyForm.do',
+				'method':'post'
+			});
+			formObj.submit();
+		}
 
 </script>
  

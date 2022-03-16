@@ -17,6 +17,8 @@ public interface RentDAO {
 	
 	//현재 연체중인 책의 갯수
 	int selectOverdueRentCount(String mem_id) throws SQLException;
+	//예약 내역 count
+	int selectResverationCount(String mem_id)throws SQLException;
 	
 	//연체 기간
 	String selectOverdueDate(String mem_id) throws SQLException;
@@ -56,4 +58,6 @@ public interface RentDAO {
 	
 	//status0인 예약
 	List<ReservationVO> selectReservationStatus0()throws SQLException;
+	
+	
 }

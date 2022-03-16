@@ -56,6 +56,15 @@ public class ResverationCommand {
 		return res;
 	}
 	
+	public ReservationVO toSuccessResRemove() throws Exception{
+		
+		ReservationVO res = new ReservationVO();
+		
+		res.setBook_no(book_no);
+		res.setId(id);
+		
+		return res;
+	}
 	
 	
 	public Date getRes_date() {

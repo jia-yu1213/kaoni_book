@@ -12,6 +12,9 @@ public interface RentService {
 	
 	Map<String, Object> checkRent(String mem_id) throws SQLException;
 	
+	//예약 내역 count
+	Map<String, Object> getResverationCount(String mem_id) throws SQLException;
+	
 	// 대여이력
 	void registRent(RentVO rent)throws SQLException;
 	
@@ -26,7 +29,10 @@ public interface RentService {
 	
 	void removeReservation(ReservationVO resVO) throws SQLException;
 	
-
+	//대여 성공시 예약내역 삭제
+	void removeSuccesRes(ReservationVO resVO) throws SQLException;
+	
+	
 	// 회원 책 정보 상세조회
 	RentVO getRent(String rent_no) throws SQLException;
 	
@@ -38,6 +44,7 @@ public interface RentService {
 	
 	//rentstatus업데이트
 	void updateRealRentStatus(RentVO rent) throws SQLException;
+	
 }
 
 

@@ -61,21 +61,28 @@ function resBook(book_no, id){
 				
 				var status = dataMap.status;
 				var data = dataMap.data;
-
-			
+				var countRes = dataMap.countRes;
+				console.log("왜안나와 이시키 : " + countRes);
+				
 				var answer;
 			    if (status=="overdueDate") {
 					 alert("연체 기간입니다. \n"+data.split(" ")[0]+"까지 이용이 불가합니다.");
-				}else if (status=="nowRent") {
+				}else if (status=="nowRent" && countRes!=0) {
 					//대여가능
-					answer = confirm(data+"권이 예약중입니다. \n예약하시겠습니까?");
+					answer = confirm(countRes + "권이 예약중입니다. \n예약하시겠습니까?");
 					if(answer){
 					
 
 						location = "<%=request.getContextPath()%>/rent/reservation.do?book_no="+book_no +"&id="+id;
+						alert("예약이 완료되었습니다.");
 						console.log(book_no);
 						console.log(id);
 					}
+				}else{
+						location = "<%=request.getContextPath()%>/rent/reservation.do?book_no="+book_no +"&id="+id;
+						alert("예약이 완료되었습니다.");
+						console.log(book_no);
+						console.log(id);
 				}
 					
 			},

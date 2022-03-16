@@ -40,6 +40,7 @@ import kr.or.ddit.command.BookModifyCommand;
 import kr.or.ddit.command.BookRegistCommand;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.BookVO;
+import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.dto.RentVO;
 import kr.or.ddit.dto.ReservationVO;
 import kr.or.ddit.service.BookService;
@@ -61,6 +62,23 @@ public class BookController {
 		return "book/list";
 	}
 	
+//	@RequestMapping("/list")
+//	public ModelAndView list(SearchCriteria cri, ModelAndView mnv,HttpSession session)throws Exception{
+//		List<BookVO> cateList =  bookService.selectCateList();
+////		List<ReservationVO> resList = rentService.getResStatus0List();
+////		model.addAttribute("resList",resList);
+//		mnv.addObject("cateList",cateList);
+//		Map<String,Object> dataMap = bookService.getBookList(session,cri);
+//		
+//		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+//		int countRes = rentService.getResverationCount(loginUser.getId());
+//		
+//		mnv.addObject("dataMap", dataMap);
+//		mnv.addObject("countRes", countRes);
+//		
+//		return mnv;
+//	}
+	
 	@RequestMapping("/list")
 	public void list(SearchCriteria cri, Model model,HttpSession session)throws Exception{
 		List<BookVO> cateList =  bookService.selectCateList();
@@ -70,6 +88,7 @@ public class BookController {
 		Map<String,Object> dataMap = bookService.getBookList(session,cri);		
 		model.addAllAttributes(dataMap);
 	}
+	
 	@RequestMapping("/returnBookMaster")
 	public void returnList(SearchCriteria cri, Model model)throws Exception{
 	

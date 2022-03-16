@@ -21,7 +21,7 @@
 		        	<div style="display: inline-block;">
 <!-- 						<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button> -->
 <!-- 						&nbsp;&nbsp;&nbsp;&nbsp; -->
-						<button type="button" class="btn btn-warning" id="cancelBtn" onclick="CloseWindow();">취 소</button>
+						<button type="button" class="btn btn-warning" id="cancelBtn" onclick="CloseWindow();">닫기</button>
 					</div> 
 		        </div>
 				<div style="text-align:center">
