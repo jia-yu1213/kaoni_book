@@ -146,7 +146,7 @@ ul.tabs li.current{
 					<div class="row" style=" margin : auto;">
 						<c:choose>
 							<c:when test="${rent.rent_status eq 0 ||rent.rent_status eq 1}">
-								<button type="button" class="btn btn-primary" style="margin : auto;" onclick="location.href='<%=request.getContextPath()%>/mylist/returnBookWait2?rent_no=${rent.rent_no}'">반납하기</button>
+								<button type="button" class="btn btn-primary" style="margin : auto;" onclick="returnBookWait4(${rent.rent_no })">반납하기</button>
 							</c:when>
 							<c:when test="${rent.rent_status eq 2 }">
 								<button type="button" class="btn btn-secondary"style="margin : auto;">반납완료</button>
@@ -229,6 +229,16 @@ function modify_go(){
 			});
 			formObj.submit();
 		}
+
+
+function returnBookWait4(rent_no){
+	var result = confirm("반납 하시겠습니까?");
+	if (result) {
+		location.href='<%=request.getContextPath()%>/mylist/returnBookWait2?rent_no='+rent_no
+	}
+	
+}
+
 
 </script>
  

@@ -10,7 +10,15 @@
 <title>도서목록</title>
 
 <body>
-
+<script>
+function returnBookWait3(rent_no){
+	var result = confirm("반납 하시겠습니까?");
+	if (result) {
+		location.href="returnBookWait?rent_no="+rent_no;
+	}
+	
+}
+</script>
 <input type="hidden" id="loginUser" value="${loginUser}">
 		
 		<section class="content-header">
@@ -117,7 +125,7 @@
 													<td style='vertical-align:middle' onclick="event.stopPropagation()">
 														<c:choose>
 															<c:when test="${rent.rent_status eq 0 ||rent.rent_status eq 1}">
-																<button type="button" class="btn-sm btn-block btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
+																<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBookWait3('${rent.rent_no}')">반납하기</button>
 															</c:when>
 															<c:when test="${rent.rent_status eq 2 }">
 																<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
@@ -148,11 +156,5 @@
 		</div>
 	</section>	
 
-<script>
-function returnBookWait(rent_no){
-	
-	location.href="returnBookWait?rent_no="+rent_no;
-	
-}
-</script>
+
 </body>
