@@ -144,13 +144,14 @@ var checkedPwd=""
 	       return;
 	       
 	    }else{
-	       
 	       //아이디는 4~12자의 영문자와 숫자로만 입력
 	       var reqPWD=/^[a-z]{1}[a-zA-Z0-9]{3,12}$/;
 	       if(!reqPWD.test($('input[name="pwd"]').val())){
 	          alert("비밀번호 첫글자는 영소문자이며, \n 4~13자의 영문자와 숫자로만 입력해야합니다");
 	          $('input[name="pwd"]').focus();
 	          return;
+	       }else{
+	    	   alert("사용가능한 비밀번호입니다.");
 	       }
 	       
 	    }
