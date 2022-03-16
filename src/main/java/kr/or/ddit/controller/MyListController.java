@@ -83,12 +83,11 @@ public class MyListController {
 		
 		RentVO rent = rentService.getRent(rent_no);
 		
-		BookVO book = new BookVO();
-		book.setBook_no(rent.getBook_no());
-		book.setBook_status(3);
-		bookService.modifyStatus(book);
+//		BookVO book = new BookVO();
+//		book.setBook_no(rent.getBook_no());
+//		book.setBook_status(3);
+//		bookService.modifyStatus(book);
 		
-
 		rent.setRent_status(3);
 		rentService.updateRealRentStatus(rent);
 

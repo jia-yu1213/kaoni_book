@@ -193,7 +193,7 @@ public class BookController {
 
 		BookVO book = new BookVO();
 		book.setBook_no(book_no);
-		book.setBook_status(4);
+		book.setBook_status(2);
 		bookService.modifyStatus(book);
 		
 		rttr.addAttribute("book_no",book_no);
@@ -353,10 +353,10 @@ public class BookController {
 	public String returnCancle(String book_no,String rent_no) throws Exception{
 		String url = "redirect:/book/returnBookMaster";
 
-		BookVO book = new BookVO();
-		book.setBook_no(book_no);
-		book.setBook_status(5);
-		bookService.modifyStatus(book);
+//		BookVO book = new BookVO();
+//		book.setBook_no(book_no);
+//		book.setBook_status(5);
+//		bookService.modifyStatus(book);
 		RentVO rent = rentService.getRent(rent_no);
 		rent.setRent_status(1);
 		rentService.updateRealRentStatus(rent);

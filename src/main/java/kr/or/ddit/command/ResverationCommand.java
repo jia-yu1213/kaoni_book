@@ -14,7 +14,23 @@ public class ResverationCommand {
 	private String book_no;
 	private String id;
 	private int book_status;
+	private int res_status;
 	
+	public int getRes_status() {
+		return res_status;
+	}
+
+	public void setRes_status(int res_status) {
+		this.res_status = res_status;
+	}
+
+	public HttpSession getSession() {
+		return session;
+	}
+
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
 	HttpSession session;
 
 	public ReservationVO toRegist() throws Exception {

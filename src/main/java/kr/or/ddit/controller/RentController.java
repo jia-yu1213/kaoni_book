@@ -77,11 +77,11 @@ public class RentController {
 		
 		
 		System.out.println("book_no : " + cmd.getBook_no());
-		System.out.println("book_status : " +cmd.getBook_status());
 		
 		System.out.println("id : " + cmd.getId());
 		
 		ReservationVO res = cmd.toRegist();
+		res.setRes_status(1);
 		rentService.modifyBookResStatus(res);
 		
 		return url;
