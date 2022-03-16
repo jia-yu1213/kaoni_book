@@ -161,22 +161,22 @@ ul.tabs li.current{
 					<input type="hidden" id="loginUser" value="${loginUser}" >
 					<div class="row" style="margin : auto;">
 					<input type="hidden" id="loginUser" value="${loginUser}" >
-					<div class="row" style="margin : auto;">
+					<div class="row" style=" margin : auto;">
 						<c:if test="${rent.real_end eq null }">
-							<c:if test="${rent.book_status ne 3 }">
-						
-								<button type="button" style="margin : auto;"class="btn-sm btn-block btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
+							<c:if test="${book.book_status ne 3 }">
+					
+								<button type="button" style="margin : auto;"class="btn btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
 							</c:if>
-							<c:if test="${rent.book_status eq 3 }">
-								<button type="button" style="margin : auto;"class="btn-sm btn-block btn-secondary">반납대기</button>
+							<c:if test="${book.book_status eq 3 }">
+								<button type="button" style="margin : auto;"class="btn btn-secondary">반납대기</button>
 						
 							</c:if>
 						</c:if>
 						<c:if test="${rent.real_end ne null }">
-							<button type="button" style="margin : auto;"class="btn-sm btn-block btn-secondary">반납완료</button>
+							<button type="button" style="margin : auto;"class="btn btn-secondary">반납완료</button>
 						
 						</c:if>
-						<button type="button" class="btn btn-secondary" style="margin : auto;"onclick="window.close()">닫기</button>
+						<button type="button" class="btn btn-secondary" style="margin : auto; margin-left : 30px;"onclick="window.close()">닫기</button>
 					</div>
       					
 					</div>
@@ -230,7 +230,7 @@ var formObj = $("form[role='form']");
 //alert("click remove btn");
 var answer = confirm("삭제 후에는 복원이 어렵습니다. \n정말 삭제하시겠습니까?");
 if(answer){		
-	formObj.attr("action", "remove.do");
+	formObj.attr("action", "<%=request.getContextPath()%>/book/remove.do");
 	formObj.attr("method", "post");
 	formObj.submit();
 }
@@ -239,7 +239,7 @@ function modify_go(){
 var formObj = $("form[role='form']");
 //alert("click modify btn");
 formObj.attr({
-	'action':'modifyForm.do',
+	'action':'<%=request.getContextPath()%>/book/modifyForm.do',
 	'method':'post'
 });
 formObj.submit();
