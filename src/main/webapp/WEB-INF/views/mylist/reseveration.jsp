@@ -40,7 +40,7 @@
 													<button type="button" class="btn-sm btn-block btn-primary" onclick="returnBook('${rent.rent_no }');">대여하기</button>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${rent.book_no }','${loginUser.id }');">에약취소</button>
+													<button type="button" class="btn-sm btn-block btn-secondary" onclick="removeRes('${res.book_no }','${loginUser.id }');">에약취소</button>
 												</c:otherwise>
 											</c:choose>
 										
@@ -62,9 +62,11 @@
 	
 	
 	function removeRes(book_no, id){
+		
+		var book_status = '1';
 		$.ajax({
 			url:"<%=request.getContextPath()%>/rent/delRes",
-			data : {"book_no":book_no, "id":id},
+			data : {"book_no":book_no, "id":id, "book_status": book_status},
 			success: function(data){
 				alert("예약이 취소되었습니다.");
 				window.location.reload();
