@@ -83,7 +83,9 @@
 														<c:choose>
 														
 															<c:when test="${rent.rent_status eq 1 }">
-																반납 반려
+																<span style="color : red">
+																	반납 반려
+																</span>
 															</c:when>
 															<c:when test="${rent.rent_status eq 3 }">
 																반납 대기
