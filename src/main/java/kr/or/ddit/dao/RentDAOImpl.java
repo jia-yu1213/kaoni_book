@@ -125,6 +125,11 @@ public class RentDAOImpl implements RentDAO {
 	public void updateRealRentStatus(RentVO rent) throws SQLException {
 		session.update("Rent-Mapper.updateRentStatus",rent);
 	}
+
+	@Override
+	public void updateReturnCancleBook(RentVO rent) throws SQLException {
+		session.update("Rent-Mapper.updateReturnCancleBook",rent);
+	}
 	
 }
 

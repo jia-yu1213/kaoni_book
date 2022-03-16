@@ -97,7 +97,13 @@
 		rent_status=#{rent_status}		
 		where rent_no=#{rent_no}
 	</update>
-	
+
+	<update id="updateReturnCancleBook" parameterType="rent">
+	/* updateReturnCancleBook 반납 취소 업데이트*/
+		update book_rent set 
+		real_end = null
+		where rent_no=#{rent_no}
+	</update>
 </mapper>
 
 

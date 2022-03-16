@@ -162,21 +162,18 @@ ul.tabs li.current{
 					<div class="row" style="margin : auto;">
 					<input type="hidden" id="loginUser" value="${loginUser}" >
 					<div class="row" style=" margin : auto;">
-						<c:if test="${rent.real_end eq null }">
-							<c:if test="${book.book_status ne 3 }">
-					
-								<button type="button" style="margin : auto;"class="btn btn-primary" onclick="location.href='returnBookWait?rent_no=${rent.rent_no}'">반납하기</button>
-							</c:if>
-							<c:if test="${book.book_status eq 3 }">
-								<button type="button" style="margin : auto;"class="btn btn-secondary">반납대기</button>
-						
-							</c:if>
-						</c:if>
-						<c:if test="${rent.real_end ne null }">
-							<button type="button" style="margin : auto;"class="btn btn-secondary">반납완료</button>
-						
-						</c:if>
-						<button type="button" class="btn btn-secondary" style="margin : auto; margin-left : 30px;"onclick="window.close()">닫기</button>
+						<c:choose>
+							<c:when test="${rent.rent_status eq 0 ||rent.rent_status eq 1}">
+								<button type="button" class="btn btn-primary" style="margin : auto;" onclick="location.href='<%=request.getContextPath()%>/mylist/returnBookWait2?rent_no=${rent.rent_no}'">반납하기</button>
+							</c:when>
+							<c:when test="${rent.rent_status eq 2 }">
+								<button type="button" class="btn btn-secondary"style="margin : auto;">반납완료</button>
+							</c:when>
+							<c:when test="${rent.rent_status eq 3 }">
+								<button type="button" class="btn btn-secondary"style="margin : auto;">반납대기</button>
+							</c:when>
+						</c:choose>
+						<button type="button" class="btn btn-secondary" style="margin : auto; margin-left : 30px;"onclick="CloseWindow();">닫기</button>
 					</div>
       					
 					</div>
@@ -246,11 +243,11 @@ formObj.submit();
 }
 
 
-function returnBookWait(rent_no){
+// function returnBookWait(rent_no){
 	
-	location.href="returnBookWait?rent_no="+rent_no;
+<%-- 	location.href="<%=request.getContextPath()%>/mylist/returnBookWait?rent_no="+rent_no; --%>
 	
-}
+// }
 // function returnBook(book_no){
 // 		$.ajax({
 <%-- 			url:"<%=request.getContextPath()%>/rent/modify", --%>

@@ -179,9 +179,10 @@ public class BookController {
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(String book_no, ModelAndView mnv,HttpSession session) throws SQLException{
+	public ModelAndView detail(String book_no,int rent_able, ModelAndView mnv,HttpSession session) throws SQLException{
 			String url = "book/detail";
 			BookVO book = bookService.getBook(session,book_no);
+			book.setRent_able(rent_able);
 			mnv.addObject("book",book);
 			mnv.setViewName(url);
 			return mnv;
@@ -333,10 +334,6 @@ public class BookController {
 	public String returnBook(String book_no,String rent_no) throws Exception{
 		String url = "redirect:/book/returnBookMaster";
 		
-		RentVO rent1 = new RentVO();
-		rent1.setRent_no(rent_no);
-		rentService.updateReturn(rent1);
-		
 		BookVO book = new BookVO();
 		book.setBook_no(book_no);
 		book.setBook_status(0);
@@ -353,13 +350,12 @@ public class BookController {
 	public String returnCancle(String book_no,String rent_no) throws Exception{
 		String url = "redirect:/book/returnBookMaster";
 
-//		BookVO book = new BookVO();
-//		book.setBook_no(book_no);
-//		book.setBook_status(5);
-//		bookService.modifyStatus(book);
 		RentVO rent = rentService.getRent(rent_no);
 		rent.setRent_status(1);
 		rentService.updateRealRentStatus(rent);
+		
+		//realend 삭제
+		rentService.updateReturnCancle(rent);
 		return url;
 	}
 	

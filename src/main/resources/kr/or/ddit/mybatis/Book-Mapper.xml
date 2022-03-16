@@ -152,7 +152,6 @@
 				where b.book_no is not null
 				and c.rent_status = 3
 	            and b.book_no=c.book_no
-	            and c.real_end is null
 				order by b.book_no desc
 	        ) A
 		</select>

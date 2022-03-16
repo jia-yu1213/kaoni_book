@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -77,17 +79,26 @@ public class MyListController {
 	public String returnBook(String rent_no) throws Exception{
 		String url = "redirect:/mylist/list.do";
 
-//		RentVO rent1 = new RentVO();
-//		rent1.setRent_no(rent_no);
-//		rentService.updateReturn(rent1);
+		RentVO rent1 = new RentVO();
+		rent1.setRent_no(rent_no);
+		rentService.updateReturn(rent1);
 		
 		RentVO rent = rentService.getRent(rent_no);
+		rent.setRent_status(3);
+		rentService.updateRealRentStatus(rent);
+
+		return url;
+	}
+	
+	@RequestMapping("/returnBookWait2")
+	public String returnBook2(String rent_no) throws Exception{
+		String url = "redirect:/rent/detail.do?rent_no="+rent_no;
+
+		RentVO rent1 = new RentVO();
+		rent1.setRent_no(rent_no);
+		rentService.updateReturn(rent1);
 		
-//		BookVO book = new BookVO();
-//		book.setBook_no(rent.getBook_no());
-//		book.setBook_status(3);
-//		bookService.modifyStatus(book);
-		
+		RentVO rent = rentService.getRent(rent_no);
 		rent.setRent_status(3);
 		rentService.updateRealRentStatus(rent);
 

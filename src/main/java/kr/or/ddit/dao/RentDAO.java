@@ -27,6 +27,8 @@ public interface RentDAO {
 	//책 반납 업데이트
 	void updateReturnBook(RentVO rent) throws SQLException;
 	
+	//책 반납취소 업데이트
+	void updateReturnCancleBook(RentVO rent) throws SQLException;
 	
 	//회원 대여정보 상세보기
 	RentVO selectRentDetail(String rent_no) throws SQLException;

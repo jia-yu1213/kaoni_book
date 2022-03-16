@@ -179,7 +179,7 @@ label span {
 					</c:if>
 					<c:forEach items="${bookList }" var="book">
 						<tr style='font-size: 0.85em; cursor: pointer;'
-							onclick="OpenWindow('detail.do?book_no=${book.book_no }','상세보기',800,800);">
+							onclick="OpenWindow('detail.do?book_no=${book.book_no }&rent_able=${book.rent_able}','상세보기',800,800);">
 							<td style='vertical-align: middle'>${book.rownum }</td>
 							<td style='vertical-align: middle'>${book.cate_name }</td>
 							<td id="boardTitle"

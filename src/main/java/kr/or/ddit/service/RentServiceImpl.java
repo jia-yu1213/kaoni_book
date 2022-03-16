@@ -132,5 +132,11 @@ public class RentServiceImpl implements RentService {
 		rentDAO.updateRealRentStatus(rent);
 	}
 
+	@Override
+	public void updateReturnCancle(RentVO rent) throws SQLException {
+		rentDAO.updateReturnCancleBook(rent);
+		
+	}
+
 
 }

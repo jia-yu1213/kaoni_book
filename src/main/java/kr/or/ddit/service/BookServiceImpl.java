@@ -43,24 +43,6 @@ public class BookServiceImpl implements BookService {
 		// 현재 page 번호에 맞는 리스트를 perPageNum 개수 만큼 가져오기.
 		List<BookVO> bookList = bookDAO.selectSearchBookList(cri);
 		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
-//		for(BookVO book : bookList) {
-//			if (book.getBook_status()==0) {
-//				for(ReservationVO res : resList) {
-//					if (res.getBook_no().equals(book.getBook_no())) {
-//						if (member==null || !res.getId().equals(member.getId())) {
-//							book.setRent_able(1);
-//							break;
-//						}else if (res.getId().equals(member.getId())) {
-//							book.setRent_able(0);
-//							break;
-//						}
-//						break;
-//					}else {
-//						book.setRent_able(0);
-//					}
-//				}
-//			}
-//		}
 		for(BookVO book : bookList) {
 			if (book.getBook_status()==0) {
 				if (book.getRes_status()==0) {
@@ -125,24 +107,31 @@ public class BookServiceImpl implements BookService {
 	public BookVO getBook(HttpSession session, String book_no) throws SQLException {
 		BookVO book = bookDAO.selectBookByBookNo(book_no);
 		
-		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
-		MemberVO member = (MemberVO) session.getAttribute("loginUser");
-		if (book.getBook_status()==0) {
-			for(ReservationVO res : resList) {
-				if (res.getBook_no().equals(book.getBook_no())) {
-					if (member==null || !res.getId().equals(member.getId())) {
-						book.setRent_able(1);
-						break;
-					}else if (res.getId().equals(member.getId())) {
-						book.setRent_able(0);
-						break;
-					}
-					break;
-				}else {
-					book.setRent_able(0);
-				}
-			}
-		}
+//		List<ReservationVO> resList = rentDAO.selectReservationStatus0();
+//		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		
+//		if (book.getBook_status()==0) {
+//			if (book.getRes_status()==0) {
+//				book.setRent_able(0);
+//			}else if (book.getRes_status()==1) {
+//				for(ReservationVO res : resList) {
+//					if (res.getBook_no().equals(book.getBook_no())) {
+//						if (member==null|| !res.getId().equals(member.getId())) {
+//							book.setRent_able(2);
+//						}else if (res.getId().equals(member.getId())) {
+//							book.setRent_able(0);
+//						}
+//					}
+//				}
+//			}
+//		}else if (book.getBook_status()==1) {
+//			if (book.getRes_status()==0) {
+//				book.setRent_able(1);
+//			}else if (book.getRes_status()==1) {
+//				book.setRent_able(2);
+//			}
+//		}
+		
 		return book;
 	}
 

@@ -32,11 +32,11 @@
 				<table class="table table-bordered text-center" >					
 					<tr style="font-size:0.95em;">
 						<th style="width:8%;">번 호</th>
-						<th style="width:8%;">분 류</th>
-						<th style="width:45%;">제 목</th>
-						<th style="width:15%;">대여종료일</th>
+						<th style="width:10%;">분 류</th>
+						<th style="width:40%;">제 목</th>
+						<th style="width:13%;">대여종료일</th>
 						<th>대여자</th>
-						<th style="width:15%;">승인하기</th>
+						<th style="width:18%;">승인하기</th>
 					</tr>				
 					<c:if test="${empty bookList }" >
 						<tr>
@@ -62,9 +62,9 @@
 							
 							</td>
 							<td style='vertical-align:middle' onclick="event.stopPropagation()">
-								<div class="row">
-									<button type="button" class="btn btn-primary" id="registBtn" onclick="return_go('${book.book_no}','${book.rent_no }');">승 인</button>
-									<button type="button" class="btn btn-primary" id="registBtn" onclick="cancle_go('${book.book_no}','${book.rent_no }')">반 려</button>
+								<div class="row" style="margin : auto">
+									<button type="button" class="btn btn-primary" style="margin : auto" id="registBtn" onclick="return_go('${book.book_no}','${book.rent_no }');">승 인</button>
+									<button type="button" class="btn btn-secondary" style="margin : auto" id="registBtn" onclick="cancle_go('${book.book_no}','${book.rent_no }')">반 려</button>
 								
 								</div>
 							</td>		
