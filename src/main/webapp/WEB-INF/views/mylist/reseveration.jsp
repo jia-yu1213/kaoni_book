@@ -25,7 +25,7 @@
 									</tr>
 								</c:if>				
 								<c:forEach items="${resList }" var="res">
-									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?book_no=${res.book_no }','상세보기',802,730);">
+									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/book/resDetail.do?book_no=${res.book_no }','상세보기',802,730);">
 										<td style='vertical-align:middle'>${res.rownum }</td>
 										<td id="boardTitle" style="vertical-align:middle; max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;vertical-align:middle">${res.title }</td>			
 										<td style='vertical-align:middle'>${res.writer }</td>

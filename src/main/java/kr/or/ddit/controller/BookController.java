@@ -210,6 +210,18 @@ public class BookController {
 			return mnv;
 	}
 	
+	@RequestMapping("/resDetail")
+	public ModelAndView resDetail(String book_no,ModelAndView mnv,HttpSession session) throws SQLException{
+			String url = "mylist/resDetail";
+			
+			BookVO book = bookService.getBook(session,book_no);
+
+			mnv.addObject("book",book);
+			mnv.setViewName(url);
+			return mnv;
+	}
+	
+	
 	@RequestMapping(value="/remove",method=RequestMethod.POST)
 	public String remove(String book_no,RedirectAttributes rttr) throws Exception{
 		String url = "redirect:/book/detail.do";
