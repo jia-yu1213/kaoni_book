@@ -59,7 +59,7 @@
 									</tr>
 								</c:if>				
 								<c:forEach items="${rentList }" var="rent">
-									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?rent_no=${rent.rent_no }','상세보기',802,730);">
+									<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('<%=request.getContextPath() %>/rent/detail.do?rent_no=${rent.rent_no }','상세보기',804,753);">
 										<td style='vertical-align:middle'>${rent.rownum }</td>
 <%-- 										<td style='vertical-align:middle'>${rent.rent_no }</td> --%>
 										<td style='vertical-align:middle'>

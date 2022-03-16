@@ -40,7 +40,7 @@ public class ResverationCommand {
 		
 		res.setBook_no(book_no);
 		res.setId(id);
-		res.setBook_status(book_status);
+		res.setRes_status(res_status);
 		
 		return res;
 	}
@@ -51,7 +51,7 @@ public class ResverationCommand {
 		
 		res.setBook_no(book_no);
 		res.setId(id);
-		res.setBook_status(book_status);
+		res.setRes_status(res_status);
 		
 		return res;
 	}
