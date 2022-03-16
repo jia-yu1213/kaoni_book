@@ -34,7 +34,7 @@
         		end rent_end
 			from book b
 			where b.book_no is not null
-			and b.book_status != 4
+			and b.book_status != 2
 			<include refid="search" />
 			<if test="cateType != null and !cateType.equals('')">
 				and cate_no = #{cateType}			
@@ -49,7 +49,7 @@
 		count(*) 
 		from book
 		where book_no is not null
-		and book_status != 4
+		and book_status != 2
 		<include refid="search" />
 		<if test="cateType != null and !cateType.equals('')">
 			and cate_no = #{cateType}			

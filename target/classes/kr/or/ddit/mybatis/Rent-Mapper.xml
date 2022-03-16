@@ -88,7 +88,7 @@
 	</select>
 	
 	<select id="selectReservationStatus0" resultType="res">
-		select * from book_resveration where res_status = 0
+		select * from book_resveration
 	</select>
 	
 	<update id="updateRentStatus" parameterType="rent">

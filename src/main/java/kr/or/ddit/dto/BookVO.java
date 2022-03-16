@@ -27,7 +27,7 @@ public class BookVO {
 	private String rent_no;
 	
 
-	private int rent_able; //0대여가능 1대여불가
+	private int rent_able; //0대여가능 1예약가능 2예약불가(대여불가)  
 	
 	public int getRent_able() {
 		return rent_able;

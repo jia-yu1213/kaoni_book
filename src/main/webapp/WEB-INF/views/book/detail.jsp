@@ -173,19 +173,19 @@ ul.tabs li.current{
 						<c:choose>
 							<c:when test="${book.book_status eq 0}">
 								<c:if test="${book.rent_able eq 0 }">
-									<button style="margin : auto;"type="button" class="btn-sm btn-block btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
+									<button style="margin : auto;"type="button" class="btn btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
 								</c:if>
 								<c:if test="${book.rent_able eq 1 }">
-									<button style="margin : auto;"type="button" class="btn-sm btn-block btn-secondary">대여불가</button>
+									<button style="margin : auto;"type="button" class="btn btn-secondary">대여불가</button>
 								</c:if>
 							</c:when>
 
 							<c:when test="${book.book_status eq 1}">
-								<button type="button" style="margin : auto;"class="btn-sm btn-block btn-secondary"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
+								<button type="button" style="margin : auto;"class="btn btn-secondary"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
 
 							</c:when>
 							<c:when test="${book.book_status eq 2 ||book.book_status eq 3||book.book_status eq 5}">
-								<button type="button" style="margin : auto;"class="btn-sm btn-block btn-secondary">대여불가</button>
+								<button type="button" style="margin : auto;"class="btn btn-secondary">대여불가</button>
 							</c:when>
 								
 						</c:choose>
