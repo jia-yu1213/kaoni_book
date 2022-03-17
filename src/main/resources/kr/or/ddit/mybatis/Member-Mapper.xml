@@ -48,6 +48,13 @@
 		from member
 		where id=#{id}
 	</select>
+		<select id="selectMemberByIdForLogin" parameterType="str" resultType="member">
+		select
+		*
+		from member
+		where id=#{id}
+		and enabled=0
+	</select>
 	
 	<update id="insertMember" parameterType="member">
 		insert into member

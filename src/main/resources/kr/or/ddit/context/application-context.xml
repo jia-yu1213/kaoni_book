@@ -54,6 +54,7 @@
 		  class="kr.or.ddit.service.BookServiceImpl"
 		  p:bookDAO-ref="bookDAO"
 		  p:rentDAO-ref="rentDAO"
+		  p:mylistDAO-ref="mylistDAO"
 		  />
 		  
 	<bean id="rentService"

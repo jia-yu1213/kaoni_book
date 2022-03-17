@@ -131,7 +131,7 @@ function returnBookWait3(rent_no){
 																<button type="button" class="btn-sm btn-block btn-secondary">반납완료</button>
 															</c:when>
 															<c:when test="${rent.rent_status eq 3 }">
-																<button type="button" class="btn-sm btn-block btn-secondary">반납대기</button>
+																<button type="button" class="btn-sm btn-block" style="background-color : #D3D3D3; border : 0px;">반납대기</button>
 															</c:when>
 														</c:choose>
 													</td>		

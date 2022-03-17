@@ -9,7 +9,7 @@
 <style>
 
 .container{
-	width: 534px;
+
 	margin: 0 auto;
 	padding:0px;
 }
@@ -36,7 +36,7 @@ ul.tabs li.current{
 	display: none;
 	background: #ededed;
 	padding: 15px;
-	height : 240px;
+	height : 289px;
 	overflow-y : scroll;
 }
 
@@ -52,7 +52,7 @@ ul.tabs li.current{
   <div class="content-wrapper" >
     <section class="content container-fluid" style="background-color: ghostwhite;">       
 		<div class="row justify-content-center" > 
-			<div class="col-md-9">
+			<div class="col-md-10">
 			
 				<c:if test="${loginUser.authority == 0}">
 					<div class="card-header">

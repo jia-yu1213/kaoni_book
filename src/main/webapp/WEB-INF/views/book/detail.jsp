@@ -9,7 +9,7 @@
 <style>
 
 .container{
-	width: 534px;
+	
 	margin: 0 auto;
 	padding:0px;
 }
@@ -36,7 +36,7 @@ ul.tabs li.current{
 	display: none;
 	background: #ededed;
 	padding: 15px;
-	height : 240px;
+	height : 289px;
 	overflow-y : scroll;
 }
 
@@ -67,7 +67,7 @@ ul.tabs li.current{
     <!-- Main content -->
     <section class="content container-fluid" style="background-color: ghostwhite;">       
 		<div class="row justify-content-center" > 
-			<div class="col-md-9">
+			<div class="col-md-10">
 			
 				<c:if test="${loginUser.authority == 0}">
 					<div class="card-header">
@@ -172,7 +172,7 @@ ul.tabs li.current{
 
 						<c:choose>
 							<c:when test="${book.rent_able eq 0}">
-								<button type="button" style="margin : auto;" class="btn btn-primary" onclick="rentBook('${book.book_no }');">대여하기</button>
+								<button type="button" style="margin : auto;" class="btn btn-primary" onclick="rentBook2('${book.book_no }','${book.rent_able }');">대여하기</button>
 							</c:when>
 
 							<c:when test="${book.rent_able eq 1}">

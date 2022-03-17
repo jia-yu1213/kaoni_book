@@ -49,7 +49,7 @@
 	
 	<update id="updateReturnBook" parameterType="rent">
 	/* updateReturnBook 반납 업데이트*/
-		update book_rent set 
+		update book_rent set  
 		real_end = sysdate
 		where rent_no=#{rent_no}
 	</update>

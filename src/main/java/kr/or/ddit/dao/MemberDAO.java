@@ -12,6 +12,8 @@ public interface MemberDAO {
 	
 	// 회원정보 조회
 	MemberVO selectMemberById(String id) throws SQLException;
+	// 회원정보 조회
+	MemberVO selectMemberByIdForLogin(String id) throws SQLException;
 	
 	//회원리스트 조회
 	List<MemberVO> selectMemberList()throws SQLException;

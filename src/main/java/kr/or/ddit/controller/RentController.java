@@ -71,6 +71,20 @@ public class RentController {
 		return url;
 	}
 	
+	@RequestMapping("/registRent2")
+	public String registRent2(String book_no,Integer rent_able,HttpSession session) throws Exception{
+		String url = "redirect:/book/detail?book_no="+book_no+"&rent_able="+rent_able;
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginUser");
+		
+		RentVO rent = new RentVO();
+		rent.setId(member.getId());
+		rent.setBook_no(book_no);
+		rentService.registRent(rent);
+		
+		return url;
+	}
+	
 	@RequestMapping("/reservation")
 	public String reservation(ResverationCommand cmd, HttpSession session) throws Exception{
 		String url = "redirect:/book/list";

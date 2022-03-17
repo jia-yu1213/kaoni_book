@@ -22,6 +22,11 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberVO member=session.selectOne("Member-Mapper.selectMemberById",id);			
 		return member;
 	}
+	@Override
+	public MemberVO selectMemberByIdForLogin( String id) throws SQLException {
+		MemberVO member=session.selectOne("Member-Mapper.selectMemberByIdForLogin",id);			
+		return member;
+	}
 
 	@Override
 	public List<MemberVO> selectMemberList() throws SQLException {
