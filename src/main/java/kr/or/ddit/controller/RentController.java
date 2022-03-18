@@ -72,7 +72,7 @@ public class RentController {
 	}
 	
 	@RequestMapping("/registRent2")
-	public String registRent2(String book_no,Integer rent_able,HttpSession session) throws Exception{
+	public String registRent2(String book_no,Integer rent_able,HttpSession session,RedirectAttributes rttr) throws Exception{
 		String url = "redirect:/book/detail?book_no="+book_no+"&rent_able="+rent_able;
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginUser");
@@ -81,6 +81,7 @@ public class RentController {
 		rent.setId(member.getId());
 		rent.setBook_no(book_no);
 		rentService.registRent(rent);
+		rttr.addFlashAttribute("from", "registRent");
 		
 		return url;
 	}

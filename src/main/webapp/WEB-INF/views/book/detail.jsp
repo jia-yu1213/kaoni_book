@@ -176,7 +176,7 @@ ul.tabs li.current{
 							</c:when>
 
 							<c:when test="${book.rent_able eq 1}">
-								<button type="button" style="margin : auto;" class="btn btn-secondary"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
+								<button type="button" style="margin : auto;" class="btn btn-success"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
 
 							</c:when>
 							<c:when test="${book.rent_able eq 2}">
@@ -210,6 +210,9 @@ ul.tabs li.current{
 	alert("삭제되었습니다.");
 	window.opener.location.reload();
 	window.close();
+</c:if>
+<c:if test="${from eq 'registRent'}" >
+	window.opener.location.reload();
 </c:if>
  function BookPictureThumb(targetObj, fileName,contextPath){ //(대상, 이미지파일명) 
 		

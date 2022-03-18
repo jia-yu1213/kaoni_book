@@ -119,7 +119,7 @@
           				     <td>
           				     	<c:choose>
           				     		<c:when test="${member.enabled eq '0'}">활성</c:when>
-          				     		<c:when test="${member.enabled eq '1'}">휴면</c:when>
+          				     		<c:when test="${member.enabled eq '1'}"><span style="color : red">휴면</span></c:when>
           				     		<c:when test="${member.enabled eq '2'}">탈퇴</c:when>
           				     	</c:choose>
        				     	</td>

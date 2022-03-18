@@ -80,7 +80,6 @@ public class CommonController {
 			url="redirect:/common/loginForm.do";
 			
 		} catch (SQLException e) {
-			ExceptionLoggerHelper.write(request, e, memberService);
 			e.printStackTrace();
 			throw e;
 		}

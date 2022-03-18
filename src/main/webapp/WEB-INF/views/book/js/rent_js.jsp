@@ -75,6 +75,7 @@ function rentBook2(book_no,rent_able){
 					if(answer){
 					
 						location = "<%=request.getContextPath()%>/rent/registRent2.do?book_no="+book_no+"&rent_able="+rent_able;
+						
 					}
 				}
 					

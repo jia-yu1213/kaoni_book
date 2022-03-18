@@ -213,7 +213,7 @@ label span {
 									</c:when>
 
 									<c:when test="${book.rent_able eq 1}">
-										<button type="button" class="btn-sm btn-block btn-secondary"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
+										<button type="button" class="btn-sm btn-block btn-success"onclick="resBook('${book.book_no}','${loginUser.id}');">예약하기</button>
 
 									</c:when>
 									<c:when test="${book.rent_able eq 2}">
